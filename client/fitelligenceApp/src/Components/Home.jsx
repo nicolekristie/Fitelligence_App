@@ -1,6 +1,12 @@
 import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faDumbbell,
+  faChartLine,
+  faBrain,
+} from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/images/logo.png";
 
 function Home() {
@@ -44,7 +50,11 @@ function Home() {
             <Card className="h-100 text-center">
               <Card.Body>
                 <div className="mb-3">
-                  <i className="fas fa-dumbbell fa-3x text-primary"></i>
+                  <FontAwesomeIcon
+                    icon={faDumbbell}
+                    size="3x"
+                    className="text-primary"
+                  />
                 </div>
                 <Card.Title>AI Personalized Recipes</Card.Title>
                 <Card.Text>
@@ -59,7 +69,11 @@ function Home() {
             <Card className="h-100 text-center">
               <Card.Body>
                 <div className="mb-3">
-                  <i className="fas fa-chart-line fa-3x text-success"></i>
+                  <FontAwesomeIcon
+                    icon={faChartLine}
+                    size="3x"
+                    className="text-success"
+                  />
                 </div>
                 <Card.Title>Progress Tracking</Card.Title>
                 <Card.Text>
@@ -74,7 +88,11 @@ function Home() {
             <Card className="h-100 text-center">
               <Card.Body>
                 <div className="mb-3">
-                  <i className="fas fa-brain fa-3x text-info"></i>
+                  <FontAwesomeIcon
+                    icon={faBrain}
+                    size="3x"
+                    className="text-info"
+                  />
                 </div>
                 <Card.Title>AI Intelligence</Card.Title>
                 <Card.Text>
