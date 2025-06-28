@@ -1,6 +1,15 @@
 import React, { useState } from "react";
-import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import {
+  Form,
+  Button,
+  Container,
+  Row,
+  Col,
+  Card,
+  Alert,
+} from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // Custom CSS to ensure labels are left-aligned
 const labelStyle = {
@@ -10,21 +19,67 @@ const labelStyle = {
 };
 
 function LoginForm() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
+
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add form validation logic here
-    console.log("Login submitted:", formData);
-    // Send data to backend or handle login logic
+
+    setIsLoading(true);
+    setMessage("");
+
+    try {
+      // Send login request to backend
+      const response = await axios.post("http://localhost:3001/api/login", {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      // Login successful
+      const { token, user } = response.data;
+
+      // Store token in localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(user));
+
+      // Trigger custom event to update NavBar
+      window.dispatchEvent(new Event("userLogin"));
+
+      setMessage("Login successful! Welcome back!");
+      setIsError(false);
+
+      // Clear form
+      setFormData({
+        email: "",
+        password: "",
+      });
+
+      // Redirect to home page after showing success message
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    } catch (error) {
+      // Handle login errors
+      const errorMessage =
+        error.response?.data?.error || "Login failed. Please try again.";
+      setMessage(errorMessage);
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -36,13 +91,22 @@ function LoginForm() {
               Login
             </Card.Header>
             <Card.Body className="text-start">
+              {message && (
+                <Alert
+                  variant={isError ? "danger" : "success"}
+                  className="mb-3"
+                >
+                  {message}
+                </Alert>
+              )}
+
               <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicUsername">
-                  <Form.Label style={labelStyle}>Username</Form.Label>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                  <Form.Label style={labelStyle}>Email</Form.Label>
                   <Form.Control
-                    type="text"
-                    name="username"
-                    value={formData.username}
+                    type="email"
+                    name="email"
+                    value={formData.email}
                     onChange={handleChange}
                     required
                   />
@@ -59,8 +123,13 @@ function LoginForm() {
                   />
                 </Form.Group>
 
-                <Button variant="primary" type="submit" className="w-100">
-                  Login
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="w-100"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Logging in..." : "Login"}
                 </Button>
 
                 <div className="text-center mt-3">

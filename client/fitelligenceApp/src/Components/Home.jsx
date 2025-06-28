@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,6 +10,37 @@ import {
 import logo from "../assets/images/logo.png";
 
 function Home() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    // Function to check user data
+    const checkUser = () => {
+      const userData = localStorage.getItem("user");
+      if (userData) {
+        setUser(JSON.parse(userData));
+      } else {
+        setUser(null);
+      }
+    };
+
+    // Check on initial load
+    checkUser();
+
+    // Listen for user login/logout events
+    const handleUserChange = () => {
+      checkUser();
+    };
+
+    window.addEventListener("userLogin", handleUserChange);
+    window.addEventListener("userLogout", handleUserChange);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener("userLogin", handleUserChange);
+      window.removeEventListener("userLogout", handleUserChange);
+    };
+  }, []);
+
   const backgroundStyle = {
     backgroundImage: `url(${logo})`,
     backgroundRepeat: "no-repeat",
@@ -35,12 +66,26 @@ function Home() {
         {/* Hero Section */}
         <Row className="text-center mb-5">
           <Col>
-            <h1 className="display-4 fw-bold text-primary">
-              Welcome to Fitelligence
-            </h1>
-            <p className="lead text-muted">
-              Smart fitness tracking and intelligence for your workout journey
-            </p>
+            {user ? (
+              <>
+                <h1 className="display-4 fw-bold text-primary">
+                  Welcome back, {user.firstname}! 💪
+                </h1>
+                <p className="lead text-muted">
+                  Ready to continue your fitness journey?
+                </p>
+              </>
+            ) : (
+              <>
+                <h1 className="display-4 fw-bold text-primary">
+                  Welcome to Fitelligence
+                </h1>
+                <p className="lead text-muted">
+                  Your intelligent fitness companion for smarter workouts and
+                  better results
+                </p>
+              </>
+            )}
           </Col>
         </Row>
 
@@ -109,30 +154,67 @@ function Home() {
           <Col>
             <Card className="bg-light">
               <Card.Body className="py-5">
-                <h3 className="mb-4">Ready to Start Your Fitness Journey?</h3>
-                <div className="d-flex justify-content-center gap-3">
-                  <Button
-                    as={Link}
-                    to="/register"
-                    variant="primary"
-                    size="lg"
-                    className="px-4"
-                  >
-                    Get Started
-                  </Button>
-                  <Button
-                    as={Link}
-                    to="/login"
-                    variant="outline-primary"
-                    size="lg"
-                    className="px-4"
-                  >
-                    Login
-                  </Button>
-                </div>
-                <p className="text-muted mt-3">
-                  Join thousands of users already using Fitelligence
-                </p>
+                {user ? (
+                  // User is logged in - show personalized call-to-action
+                  <>
+                    <h3 className="mb-4">
+                      Ready to Continue, {user.firstname}?
+                    </h3>
+                    <div className="d-flex justify-content-center gap-3">
+                      <Button
+                        as={Link}
+                        to="/workouts"
+                        variant="primary"
+                        size="lg"
+                        className="px-4"
+                      >
+                        View Workouts
+                      </Button>
+                      <Button
+                        as={Link}
+                        to="/profile"
+                        variant="outline-primary"
+                        size="lg"
+                        className="px-4"
+                      >
+                        My Profile
+                      </Button>
+                    </div>
+                    <p className="text-muted mt-3">
+                      Welcome back! Let's achieve your fitness goals together.
+                    </p>
+                  </>
+                ) : (
+                  // User not logged in - show registration call-to-action
+                  <>
+                    <h3 className="mb-4">
+                      Ready to Start Your Fitness Journey?
+                    </h3>
+                    <div className="d-flex justify-content-center gap-3">
+                      <Button
+                        as={Link}
+                        to="/register"
+                        variant="primary"
+                        size="lg"
+                        className="px-4"
+                      >
+                        Get Started
+                      </Button>
+                      <Button
+                        as={Link}
+                        to="/login"
+                        variant="outline-primary"
+                        size="lg"
+                        className="px-4"
+                      >
+                        Login
+                      </Button>
+                    </div>
+                    <p className="text-muted mt-3">
+                      Join thousands of users already using Fitelligence
+                    </p>
+                  </>
+                )}
               </Card.Body>
             </Card>
           </Col>

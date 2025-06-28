@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import registerRoute from "./routes/register.js";
+import loginRoute from "./routes/login.js";
+import profileRoute from "./routes/profile.js";
 
 const app = express();
 const PORT = 3001;
@@ -14,6 +16,12 @@ app.get("/", (req, res) => {
 
 // Register route
 app.use("/api/register", registerRoute);
+
+// Login route
+app.use("/api/login", loginRoute);
+
+// Profile route (protected)
+app.use("/api/profile", profileRoute);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

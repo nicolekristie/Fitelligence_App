@@ -6,6 +6,7 @@ import LoginForm from "./Components/LoginForm.jsx";
 import RegistrationForm from "./Components/RegistrationForm.jsx";
 import Workouts from "./Components/Workouts.jsx";
 import Profile from "./Components/Profile.jsx";
+import ProtectedRoute from "./Components/ProtectedRoute.jsx";
 
 function App() {
   return (
@@ -17,7 +18,14 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/register" element={<RegistrationForm />} />
           <Route path="/workouts" element={<Workouts />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </div>
     </Router>
