@@ -85,6 +85,9 @@ function NavBar() {
                 <Nav.Link as={Link} to="/profile">
                   Profile
                 </Nav.Link>
+                <Nav.Link as={Link} to="/chat">
+                  AI Coach
+                </Nav.Link>
                 <Navbar.Text className="me-3 text-light">
                   Welcome, {user.firstname}! 👋
                 </Navbar.Text>
