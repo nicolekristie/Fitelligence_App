@@ -3,13 +3,26 @@ import coachImage from "../assets/images/coachFace.jpeg";
 import { PaperAirplaneIcon } from "@heroicons/react/20/solid";
 import ChatMessage from "./ChatMessage";
 
-const Chat = () => {
+const Chat = ({ userId, goal }) => {
   //form in which it will create the chat box
   const [messages, setMessages] = React.useState([]);
   const [input, setInput] = React.useState("");
   const [isLoading, setisLoading] = React.useState(false);
+  const [user, setUser] = React.useState(null);
   const messagesEndRef = React.useRef(null);
   const inputRef = React.useRef(null);
+
+  // Get user data from localStorage if not passed as props
+  React.useEffect(() => {
+    if (!userId) {
+      const userData = localStorage.getItem("user");
+      if (userData) {
+        setUser(JSON.parse(userData));
+      }
+    } else {
+      setUser({ id: userId });
+    }
+  }, [userId]);
 
   // Auto-scroll to bottom when new messages are added
   React.useEffect(() => {
@@ -31,7 +44,11 @@ const Chat = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: userMessage }),
+        body: JSON.stringify({
+          message: userMessage,
+          userId: user?.id,
+          goal: goal,
+        }),
       });
       const data = await response.json();
 
@@ -53,10 +70,9 @@ const Chat = () => {
 
   return (
     <div className="container mt-4">
-      <h2>Chat Component Loaded</h2>
       {/* Chatbot Header */}
       <div className="card chat">
-        <div className="card-header d-flex justify-content-between align-items-center">
+        <div className="card-header">
           <div className="d-flex align-items-center">
             <img
               src={coachImage}
@@ -66,17 +82,12 @@ const Chat = () => {
             />
             <h5 className="mb-0">AI Fitness Coach</h5>
           </div>
-          <button
-            type="button"
-            className="btn-close"
-            aria-label="Close"
-          ></button>
         </div>
 
         <hr className="my-2" />
 
         <div className="card-body p-3">
-          <p className="card-text mb-3">Hello, what are your fitness goals?</p>
+          <p className="card-text mb-3">Hello, How can I assist you today?</p>
 
           {/* Messages display area */}
           <div

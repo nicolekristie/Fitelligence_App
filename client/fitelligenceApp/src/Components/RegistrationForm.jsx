@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "./Context/userContext.jsx";
 
 // Custom CSS to ensure labels are left-aligned
 const labelStyle = {
@@ -20,6 +21,7 @@ const labelStyle = {
 
 function RegistrationForm() {
   const navigate = useNavigate();
+  const { loginUser } = useUser();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -68,10 +70,17 @@ function RegistrationForm() {
         password: formData.password,
       });
 
-      // Success
-      setMessage(
-        "Registration successful! Welcome to Fitelligence! Redirecting to home..."
-      );
+      // Registration successful - auto-login the user
+      const { token, user } = response.data;
+
+      // Store token in localStorage (for API authentication)
+      localStorage.setItem("token", token);
+
+      // Set user in context only (no localStorage for user data)
+      loginUser(user);
+
+      // Success message
+      setMessage("Registration successful! Welcome to Fitelligence!");
       setIsError(false);
 
       // Reset form
@@ -84,9 +93,9 @@ function RegistrationForm() {
         confirmPassword: "",
       });
 
-      // Redirect to home page after showing success message
+      // Redirect to fitness survey after showing success message
       setTimeout(() => {
-        navigate("/");
+        navigate("/fitness-survey");
       }, 2000); // 2 second delay to show success message
     } catch (error) {
       // Handle errors

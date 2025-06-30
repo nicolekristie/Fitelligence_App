@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useUser } from "./Context/userContext.jsx";
 
 // Custom CSS to ensure labels are left-aligned
 const labelStyle = {
@@ -20,6 +21,7 @@ const labelStyle = {
 
 function LoginForm() {
   const navigate = useNavigate();
+  const { loginUser } = useUser();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -51,12 +53,11 @@ function LoginForm() {
       // Login successful
       const { token, user } = response.data;
 
-      // Store token in localStorage
+      // Store token in localStorage (for API authentication)
       localStorage.setItem("token", token);
-      localStorage.setItem("user", JSON.stringify(user));
 
-      // Trigger custom event to update NavBar
-      window.dispatchEvent(new Event("userLogin"));
+      // Set user in context only (no localStorage for user data)
+      loginUser(user);
 
       setMessage("Login successful! Welcome back!");
       setIsError(false);

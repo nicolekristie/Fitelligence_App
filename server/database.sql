@@ -27,6 +27,20 @@ CREATE TABLE profiles (
 );
 
 
+CREATE TABLE fitness_survey (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER UNIQUE NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  goal VARCHAR(50) NOT NULL,
+  fitness_level VARCHAR(20) NOT NULL,
+  days_per_week INTEGER NOT NULL,
+  minutes_per_session INTEGER NOT NULL,
+  injuries TEXT,
+  equipment TEXT[],  -- array of strings
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+
+
 -- Sample Data
 INSERT INTO users (firstname, lastname, username, email, password)
 VALUES

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,38 +8,10 @@ import {
   faBrain,
 } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/images/logo.png";
+import { useUser } from "./Context/userContext.jsx";
 
 function Home() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // Function to check user data
-    const checkUser = () => {
-      const userData = localStorage.getItem("user");
-      if (userData) {
-        setUser(JSON.parse(userData));
-      } else {
-        setUser(null);
-      }
-    };
-
-    // Check on initial load
-    checkUser();
-
-    // Listen for user login/logout events
-    const handleUserChange = () => {
-      checkUser();
-    };
-
-    window.addEventListener("userLogin", handleUserChange);
-    window.addEventListener("userLogout", handleUserChange);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener("userLogin", handleUserChange);
-      window.removeEventListener("userLogout", handleUserChange);
-    };
-  }, []);
+  const { user, isLoading } = useUser();
 
   return (
     <div

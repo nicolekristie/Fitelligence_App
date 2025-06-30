@@ -1,14 +1,13 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import { useUser } from "./Context/userContext.jsx";
 
 // Protected Route Component
 function ProtectedRoute({ children }) {
-  // Check if user is logged in
-  const token = localStorage.getItem("token");
-  const user = localStorage.getItem("user");
+  const { isAuthenticated } = useUser();
 
-  // If no token or user, redirect to login
-  if (!token || !user) {
+  // If not authenticated, redirect to login
+  if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
 

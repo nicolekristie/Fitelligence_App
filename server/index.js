@@ -4,12 +4,15 @@ import registerRoute from "./routes/register.js";
 import loginRoute from "./routes/login.js";
 import profileRoute from "./routes/profile.js";
 import OpenAI from "openai";
+import fitnessSurveyRoute from "./routes/fitness_survey.js";
+import pool from "./db.js";
 
 const app = express();
 const PORT = 3001;
 
 app.use(cors());
 app.use(express.json());
+app.use("/api/fitness-survey", fitnessSurveyRoute);
 
 // Initialize with API key from environment variables
 const openai = new OpenAI({
@@ -19,7 +22,7 @@ const openai = new OpenAI({
 //Chat endpoints
 app.post("/api/chat", async (req, res) => {
   try {
-    const { message } = req.body;
+    const { message, userId, goal } = req.body;
 
     // Validate input
     if (
@@ -33,14 +36,85 @@ app.post("/api/chat", async (req, res) => {
       });
     }
 
-    // Create completion with system context
+    // Build personalized system prompt
+    let systemPrompt = `You are an expert fitness coach for Fitelligence app. Provide helpful, motivating, and safe fitness advice. Format your responses clearly with:
+
+- Use bullet points for lists (• or -)
+- Number steps when giving instructions (1. 2. 3.)
+- Use line breaks to separate different topics
+- Keep responses concise but informative
+- Use an encouraging, professional tone
+- When giving workout routines, format them clearly with exercise names and reps/sets
+
+Example formatting:
+Here are some great exercises for beginners:
+
+• Push-ups: 3 sets of 8-12 reps
+• Squats: 3 sets of 10-15 reps
+• Plank: Hold for 30-60 seconds
+
+Remember to warm up before exercising!`;
+
+    // Fetch user's fitness survey data if userId is provided
+    if (userId) {
+      try {
+        const surveyResult = await pool.query(
+          "SELECT * FROM fitness_survey WHERE user_id = $1",
+          [userId]
+        );
+
+        if (surveyResult.rows.length > 0) {
+          const survey = surveyResult.rows[0];
+
+          // Create personalized system prompt based on survey data
+          systemPrompt = `You are an expert fitness coach for Fitelligence app. You are coaching a user with the following profile:
+
+**Fitness Goal:** ${survey.goal}
+**Fitness Level:** ${survey.fitness_level}
+**Workout Schedule:** ${survey.days_per_week} days per week, ${
+            survey.minutes_per_session
+          } minutes per session
+**Available Equipment:** ${
+            survey.equipment.length > 0
+              ? survey.equipment.join(", ")
+              : "No equipment (bodyweight only)"
+          }
+${survey.injuries ? `**Injuries/Limitations:** ${survey.injuries}` : ""}
+
+IMPORTANT: Always tailor your advice specifically to this user's profile. Reference their:
+- Goal (${survey.goal}) when suggesting exercises
+- Fitness level (${survey.fitness_level}) when recommending intensity
+- Available equipment when creating workouts
+- Time constraints (${survey.minutes_per_session} min sessions)
+- Any injuries/limitations when applicable
+
+Format your responses clearly with:
+- Use bullet points for lists (• or -)
+- Number steps when giving instructions
+- Use line breaks to separate different topics
+- Keep responses concise but informative
+- Use an encouraging, professional tone
+- Always customize recommendations to their specific situation
+
+When creating workout plans, ONLY suggest exercises using their available equipment: ${
+            survey.equipment.length > 0
+              ? survey.equipment.join(", ")
+              : "bodyweight exercises only"
+          }.`;
+        }
+      } catch (dbError) {
+        console.log("Could not fetch survey data:", dbError.message);
+        // Continue with generic prompt if survey data unavailable
+      }
+    }
+
+    // Create completion with personalized system context
     const completion = await openai.chat.completions.create({
       model: "gpt-4",
       messages: [
         {
           role: "system",
-          content:
-            "You are an expert fitness coach for Fitelligence app. Provide helpful, motivating, and safe fitness advice. Format your responses clearly with:\n\n- Use bullet points for lists (• or -)\n- Number steps when giving instructions (1. 2. 3.)\n- Use line breaks to separate different topics\n- Keep responses concise but informative\n- Use an encouraging, professional tone\n- When giving workout routines, format them clearly with exercise names and reps/sets\n\nExample formatting:\nHere are some great exercises for beginners:\n\n• Push-ups: 3 sets of 8-12 reps\n• Squats: 3 sets of 10-15 reps\n• Plank: Hold for 30-60 seconds\n\nRemember to warm up before exercising!",
+          content: systemPrompt,
         },
         {
           role: "user",

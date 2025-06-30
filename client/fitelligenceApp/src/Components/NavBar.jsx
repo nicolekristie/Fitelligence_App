@@ -1,56 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
+import { useUser } from "./Context/userContext.jsx";
 
 function NavBar() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    // Function to check user data
-    const checkUser = () => {
-      const userData = localStorage.getItem("user");
-      if (userData) {
-        setUser(JSON.parse(userData));
-      } else {
-        setUser(null);
-      }
-    };
-
-    // Check on initial load
-    checkUser();
-
-    // Listen for storage changes (when user logs in/out)
-    const handleStorageChange = () => {
-      checkUser();
-    };
-
-    // Listen for custom login event
-    const handleLoginEvent = () => {
-      checkUser();
-    };
-
-    // Add event listeners
-    window.addEventListener("storage", handleStorageChange);
-    window.addEventListener("userLogin", handleLoginEvent);
-    window.addEventListener("userLogout", handleLoginEvent);
-
-    // Cleanup event listeners
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("userLogin", handleLoginEvent);
-      window.removeEventListener("userLogout", handleLoginEvent);
-    };
-  }, []);
+  const { user, logoutUser } = useUser();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setUser(null);
-
-    // Trigger custom event for other components
-    window.dispatchEvent(new Event("userLogout"));
-
+    logoutUser();
     window.location.href = "/"; // Redirect to home
   };
 
