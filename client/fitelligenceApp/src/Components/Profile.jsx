@@ -1,16 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
+import { useUser } from "./Context/userContext.jsx";
 
 function Profile() {
-  const [user, setUser] = useState(null);
+  const { user, isLoading } = useUser();
 
-  useEffect(() => {
-    // Get user data from localStorage
-    const userData = localStorage.getItem("user");
-    if (userData) {
-      setUser(JSON.parse(userData));
-    }
-  }, []);
+  if (isLoading) {
+    return (
+      <Container className="mt-5">
+        <Row>
+          <Col>
+            <Card>
+              <Card.Body className="text-center">
+                <p>Loading profile...</p>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    );
+  }
 
   if (!user) {
     return (
@@ -19,7 +28,7 @@ function Profile() {
           <Col>
             <Card>
               <Card.Body className="text-center">
-                <p>Loading profile...</p>
+                <p>Please log in to view your profile.</p>
               </Card.Body>
             </Card>
           </Col>

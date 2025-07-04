@@ -9,6 +9,7 @@ import Workouts from "./Components/Workouts.jsx";
 import Profile from "./Components/Profile.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute.jsx";
 import Chat from "./Components/Chat.jsx";
+import Welcome from "./Components/Welcome.jsx";
 import { UserProvider } from "./Components/Context/userContext.jsx";
 
 function App() {
@@ -43,6 +44,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Profile />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/welcome"
+              element={
+                <ProtectedRoute>
+                  <Welcome />
                 </ProtectedRoute>
               }
             />

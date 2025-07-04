@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import Chat from "./Chat";
 import { useUser } from "./Context/userContext.jsx";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function FitnessSurvey() {
   const { user } = useUser();
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     goal: "",
     fitness_level: "",
@@ -63,7 +65,8 @@ export default function FitnessSurvey() {
 
     const data = await res.json();
     if (res.ok) {
-      setShowChat(true); // ✅ Show the Chat component
+      navigate("/welcome"); // Redirect to the welcome page after successful submission
+      // setShowChat(true); // ✅ Show the Chat component
     } else {
       setMessage(data.error || "Something went wrong");
     }

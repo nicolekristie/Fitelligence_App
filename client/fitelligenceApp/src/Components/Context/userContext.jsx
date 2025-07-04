@@ -4,7 +4,9 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false); // Initialize user state by validating token on app start
+  const [isLoading, setIsLoading] = useState(true); // Start with loading true
+
+  // Initialize user state by validating token on app start
   useEffect(() => {
     // Clean up any old user data from localStorage (from previous implementation)
     localStorage.removeItem("user");
@@ -31,17 +33,21 @@ export const UserProvider = ({ children }) => {
         } catch (error) {
           console.error("Error validating token:", error);
           localStorage.removeItem("token");
+        } finally {
+          setIsLoading(false);
         }
       };
 
       validateToken();
+    } else {
+      setIsLoading(false);
     }
   }, []);
 
   // Function to login user
   const loginUser = (userData) => {
     setUser(userData);
-    // Token is already stored by LoginForm/RegistrationForm
+    setIsLoading(false); // Ensure loading is set to false after login
   };
 
   // Function to logout user
@@ -50,11 +56,46 @@ export const UserProvider = ({ children }) => {
     localStorage.removeItem("token");
   };
 
+  // Function to manually validate current token (useful for testing)
+  const validateCurrentToken = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("UserContext: No token to validate");
+      return false;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3001/api/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("UserContext: Token validation successful:", data);
+        setUser(data.user);
+        return true;
+      } else {
+        console.log("UserContext: Token validation failed");
+        localStorage.removeItem("token");
+        setUser(null);
+        return false;
+      }
+    } catch (error) {
+      console.error("UserContext: Error during token validation:", error);
+      localStorage.removeItem("token");
+      setUser(null);
+      return false;
+    }
+  };
+
   const value = {
     user,
     setUser,
     loginUser,
     logoutUser,
+    validateCurrentToken,
     isLoading,
     setIsLoading,
     isAuthenticated: !!user,
