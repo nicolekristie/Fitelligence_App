@@ -62,7 +62,7 @@ function RegistrationForm() {
 
     try {
       // Send data to backend
-      const response = await axios.post("http://localhost:3001/api/register", {
+      const response = await axios.post("/api/register", {
         firstname: formData.firstName,
         lastname: formData.lastName,
         username: formData.username,

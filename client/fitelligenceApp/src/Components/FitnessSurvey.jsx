@@ -57,7 +57,7 @@ export default function FitnessSurvey() {
     }
 
     //Send fitness survey data to backend
-    const res = await fetch("http://localhost:3001/api/fitness-survey", {
+    const res = await fetch("/api/fitness-survey", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...form, user_id: user.id }),

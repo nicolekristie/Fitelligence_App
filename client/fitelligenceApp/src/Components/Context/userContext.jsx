@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
       // Validate token with backend and get fresh user data
       const validateToken = async () => {
         try {
-          const response = await fetch("http://localhost:3001/api/profile", {
+          const response = await fetch("/api/profile", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -65,7 +65,7 @@ export const UserProvider = ({ children }) => {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/api/profile", {
+      const response = await fetch("/api/profile", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

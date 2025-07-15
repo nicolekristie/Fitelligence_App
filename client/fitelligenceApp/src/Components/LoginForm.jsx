@@ -45,7 +45,7 @@ function LoginForm() {
 
     try {
       // Send login request to backend
-      const response = await axios.post("http://localhost:3001/api/login", {
+      const response = await axios.post("/api/login", {
         email: formData.email,
         password: formData.password,
       });
