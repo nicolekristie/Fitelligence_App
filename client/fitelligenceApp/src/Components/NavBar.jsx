@@ -34,8 +34,8 @@ function NavBar() {
             <Nav.Link as={Link} to="/">
               Home
             </Nav.Link>
-            <Nav.Link as={Link} to="/workouts">
-              Workouts
+            <Nav.Link as={Link} to="/progress">
+              Progress Tracking
             </Nav.Link>
 
             {user ? (

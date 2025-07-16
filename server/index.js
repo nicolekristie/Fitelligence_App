@@ -19,6 +19,13 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+
+app.get("/api/test", (req, res) => {
+  res.json({ success: true, message: "Test route works!" });
+});
+
+
+
 //Chat endpoints
 app.post("/api/chat", async (req, res) => {
   try {
@@ -132,6 +139,33 @@ When creating workout plans, ONLY suggest exercises using their available equipm
       throw new Error("No response from AI");
     }
 
+    // Save AI response to database if user is logged in
+    if (userId) {
+      try {
+        console.log(`Attempting to save AI response for user ${userId}`);
+        console.log(`Response text: ${aiResponse.trim().substring(0, 100)}...`);
+
+        const result = await pool.query(
+          `INSERT INTO ai_chat_responses (user_id, response_text) 
+           VALUES ($1, $2) RETURNING id`,
+          [userId, aiResponse.trim()]
+        );
+
+        console.log(
+          `✅ Successfully saved AI response with ID: ${result.rows[0].id}`
+        );
+      } catch (dbError) {
+        console.error(
+          "❌ Error saving AI response to database:",
+          dbError.message
+        );
+        console.error("Full error:", dbError);
+        // Continue without failing the request
+      }
+    } else {
+      console.log("⚠️ No userId provided, skipping database save");
+    }
+
     // Send formatted response
     res.json({
       response: aiResponse.trim(),
@@ -147,6 +181,69 @@ When creating workout plans, ONLY suggest exercises using their available equipm
         "I'm having trouble responding right now. Please try again in a moment.",
       success: false,
       timestamp: new Date().toISOString(),
+    });
+  }
+});
+
+// Get chat history for a user
+app.get("/api/test", (req, res) => {
+  res.json({ success: true, message: "Test route works!" });
+});
+
+app.get("/api/chat/history/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { limit = 50, offset = 0 } = req.query;
+
+    // Validate userId
+    if (!userId || isNaN(parseInt(userId))) {
+      return res.status(400).json({
+        error: "Valid user ID is required",
+        success: false,
+      });
+    }
+
+    // Get chat history
+    const query = `
+      SELECT 
+        id,
+        response_text,
+        timestamp,
+        created_at
+      FROM ai_chat_responses 
+      WHERE user_id = $1
+      ORDER BY timestamp DESC 
+      LIMIT $2 OFFSET $3
+    `;
+
+    const result = await pool.query(query, [
+      parseInt(userId),
+      parseInt(limit),
+      parseInt(offset),
+    ]);
+
+    // Get total count for pagination
+    const countResult = await pool.query(
+      `SELECT COUNT(*) FROM ai_chat_responses WHERE user_id = $1`,
+      [parseInt(userId)]
+    );
+    const totalCount = parseInt(countResult.rows[0].count);
+
+    res.json({
+      success: true,
+      data: result.rows,
+      pagination: {
+        total: totalCount,
+        limit: parseInt(limit),
+        offset: parseInt(offset),
+        hasMore: parseInt(offset) + parseInt(limit) < totalCount,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching chat history:", error.message);
+    res.status(500).json({
+      error: "Unable to fetch chat history",
+      success: false,
     });
   }
 });

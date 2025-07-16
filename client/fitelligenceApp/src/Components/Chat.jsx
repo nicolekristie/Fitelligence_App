@@ -11,32 +11,22 @@ import intenseImage from "../assets/images/aiCoach/intense.jpg";
 import kettlebellImage from "../assets/images/aiCoach/kettlebell.jpg";
 import powerImage from "../assets/images/aiCoach/power.jpg";
 import fitnessPartner from "../assets/images/aiCoach/fitness-partners.jpg";
-import workoutGirlImage from "../assets/images/aiCoach/workoutgirl.jpg";
 import { PaperAirplaneIcon } from "@heroicons/react/20/solid";
 import ChatMessage from "./ChatMessage";
 import RandomQuotes from "./RandomQuotes";
 import { motion } from "framer-motion";
+import { useUser } from "./Context/userContext.jsx";
 
 const Chat = ({ userId, goal }) => {
   //form in which it will create the chat box
   const [messages, setMessages] = React.useState([]);
   const [input, setInput] = React.useState("");
   const [isLoading, setisLoading] = React.useState(false);
-  const [user, setUser] = React.useState(null);
   const messagesEndRef = React.useRef(null);
   const inputRef = React.useRef(null);
 
-  // Get user data from localStorage if not passed as props
-  React.useEffect(() => {
-    if (!userId) {
-      const userData = localStorage.getItem("user");
-      if (userData) {
-        setUser(JSON.parse(userData));
-      }
-    } else {
-      setUser({ id: userId });
-    }
-  }, [userId]);
+  // Get user from context
+  const { user } = useUser();
 
   // Auto-scroll to bottom when new messages are added
   React.useEffect(() => {
@@ -52,19 +42,28 @@ const Chat = ({ userId, goal }) => {
     setisLoading(true);
     inputRef.current.focus();
 
+    // Debug: Log the data being sent
+    const requestData = {
+      message: userMessage,
+      userId: user?.id,
+      goal: goal,
+    };
+    console.log("🚀 Sending chat request:", requestData);
+    console.log("👤 User object:", user);
+    console.log("🆔 User ID:", user?.id);
+    console.log("🎯 Goal:", goal);
+
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          message: userMessage,
-          userId: user?.id,
-          goal: goal,
-        }),
+        body: JSON.stringify(requestData),
       });
       const data = await response.json();
+
+      console.log("📥 Received response:", data);
 
       // Add the bot's response to messages
       setMessages((prev) => [...prev, { text: data.response, isUser: false }]); //AI response

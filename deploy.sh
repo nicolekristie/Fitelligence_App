@@ -9,7 +9,7 @@ echo "🚀 Starting Fitelligence deployment..."
 
 # Configuration
 SERVER="ubuntu@34.225.131.148"
-SSH_KEY="~/.ssh/id_rsa"
+SSH_KEY="~/.ssh/virginia-app-mbp.pem"
 REMOTE_PATH="/var/www/vite-app/dist/"
 LOCAL_BUILD_PATH="client/fitelligenceApp/dist/"
 
@@ -34,7 +34,7 @@ rsync -avz --exclude=node_modules -e "ssh -i $SSH_KEY" \
 # Step 2.6: Install dependencies and restart server
 echo "🔄 Updating server dependencies..."
 ssh -i $SSH_KEY $SERVER "cd /home/ubuntu/fitelligence-server && npm install"
-ssh -i $SSH_KEY $SERVER "pm2 restart fitelligence-server || pm2 start index.js --name fitelligence-server"
+ssh -i $SSH_KEY $SERVER "cd /home/ubuntu/fitelligence-server && (pm2 restart fitelligence-server || pm2 start index.js --name fitelligence-server)"
 
 # Step 3: Reload Caddy (optional)
 echo "🔄 Reloading Caddy server..."

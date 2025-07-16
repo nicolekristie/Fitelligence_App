@@ -83,6 +83,15 @@ function Home() {
                   Monitor your fitness progress with detailed analytics and
                   visual insights.
                 </Card.Text>
+                <Button
+                  variant="success"
+                  as={Link}
+                  to="/progress"
+                  className="mt-2"
+                >
+                  <FontAwesomeIcon icon={faChartLine} className="me-2" />
+                  View Progress
+                </Button>
               </Card.Body>
             </Card>
           </Col>
@@ -135,12 +144,12 @@ function Home() {
                     <div className="d-flex justify-content-center gap-3">
                       <Button
                         as={Link}
-                        to="/workouts"
+                        to="/progress"
                         variant="primary"
                         size="md"
                         className="px-3"
                       >
-                        View Workouts
+                        View Progress
                       </Button>
                       <Button
                         as={Link}

@@ -1,11 +1,16 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import NavBar from "./Components/NavBar.jsx";
 import Home from "./Components/Home.jsx";
 import LoginForm from "./Components/LoginForm.jsx";
 import RegistrationForm from "./Components/RegistrationForm.jsx";
 import FitnessSurvey from "./Components/FitnessSurvey";
-import Workouts from "./Components/Workouts.jsx";
+import ProgressTracking from "./Components/ProgressTracking.jsx";
 import Profile from "./Components/Profile.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute.jsx";
 import Chat from "./Components/Chat.jsx";
@@ -30,7 +35,12 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/workouts" element={<Workouts />} />
+            <Route path="/progress" element={<ProgressTracking />} />
+            {/* Redirect old workouts route to new progress route */}
+            <Route
+              path="/workouts"
+              element={<Navigate to="/progress" replace />}
+            />
             <Route
               path="/chat"
               element={

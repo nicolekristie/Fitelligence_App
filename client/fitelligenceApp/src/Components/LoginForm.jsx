@@ -120,6 +120,7 @@ function LoginForm() {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
+                    autoComplete="current-password"
                     required
                   />
                 </Form.Group>

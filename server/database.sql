@@ -1,4 +1,6 @@
 -- DROP existing tables 
+DROP TABLE IF EXISTS ai_chat_responses;
+DROP TABLE IF EXISTS fitness_survey;
 DROP TABLE IF EXISTS profiles;
 DROP TABLE IF EXISTS users;
 
@@ -39,6 +41,18 @@ CREATE TABLE fitness_survey (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- AI_CHAT_RESPONSES table (linked to users)
+CREATE TABLE ai_chat_responses (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    response_text TEXT NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create indexes for better query performance
+CREATE INDEX idx_ai_chat_responses_user_id ON ai_chat_responses(user_id);
+CREATE INDEX idx_ai_chat_responses_timestamp ON ai_chat_responses(timestamp);
 
 
 -- Sample Data
