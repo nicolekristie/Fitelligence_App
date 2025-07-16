@@ -19,12 +19,9 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-
 app.get("/api/test", (req, res) => {
   res.json({ success: true, message: "Test route works!" });
 });
-
-
 
 //Chat endpoints
 app.post("/api/chat", async (req, res) => {
