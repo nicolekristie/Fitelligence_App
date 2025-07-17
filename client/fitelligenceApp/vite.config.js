@@ -12,5 +12,7 @@ export default defineConfig({
         secure: false,
       },
     },
+    open: true, // Automatically open the browser when the server starts
+    port: 3001, // Use a different port to avoid conflicts with other services
   },
 });

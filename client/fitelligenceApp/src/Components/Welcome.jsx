@@ -21,7 +21,10 @@ function Welcome() {
 
       <HeroSlider />
 
-      <Features />
+      <div className="mb-5">
+        <Features />
+      </div>
+      <div style={{ height: "48px" }} />
     </>
   );
 }

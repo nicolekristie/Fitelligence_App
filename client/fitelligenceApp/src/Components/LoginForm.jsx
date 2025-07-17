@@ -68,9 +68,9 @@ function LoginForm() {
         password: "",
       });
 
-      // Redirect to home page after showing success message
+      // Redirect to Welcome page after showing success message
       setTimeout(() => {
-        navigate("/");
+        navigate("/welcome");
       }, 1500);
     } catch (error) {
       // Handle login errors

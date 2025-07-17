@@ -22,7 +22,7 @@ function Home() {
     >
       <Container className="mt-5" style={{ position: "relative", zIndex: 1 }}>
         {/* Hero Section */}
-        <Row className="text-center mb-5">
+        <Row className="text-center mb-3">
           <Col>
             {user ? (
               <>
@@ -64,6 +64,25 @@ function Home() {
                   Personalized meal plans and recipes tailored to your fitness
                   goals and dietary preferences.
                 </Card.Text>
+                {user ? (
+                  <Button
+                    as={Link}
+                    to="/chat-recipe"
+                    variant="primary"
+                    className="mt-2"
+                  >
+                    View Recipes
+                  </Button>
+                ) : (
+                  <Button
+                    as={Link}
+                    to="/login"
+                    variant="outline-primary"
+                    className="mt-2"
+                  >
+                    Login to View Recipes
+                  </Button>
+                )}
               </Card.Body>
             </Card>
           </Col>
@@ -131,7 +150,7 @@ function Home() {
         </Row>
 
         {/* Call to Action */}
-        <Row className="text-center">
+        <Row className="text-center mb-5">
           <Col>
             <Card className="bg-light">
               <Card.Body className="py-3">

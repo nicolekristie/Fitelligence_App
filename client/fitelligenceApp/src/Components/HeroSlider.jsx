@@ -13,8 +13,7 @@ import stayStrong from "../assets/images/carousel/stayStrong.jpeg";
 import weights from "../assets/images/carousel/weights.jpg";
 import together from "../assets/images/carousel/together.jpg";
 
-
-function Welcome() {
+function HeroSlider() {
   const { user } = useUser();
 
   return (
@@ -36,9 +35,32 @@ function Welcome() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
+            position: "relative",
           }}
         >
-          <Carousel.Caption className="d-none d-md-block">
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              background: "rgba(0,0,0,0.3)",
+              zIndex: 1,
+            }}
+          />
+          <Carousel.Caption
+            className="d-none d-md-block"
+            style={{
+              zIndex: 2,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              background: "rgba(0,0,0,0.25)",
+              padding: "32px 0 28px 0",
+            }}
+          >
             <h5>Fitness Journey</h5>
             <p>Start your transformation today.</p>
           </Carousel.Caption>
@@ -51,9 +73,32 @@ function Welcome() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
+            position: "relative",
           }}
         >
-          <Carousel.Caption className="d-none d-md-block">
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              background: "rgba(0,0,0,0.3)",
+              zIndex: 1,
+            }}
+          />
+          <Carousel.Caption
+            className="d-none d-md-block"
+            style={{
+              zIndex: 2,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              background: "rgba(0,0,0,0.3)",
+              padding: "20px 0",
+            }}
+          >
             <h5>Strength Training</h5>
             <p>Build your power, one rep at a time.</p>
           </Carousel.Caption>
@@ -66,9 +111,32 @@ function Welcome() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
+            position: "relative",
           }}
         >
-          <Carousel.Caption className="d-none d-md-block">
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              background: "rgba(0,0,0,0.5)",
+              zIndex: 1,
+            }}
+          />
+          <Carousel.Caption
+            className="d-none d-md-block"
+            style={{
+              zIndex: 2,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              background: "rgba(0,0,0,0.3)",
+              padding: "20px 0",
+            }}
+          >
             <h5>Be Stronger</h5>
             <p>Than your excuses.</p>
           </Carousel.Caption>
@@ -81,9 +149,32 @@ function Welcome() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
+            position: "relative",
           }}
         >
-          <Carousel.Caption className="d-none d-md-block">
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              background: "rgba(0,0,0,0.5)",
+              zIndex: 1,
+            }}
+          />
+          <Carousel.Caption
+            className="d-none d-md-block"
+            style={{
+              zIndex: 2,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              background: "rgba(0,0,0,0.3)",
+              padding: "20px 0",
+            }}
+          >
             <h5>Never Give Up</h5>
             <p>Keep pushing forward.</p>
           </Carousel.Caption>
@@ -96,9 +187,32 @@ function Welcome() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
+            position: "relative",
           }}
         >
-          <Carousel.Caption className="d-none d-md-block">
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              background: "rgba(0,0,0,0.5)",
+              zIndex: 1,
+            }}
+          />
+          <Carousel.Caption
+            className="d-none d-md-block"
+            style={{
+              zIndex: 2,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              background: "rgba(0,0,0,0.3)",
+              padding: "20px 0",
+            }}
+          >
             <h5>Stay Strong</h5>
             <p>Build your inner strength.</p>
           </Carousel.Caption>
@@ -111,9 +225,32 @@ function Welcome() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
+            position: "relative",
           }}
         >
-          <Carousel.Caption className="d-none d-md-block">
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              background: "rgba(0,0,0,0.5)",
+              zIndex: 1,
+            }}
+          />
+          <Carousel.Caption
+            className="d-none d-md-block"
+            style={{
+              zIndex: 2,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              background: "rgba(0,0,0,0.3)",
+              padding: "20px 0",
+            }}
+          >
             <h5>Fear No Limits</h5>
             <p>Push beyond boundaries.</p>
           </Carousel.Caption>
@@ -126,9 +263,32 @@ function Welcome() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
+            position: "relative",
           }}
         >
-          <Carousel.Caption className="d-none d-md-block">
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              background: "rgba(0,0,0,0.5)",
+              zIndex: 1,
+            }}
+          />
+          <Carousel.Caption
+            className="d-none d-md-block"
+            style={{
+              zIndex: 2,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              background: "rgba(0,0,0,0.3)",
+              padding: "20px 0",
+            }}
+          >
             <h5>Work For It</h5>
             <p>Success requires effort.</p>
           </Carousel.Caption>
@@ -141,9 +301,32 @@ function Welcome() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
+            position: "relative",
           }}
         >
-          <Carousel.Caption className="d-none d-md-block">
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              background: "rgba(0,0,0,0.5)",
+              zIndex: 1,
+            }}
+          />
+          <Carousel.Caption
+            className="d-none d-md-block"
+            style={{
+              zIndex: 2,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              background: "rgba(0,0,0,0.3)",
+              padding: "20px 0",
+            }}
+          >
             <h5>Good Day</h5>
             <p>Today is your day to shine.</p>
           </Carousel.Caption>
@@ -156,9 +339,32 @@ function Welcome() {
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
+            position: "relative",
           }}
         >
-          <Carousel.Caption className="d-none d-md-block">
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              background: "rgba(0,0,0,0.5)",
+              zIndex: 1,
+            }}
+          />
+          <Carousel.Caption
+            className="d-none d-md-block"
+            style={{
+              zIndex: 2,
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              background: "rgba(0,0,0,0.3)",
+              padding: "20px 0",
+            }}
+          >
             <h5>You can do it!</h5>
             <p>Believe in yourself and all that you are.</p>
           </Carousel.Caption>
@@ -168,4 +374,4 @@ function Welcome() {
   );
 }
 
-export default Welcome;
+export default HeroSlider;

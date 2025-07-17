@@ -1,10 +1,5 @@
 import React from "react";
 import coachImage from "../assets/images/coachFace.jpeg";
-// import fitnessImage from "../assets/images/carousel/fitness.jpeg";
-// import weightsImage from "../assets/images/carousel/weights.jpg";
-// import stayStrongImage from "../assets/images/carousel/stayStrong.jpeg";
-// import togetherImage from "../assets/images/carousel/together.jpg";
-// AI Coach images
 import balanceImage from "../assets/images/aiCoach/balance.jpg";
 import focusedImage from "../assets/images/aiCoach/focused.jpg";
 import intenseImage from "../assets/images/aiCoach/intense.jpg";

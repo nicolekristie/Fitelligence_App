@@ -15,6 +15,7 @@ import Profile from "./Components/Profile.jsx";
 import ProtectedRoute from "./Components/ProtectedRoute.jsx";
 import Chat from "./Components/Chat.jsx";
 import Welcome from "./Components/Welcome.jsx";
+import ChatRecipe from "./Components/ChatRecipe.jsx";
 import { UserProvider } from "./Components/Context/userContext.jsx";
 
 function App() {
@@ -62,6 +63,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Welcome />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/chat-recipe"
+              element={
+                <ProtectedRoute>
+                  <ChatRecipe />
                 </ProtectedRoute>
               }
             />

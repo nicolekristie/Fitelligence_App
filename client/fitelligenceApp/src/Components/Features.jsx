@@ -23,7 +23,7 @@ function Features() {
       </div>
 
       {/* Features Section */}
-      <Row className="mb-4 mt-3">
+      <Row className="mb-5 mt-3">
         <Col md={4} className="mb-2">
           <Card className="h-100 text-center shadow-sm">
             <Card.Body className="p-3">
@@ -41,6 +41,27 @@ function Features() {
                 Personalized meal plans and recipes tailored to your fitness
                 goals and dietary preferences.
               </Card.Text>
+              {user ? (
+                <Button
+                  as={Link}
+                  to="/chat-recipe"
+                  variant="primary"
+                  size="sm"
+                  className="mt-2"
+                >
+                  View Recipes
+                </Button>
+              ) : (
+                <Button
+                  as={Link}
+                  to="/login"
+                  variant="outline-primary"
+                  size="sm"
+                  className="mt-2"
+                >
+                  Login to View Recipes
+                </Button>
+              )}
             </Card.Body>
           </Card>
         </Col>
@@ -60,6 +81,16 @@ function Features() {
                 Monitor your fitness progress with detailed analytics and visual
                 insights.
               </Card.Text>
+              <Button
+                as={Link}
+                to="/progress"
+                variant="success"
+                size="sm"
+                className="mt-2"
+              >
+                <FontAwesomeIcon icon={faChartLine} className="me-2" />
+                View Progress
+              </Button>
             </Card.Body>
           </Card>
         </Col>

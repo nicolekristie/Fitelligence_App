@@ -19,10 +19,6 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-app.get("/api/test", (req, res) => {
-  res.json({ success: true, message: "Test route works!" });
-});
-
 //Chat endpoints
 app.post("/api/chat", async (req, res) => {
   try {
@@ -241,6 +237,97 @@ app.get("/api/chat/history/:userId", async (req, res) => {
     res.status(500).json({
       error: "Unable to fetch chat history",
       success: false,
+    });
+  }
+});
+
+app.post("/api/chat-recipe", async (req, res) => {
+  try {
+    const { message } = req.body;
+    const systemPrompt = `You are a knowledgeable nutrition assistant. Recommend healthy, balanced recipes based on user preferences. Always suggest nutritious ingredients, clear instructions, and offer tips for dietary needs (e.g., vegetarian, gluten-free, low-carb). Be encouraging, concise, and focus on promoting overall wellness.
+
+IMPORTANT: For each recipe, put every section on its own line. Add TWO blank lines between each section. Never put more than one section on the same line. Never use inline formatting for multiple sections. If you do not follow this format, your response will not be accepted.
+
+When providing recipe recommendations, use this format for each day and recipe:
+
+**Day 1**
+
+
+🍽️ **Avocado Toast**
+
+
+🥗 **Main Ingredients:**
+• Avocado
+• Whole Grain Bread
+• Lemon
+• Salt
+
+
+🏷️ **Dietary Type:** Vegetarian
+
+
+📝 **Instructions:**
+1. Toast the bread.
+2. Mash the avocado with lemon and salt.
+3. Spread on toast and enjoy!
+
+
+---
+
+
+**Day 2**
+
+
+🍽️ **Quinoa Salad**
+
+
+🥗 **Main Ingredients:**
+• Quinoa
+• Cherry Tomatoes
+• Cucumber
+• Feta Cheese
+• Olive Oil
+
+
+🏷️ **Dietary Type:** Vegetarian, Gluten-free
+
+
+📝 **Instructions:**
+1. Cook quinoa according to package instructions.
+2. Chop vegetables and mix with quinoa.
+3. Add feta and olive oil, toss to combine.
+
+
+---
+
+
+Keep responses concise, friendly, and easy to read. Use emojis and formatting to make each recipe stand out. Do NOT merge sections onto the same line. Do NOT use inline formatting for multiple sections.`;
+
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4",
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: message },
+      ],
+      temperature: 0.7,
+      max_tokens: 500,
+    });
+
+    const aiResponse = completion.choices[0].message.content;
+    if (!aiResponse) throw new Error("No response from AI");
+
+    res.json({
+      response: aiResponse.trim(),
+      success: true,
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error) {
+    console.error("Error in chat-recipe endpoint:", error.message);
+    res.status(500).json({
+      error:
+        "I'm having trouble responding right now. Please try again in a moment.",
+      success: false,
+      timestamp: new Date().toISOString(),
     });
   }
 });
