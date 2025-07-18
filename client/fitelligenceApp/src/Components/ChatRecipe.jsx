@@ -29,85 +29,11 @@ function ChatRecipe() {
         href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
         rel="stylesheet"
       />
-      {/* Top right motivational icon equation */}
-      <div
-        style={{
-          position: "fixed",
-          top: 88, // push below navbar
-          right: 24,
-          zIndex: 20,
-          display: "flex",
-          alignItems: "center",
-          gap: 6,
-          background: "rgba(255,255,255,0.95)",
-          borderRadius: 32,
-          boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
-          padding: "6px 18px 6px 18px",
-          border: "2px solid #e3f6f5",
-          userSelect: "none",
-        }}
-        title="Strength + Healthy Food = Fit!"
-      >
-        <span style={{ fontSize: 32 }} role="img" aria-label="muscle">
-          💪
-        </span>
-        <span
-          style={{ fontSize: 26, margin: "0 2px" }}
-          role="img"
-          aria-label="plus"
-        >
-          ➕
-        </span>
-        <span style={{ fontSize: 32 }} role="img" aria-label="salad">
-          🥗
-        </span>
-        <span
-          style={{ fontSize: 26, margin: "0 2px" }}
-          role="img"
-          aria-label="equals"
-        >
-          ＝
-        </span>
-        <span style={{ fontSize: 32 }} role="img" aria-label="fit">
-          🏅
-        </span>
-      </div>
-      {/* Top right corner label */}
-      <div
-        style={{
-          position: "fixed",
-          top: 80, // push below nav bar
-          left: 36,
-          zIndex: 10,
-          fontFamily: "'Pacifico', 'Brush Script MT', cursive, sans-serif",
-          fontSize: 26, // even smaller
-          color: "#111",
-          textShadow: "0 2px 8px rgba(0,0,0,0.04)",
-          letterSpacing: 1,
-          userSelect: "none",
-          fontStyle: "italic",
-          transform: "skew(-12deg)", // more slanted
-          display: "flex",
-          alignItems: "flex-start",
-          gap: 12,
-        }}
-      >
-        <img
-          src={shrimp}
-          alt="Food Icon"
-          style={{
-            width: 38,
-            height: 38,
-            objectFit: "cover",
-            borderRadius: "50%",
-            marginRight: 10,
-            marginTop: 2,
-            boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
-            border: "2px solid #fff",
-            background: "#f8f8f8",
-          }}
-        />
-        <span>
+
+      {/* Desktop: separate top left and top right elements */}
+      <div className="top-label-desktop">
+        <img src={shrimp} alt="Food Icon" className="top-label-img" />
+        <span className="top-label-text">
           Healthy eating isn’t a diet,
           <br />
           it’s a lifestyle.
@@ -115,6 +41,197 @@ function ChatRecipe() {
           Nourish your body, fuel your life.
         </span>
       </div>
+      <div
+        className="motivational-equation-desktop"
+        title="Strength + Healthy Food = Fit!"
+      >
+        <span className="motivational-icon" role="img" aria-label="muscle">
+          💪
+        </span>
+        <span className="motivational-plus" role="img" aria-label="plus">
+          ➕
+        </span>
+        <span className="motivational-icon" role="img" aria-label="salad">
+          🥗
+        </span>
+        <span className="motivational-plus" role="img" aria-label="equals">
+          ＝
+        </span>
+        <span className="motivational-icon" role="img" aria-label="fit">
+          🏅
+        </span>
+      </div>
+
+      {/* Mobile: grouped banner, only visible on mobile */}
+      <div className="top-banner-responsive">
+        <div className="top-label-responsive">
+          <img src={shrimp} alt="Food Icon" className="top-label-img" />
+          <span className="top-label-text">
+            Healthy eating isn’t a diet,
+            <br />
+            it’s a lifestyle.
+            <br />
+            Nourish your body, fuel your life.
+          </span>
+        </div>
+        <div
+          className="motivational-equation"
+          title="Strength + Healthy Food = Fit!"
+        >
+          <span className="motivational-icon" role="img" aria-label="muscle">
+            💪
+          </span>
+          <span className="motivational-plus" role="img" aria-label="plus">
+            ➕
+          </span>
+          <span className="motivational-icon" role="img" aria-label="salad">
+            🥗
+          </span>
+          <span className="motivational-plus" role="img" aria-label="equals">
+            ＝
+          </span>
+          <span className="motivational-icon" role="img" aria-label="fit">
+            🏅
+          </span>
+        </div>
+      </div>
+
+      {/* Responsive styles for top right and top left text */}
+      <style>{`
+        /* Hide mobile banner on desktop, show on mobile */
+        .top-banner-responsive {
+          display: none;
+        }
+        @media (max-width: 900px) {
+          .top-banner-responsive {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 8px;
+            width: 100vw;
+            max-width: 100vw;
+            position: relative;
+            z-index: 30;
+          }
+        }
+
+        /* Desktop: show corners, hide on mobile */
+        .top-label-desktop, .motivational-equation-desktop {
+          position: fixed;
+          z-index: 30;
+        }
+        .top-label-desktop {
+          top: 70px;
+          left: 16px;
+          font-family: 'Pacifico', 'Brush Script MT', cursive, sans-serif;
+          font-size: 26px;
+          color: #111;
+          text-shadow: 0 2px 8px rgba(0,0,0,0.04);
+          letter-spacing: 1px;
+          user-select: none;
+          font-style: italic;
+          transform: skew(-12deg);
+          display: flex;
+          align-items: flex-start;
+          gap: 12px;
+          background: rgba(255,255,255,0.95);
+          border-radius: 32px;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+          padding: 6px 18px;
+          border: 2px solid #e3f6f5;
+          max-width: 60vw;
+          flex-wrap: wrap;
+        }
+        .motivational-equation-desktop {
+          top: 70px;
+          right: 16px;
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          background: rgba(255,255,255,0.95);
+          border-radius: 32px;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+          padding: 6px 18px;
+          border: 2px solid #e3f6f5;
+          user-select: none;
+          font-size: 26px;
+          max-width: 36vw;
+          flex-wrap: wrap;
+        }
+        .top-label-img {
+          width: 38px;
+          height: 38px;
+          object-fit: cover;
+          border-radius: 50%;
+          margin-right: 10px;
+          margin-top: 2px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+          border: 2px solid #fff;
+          background: #f8f8f8;
+        }
+        .top-label-text {
+          display: block;
+          word-break: break-word;
+        }
+        .motivational-icon {
+          font-size: 32px;
+        }
+        .motivational-plus {
+          font-size: 26px;
+          margin: 0 2px;
+        }
+        @media (max-width: 900px) {
+          .top-label-desktop, .motivational-equation-desktop {
+            display: none !important;
+          }
+          .top-label-responsive, .motivational-equation {
+            font-size: 16px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            margin: 8px auto 0 auto;
+            max-width: 90vw;
+          }
+          .top-label-responsive {
+            font-family: 'Pacifico', 'Brush Script MT', cursive, sans-serif;
+          }
+          .top-label-img {
+            width: 18px;
+            height: 18px;
+            margin-right: 2px;
+            margin-top: 1px;
+          }
+          .motivational-icon {
+            font-size: 18px;
+          }
+          .motivational-plus {
+            font-size: 14px;
+          }
+        }
+        @media (max-width: 700px) {
+          .top-banner-responsive {
+            gap: 4px;
+          }
+          .top-label-responsive, .motivational-equation {
+            font-size: 12px;
+            padding: 2px 4px;
+            border-radius: 14px;
+            margin: 4px auto 0 auto;
+            max-width: 98vw;
+          }
+          .top-label-img {
+            width: 12px;
+            height: 12px;
+            margin-right: 1px;
+            margin-top: 0px;
+          }
+          .motivational-icon {
+            font-size: 14px;
+          }
+          .motivational-plus {
+            font-size: 10px;
+          }
+        }
+      `}</style>
       {/* ...existing code... */}
       <div
         className="d-flex flex-column align-items-center justify-content-start min-vh-100 bg-light py-4"
