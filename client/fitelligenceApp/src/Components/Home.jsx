@@ -18,6 +18,11 @@ function Home() {
       style={{
         position: "relative",
         minHeight: "100vh",
+        // backgroundImage: `url(${logo})`,
+        // backgroundRepeat: "no-repeat",
+        // backgroundPosition: "center 60px",
+        // backgroundSize: "300px",
+        // opacity: 1,
       }}
     >
       <Container className="mt-5" style={{ position: "relative", zIndex: 1 }}>
