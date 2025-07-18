@@ -23,7 +23,13 @@ function ChatRecipe() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        minHeight: "100vh",
+      }}
+    >
       {/* Google Fonts link for Pacifico */}
       <link
         href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
@@ -234,10 +240,11 @@ function ChatRecipe() {
       `}</style>
       {/* ...existing code... */}
       <div
-        className="d-flex flex-column align-items-center justify-content-start min-vh-100 bg-light py-4"
+        className="d-flex flex-column align-items-center justify-content-start bg-light py-4"
         style={{
           position: "relative",
           zIndex: 1,
+          flex: 1,
         }}
       >
         {/* Lightened logo background overlay */}
@@ -431,15 +438,11 @@ function ChatRecipe() {
           fontSize: 22,
           textAlign: "center",
           padding: "28px 0 18px 0",
-          marginTop: 0,
           letterSpacing: 1,
           borderTop: "2px solid #b2f7ef",
           boxShadow: "0 -2px 16px rgba(27, 107, 107, 0.07)",
           borderRadius: "0 0 18px 18px",
-          zIndex: 100,
-          position: "fixed",
-          left: 0,
-          bottom: 0,
+          marginTop: "auto",
         }}
       >
         {`Keep fueling your journey, ${
