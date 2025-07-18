@@ -48,11 +48,29 @@ function ChatRecipe() {
         }}
         title="Strength + Healthy Food = Fit!"
       >
-        <span style={{fontSize: 32}} role="img" aria-label="muscle">💪</span>
-        <span style={{fontSize: 26, margin: '0 2px'}} role="img" aria-label="plus">➕</span>
-        <span style={{fontSize: 32}} role="img" aria-label="salad">🥗</span>
-        <span style={{fontSize: 26, margin: '0 2px'}} role="img" aria-label="equals">＝</span>
-        <span style={{fontSize: 32}} role="img" aria-label="fit">🏅</span>
+        <span style={{ fontSize: 32 }} role="img" aria-label="muscle">
+          💪
+        </span>
+        <span
+          style={{ fontSize: 26, margin: "0 2px" }}
+          role="img"
+          aria-label="plus"
+        >
+          ➕
+        </span>
+        <span style={{ fontSize: 32 }} role="img" aria-label="salad">
+          🥗
+        </span>
+        <span
+          style={{ fontSize: 26, margin: "0 2px" }}
+          role="img"
+          aria-label="equals"
+        >
+          ＝
+        </span>
+        <span style={{ fontSize: 32 }} role="img" aria-label="fit">
+          🏅
+        </span>
       </div>
       {/* Top right corner label */}
       <div
@@ -97,7 +115,7 @@ function ChatRecipe() {
           Nourish your body, fuel your life.
         </span>
       </div>
-    {/* ...existing code... */}
+      {/* ...existing code... */}
       <div
         className="d-flex flex-column align-items-center justify-content-start min-vh-100 bg-light py-4"
         style={{
@@ -238,7 +256,7 @@ function ChatRecipe() {
               boxShadow: "0 4px 16px rgba(0,0,0,0.10)",
             }}
           />
-    </div>
+        </div>
         <h2
           className="text-center bg-white rounded shadow-sm py-4 px-5 mb-4 w-100 chat-main"
           style={{ maxWidth: 700, fontSize: "2.2rem" }}
@@ -285,30 +303,32 @@ function ChatRecipe() {
             Send
           </button>
         </div>
-        </div>
-    {/* Fun personalized encouragement footer at the very bottom of the page, fixed */}
-    <footer
-      style={{
-        width: "100%",
-        background: "#e3f6f5",
-        color: "#1b6b6b",
-        fontFamily: "'Pacifico', 'Brush Script MT', cursive, sans-serif",
-        fontSize: 22,
-        textAlign: "center",
-        padding: "28px 0 18px 0",
-        marginTop: 0,
-        letterSpacing: 1,
-        borderTop: "2px solid #b2f7ef",
-        boxShadow: "0 -2px 16px rgba(27, 107, 107, 0.07)",
-        borderRadius: "0 0 18px 18px",
-        zIndex: 100,
-        position: "fixed",
-        left: 0,
-        bottom: 0,
-      }}
-    >
-      {`Keep fueling your journey, ${(user && user.firstname) ? user.firstname : 'Fitelligence friend'}! Every meal counts.`}
-    </footer>
+      </div>
+      {/* Fun personalized encouragement footer at the very bottom of the page, fixed */}
+      <footer
+        style={{
+          width: "100%",
+          background: "#e3f6f5",
+          color: "#1b6b6b",
+          fontFamily: "'Pacifico', 'Brush Script MT', cursive, sans-serif",
+          fontSize: 22,
+          textAlign: "center",
+          padding: "28px 0 18px 0",
+          marginTop: 0,
+          letterSpacing: 1,
+          borderTop: "2px solid #b2f7ef",
+          boxShadow: "0 -2px 16px rgba(27, 107, 107, 0.07)",
+          borderRadius: "0 0 18px 18px",
+          zIndex: 100,
+          position: "fixed",
+          left: 0,
+          bottom: 0,
+        }}
+      >
+        {`Keep fueling your journey, ${
+          user && user.firstname ? user.firstname : "Fitelligence friend"
+        }! Every meal counts.`}
+      </footer>
     </div>
   );
 }
