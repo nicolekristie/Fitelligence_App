@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useUser } from "./Context/userContext.jsx";
+import ProfileAvatar from "./ProfileAvatar.jsx";
 
 function Profile() {
-  const { user, isLoading } = useUser();
+  const { user, isLoading, validateCurrentToken } = useUser();
 
   if (isLoading) {
     return (
@@ -37,6 +38,17 @@ function Profile() {
     );
   }
 
+  // Avatar URL: prefer user.avatar_url, fallback to user.profile?.avatar_url, else null
+
+  const avatarUrl =
+    user.avatar_url || (user.profile && user.profile.avatar_url) || null;
+  const token = localStorage.getItem("token");
+
+  // After upload, refresh user context so avatar persists
+  const handleAvatarUpload = async () => {
+    await validateCurrentToken();
+  };
+
   return (
     <Container className="mt-5">
       <Row>
@@ -46,6 +58,11 @@ function Profile() {
               My Profile
             </Card.Header>
             <Card.Body>
+              <ProfileAvatar
+                avatarUrl={avatarUrl}
+                token={token}
+                onUpload={handleAvatarUpload}
+              />
               <Row className="mb-3">
                 <Col sm={3}>
                   <strong>First Name:</strong>
@@ -75,7 +92,9 @@ function Profile() {
                   <strong>Member Since:</strong>
                 </Col>
                 <Col sm={9}>
-                  {new Date(user.created_at).toLocaleDateString()}
+                  {user.created_at
+                    ? new Date(user.created_at).toLocaleDateString()
+                    : ""}
                 </Col>
               </Row>
             </Card.Body>

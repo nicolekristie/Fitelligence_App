@@ -13,6 +13,6 @@ export default defineConfig({
       },
     },
     open: true, // Automatically open the browser when the server starts
-    port: 3001, // Use a different port to avoid conflicts with other services
+    port: 5173, // Use a different port to avoid conflicts with backend (default Vite port)
   },
 });

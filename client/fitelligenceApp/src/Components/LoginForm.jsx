@@ -8,7 +8,7 @@ import {
   Card,
   Alert,
 } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "./Context/userContext.jsx";
 
@@ -21,7 +21,15 @@ const labelStyle = {
 
 function LoginForm() {
   const navigate = useNavigate();
-  const { loginUser } = useUser();
+  const location = useLocation();
+  const { loginUser, isAuthenticated, isLoading } = useUser();
+  // If already authenticated and on the login page, redirect to previous or home
+  if (!isLoading && isAuthenticated && location.pathname === "/login") {
+    // Try to redirect to previous page if available, else home
+    const from = location.state?.from?.pathname || "/";
+    navigate(from, { replace: true });
+    return null;
+  }
 
   const [formData, setFormData] = useState({
     email: "",
@@ -30,7 +38,7 @@ function LoginForm() {
 
   const [message, setMessage] = useState("");
   const [isError, setIsError] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isFormLoading, setIsFormLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,7 +48,7 @@ function LoginForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setIsLoading(true);
+    setIsFormLoading(true);
     setMessage("");
 
     try {
@@ -51,13 +59,23 @@ function LoginForm() {
       });
 
       // Login successful
-      const { token, user } = response.data;
+      const { token } = response.data;
 
       // Store token in localStorage (for API authentication)
       localStorage.setItem("token", token);
 
-      // Set user in context only (no localStorage for user data)
-      loginUser(user);
+      // Fetch full user profile (with avatar_url) and set in context
+      try {
+        const profileRes = await axios.get("/api/profile", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        if (profileRes.data && profileRes.data.user) {
+          loginUser(profileRes.data.user);
+        }
+      } catch (profileErr) {
+        // fallback: clear user context if profile fetch fails
+        loginUser(null);
+      }
 
       setMessage("Login successful! Welcome back!");
       setIsError(false);
@@ -79,7 +97,7 @@ function LoginForm() {
       setMessage(errorMessage);
       setIsError(true);
     } finally {
-      setIsLoading(false);
+      setIsFormLoading(false);
     }
   };
 
@@ -129,9 +147,9 @@ function LoginForm() {
                   variant="primary"
                   type="submit"
                   className="w-100"
-                  disabled={isLoading}
+                  disabled={isFormLoading}
                 >
-                  {isLoading ? "Logging in..." : "Login"}
+                  {isFormLoading ? "Logging in..." : "Login"}
                 </Button>
 
                 <div className="text-center mt-3">

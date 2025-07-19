@@ -4,7 +4,10 @@ import { useUser } from "./Context/userContext.jsx";
 
 // Protected Route Component
 function ProtectedRoute({ children }) {
-  const { isAuthenticated } = useUser();
+  const { isAuthenticated, isLoading } = useUser();
+
+  // While loading, render nothing (or a spinner if you prefer)
+  if (isLoading) return null;
 
   // If not authenticated, redirect to login
   if (!isAuthenticated) {

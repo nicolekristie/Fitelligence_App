@@ -10,6 +10,11 @@ import pool from "./db.js";
 const app = express();
 const PORT = 3001;
 
+// Serve uploaded avatars statically
+import path from "path";
+console.log("Serving uploads from:", path.join(process.cwd(), "uploads"));
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
+
 app.use(cors());
 app.use(express.json());
 app.use("/api/fitness-survey", fitnessSurveyRoute);

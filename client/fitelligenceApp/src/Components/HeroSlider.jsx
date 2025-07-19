@@ -6,12 +6,13 @@ import { Carousel } from "react-bootstrap";
 import beStronger from "../assets/images/carousel/Be Stronger.jpeg";
 import workForIt from "../assets/images/carousel/WorkForIt.jpeg";
 import fearNoLimit from "../assets/images/carousel/fearNoLimit.jpg";
-import fitness from "../assets/images/carousel/fitness.jpeg";
+import fitnessrope from "../assets/images/carousel/fitnessrope.jpg";
 import goodDay from "../assets/images/carousel/goodDay.jpeg";
 import neverGiveUp from "../assets/images/carousel/neverGiveUp.jpeg";
 import stayStrong from "../assets/images/carousel/stayStrong.jpeg";
 import weights from "../assets/images/carousel/weights.jpg";
 import together from "../assets/images/carousel/together.jpg";
+import fitnesswomen from "../assets/images/carousel/fitnesswomen.jpg";
 
 function HeroSlider() {
   const { user } = useUser();
@@ -31,7 +32,7 @@ function HeroSlider() {
         <Carousel.Item
           style={{
             height: "400px",
-            backgroundImage: `url(${fitness})`,
+            backgroundImage: `url(${fitnessrope})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
@@ -221,9 +222,9 @@ function HeroSlider() {
         <Carousel.Item
           style={{
             height: "400px",
-            backgroundImage: `url(${fearNoLimit})`,
+            backgroundImage: `url(${fitnesswomen})`,
             backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundPosition: "center 30%", // Move image even further down to show top of head
             backgroundRepeat: "no-repeat",
             position: "relative",
           }}
