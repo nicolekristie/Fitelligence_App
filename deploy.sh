@@ -27,7 +27,7 @@ rsync -avz --delete -e "ssh -i $SSH_KEY" \
 
 # Step 2.5: Deploy backend server (if needed)
 echo "🔄 Syncing backend files..."
-rsync -avz --exclude=node_modules -e "ssh -i $SSH_KEY" \
+rsync -avz --exclude=node_modules --exclude=uploads -e "ssh -i $SSH_KEY" \
   server/ \
   $SERVER:/home/ubuntu/fitelligence-server/
 
