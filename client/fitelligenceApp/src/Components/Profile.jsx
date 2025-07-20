@@ -54,11 +54,13 @@ function Profile() {
     await validateCurrentToken();
   };
 
+  // Remove extra top margin and whitespace above "My Profile"
+  // Add space at the top border of the page
   return (
-    <Container className="mt-5">
+    <Container style={{ marginTop: 32, paddingTop: 0 }}>
       <Row
         className="justify-content-center align-items-center"
-        style={{ minHeight: "unset", marginTop: "32px", position: "relative" }}
+        style={{ minHeight: "unset", marginTop: 0, position: "relative" }}
       >
         {/* Stretches image on the left side, responsive */}
         <Col
@@ -98,7 +100,10 @@ function Profile() {
               maxWidth: 820,
               minWidth: 260,
               minHeight: 420,
-              padding: "18px 0",
+              paddingTop: 0,
+              paddingLeft: 0,
+              paddingRight: 0,
+              paddingBottom: 0,
               margin: "0 auto",
               position: "relative",
             }}
@@ -113,14 +118,21 @@ function Profile() {
                 fontWeight: 700,
                 letterSpacing: 1,
                 boxShadow: "0 2px 8px rgba(24,90,157,0.10)",
-                padding: "22px 0",
-                marginBottom: 18,
+                padding: "14px 0 10px 0",
+                marginBottom: 10,
                 fontSize: 30,
               }}
             >
               My Profile
             </Card.Header>
-            <Card.Body>
+            <Card.Body
+              style={{
+                paddingTop: 0,
+                paddingBottom: 24,
+                paddingLeft: 24,
+                paddingRight: 24,
+              }}
+            >
               <Row>
                 {/* Profile fields */}
                 <Col xs={12} md={8} style={{ minWidth: 180 }}>

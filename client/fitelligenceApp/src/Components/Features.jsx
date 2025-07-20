@@ -78,8 +78,10 @@ function Features() {
               </div>
               <Card.Title className="h6 mb-2">Progress Tracking</Card.Title>
               <Card.Text className="text-muted" style={{ fontSize: "0.85rem" }}>
-                Monitor your fitness progress with detailed analytics and visual
-                insights.
+                Review your previous conversations with your AI fitness coach.
+                This page displays your chat history so you can revisit your
+                coach's advice, feedback, and motivation as you progress on your
+                fitness journey.
               </Card.Text>
               <Button
                 as={Link}

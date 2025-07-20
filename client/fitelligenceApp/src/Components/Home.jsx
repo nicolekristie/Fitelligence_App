@@ -104,8 +104,10 @@ function Home() {
                 </div>
                 <Card.Title>Progress Tracking</Card.Title>
                 <Card.Text>
-                  Monitor your fitness progress with detailed analytics and
-                  visual insights.
+                  Review your previous conversations with your AI fitness coach.
+                  This page displays your chat history so you can revisit your
+                  coach's advice, feedback, and motivation as you progress on
+                  your fitness journey.
                 </Card.Text>
                 <Button
                   variant="success"

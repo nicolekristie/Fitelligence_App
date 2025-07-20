@@ -115,10 +115,10 @@ function ProgressTracking() {
                   )}
                 </h5>
                 <p className="text-muted">
-                  Track your fitness journey by reviewing your{" "}
-                  <strong>workout history</strong> and previous conversations
-                  with your AI coach. This helps you stay motivated and
-                  accountable to your fitness goals.
+                  Review your previous conversations with your AI fitness coach.
+                  This page displays your chat history so you can revisit your
+                  coach's advice, feedback, and motivation as you progress on
+                  your fitness journey.
                 </p>
                 {user?.id ? (
                   <Button

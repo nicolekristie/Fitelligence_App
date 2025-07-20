@@ -45,8 +45,8 @@ function ProfileAvatar({ avatarUrl, token, onUpload }) {
     }
   };
 
-  // Always use backend URL for avatar if present
-  let imgSrc = "/default-avatar.png";
+  // Always use backend URL for avatar if present, else fallback to /assets/images/profile/avatardefault.jpg (public folder)
+  let imgSrc = "/assets/images/profile/avatardefault.jpg";
   if (avatarUrl) {
     if (avatarUrl.startsWith("/uploads/")) {
       // Add cache-busting query string to force reload after upload
