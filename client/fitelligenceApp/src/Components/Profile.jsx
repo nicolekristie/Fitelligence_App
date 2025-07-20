@@ -56,65 +56,47 @@ function Profile() {
 
   return (
     <Container className="mt-5">
-      {/* Stretches image at the top, more to the left and lower */}
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          position: "relative",
-          minHeight: 0,
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            left: "-120px",
-            top: "40px",
-            zIndex: 2,
-          }}
-        >
-          <div style={{ position: "relative", width: "100%" }}>
-            <img
-              src={stretchesImg}
-              alt="Stretches"
-              style={{
-                width: "100%",
-                maxWidth: 340,
-                minWidth: 200,
-                height: 340,
-                borderRadius: 28,
-                boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
-                objectFit: "contain",
-                background: "#fff",
-                border: "2.5px solid #43cea2",
-                filter: "brightness(0.8) contrast(1.15)",
-              }}
-            />
-          </div>
-        </div>
-      </div>
       <Row
         className="justify-content-center align-items-center"
-        style={{ minHeight: "unset", marginTop: "32px" }}
+        style={{ minHeight: "unset", marginTop: "32px", position: "relative" }}
       >
-        {/* Profile card centered - use flex utilities for perfect centering */}
+        {/* Stretches image on the left side, responsive */}
         <Col
+          xs={2}
+          md={2}
+          className="d-none d-sm-flex flex-column align-items-end justify-content-center"
+          style={{ paddingRight: 0 }}
+        >
+          <img
+            src={stretchesImg}
+            alt="Stretches"
+            style={{
+              width: "100%",
+              maxWidth: 320,
+              minWidth: 120,
+              height: "auto",
+              borderRadius: 32,
+              boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
+              objectFit: "contain",
+              background: "#fff",
+              border: "2.5px solid #43cea2",
+              filter: "brightness(0.8) contrast(1.15)",
+              marginBottom: 12,
+            }}
+          />
+        </Col>
+        {/* Profile card centered and responsive */}
+        <Col
+          xs={12}
           md={8}
           className="d-flex align-items-center justify-content-center"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            position: "relative",
-          }}
+          style={{ position: "relative", minWidth: 0 }}
         >
           <Card
             style={{
               width: "100%",
               maxWidth: 820,
-              minWidth: 400,
+              minWidth: 260,
               minHeight: 420,
               padding: "18px 0",
               margin: "0 auto",
@@ -141,7 +123,7 @@ function Profile() {
             <Card.Body>
               <Row>
                 {/* Profile fields */}
-                <Col md={8} style={{ minWidth: 320 }}>
+                <Col xs={12} md={8} style={{ minWidth: 180 }}>
                   <div
                     style={{
                       width: "100%",
@@ -159,7 +141,8 @@ function Profile() {
                         flexDirection: "column",
                         alignItems: "center",
                         justifyContent: "center",
-                        marginLeft: "260px",
+                        marginLeft: "12vw",
+                        transition: "margin 0.3s",
                       }}
                     >
                       <ProfileAvatar
@@ -170,105 +153,105 @@ function Profile() {
                     </div>
                   </div>
                   <Row className="mb-4 align-items-center">
-                    <Col sm={4}>
+                    <Col xs={5} sm={4}>
                       <FaUser style={{ marginRight: 8 }} />
                       <strong>First Name:</strong>
                     </Col>
-                    <Col sm={8} style={{ fontSize: 18 }}>
+                    <Col xs={7} sm={8} style={{ fontSize: 18 }}>
                       {user.firstname}
                     </Col>
                   </Row>
                   <Row className="mb-4 align-items-center">
-                    <Col sm={4}>
+                    <Col xs={5} sm={4}>
                       <FaUser style={{ marginRight: 8 }} />
                       <strong>Last Name:</strong>
                     </Col>
-                    <Col sm={8} style={{ fontSize: 18 }}>
+                    <Col xs={7} sm={8} style={{ fontSize: 18 }}>
                       {user.lastname}
                     </Col>
                   </Row>
                   <Row className="mb-4 align-items-center">
-                    <Col sm={4}>
+                    <Col xs={5} sm={4}>
                       <FaUserTag style={{ marginRight: 8 }} />
                       <strong>Username:</strong>
                     </Col>
-                    <Col sm={8} style={{ fontSize: 18 }}>
+                    <Col xs={7} sm={8} style={{ fontSize: 18 }}>
                       {user.username}
                     </Col>
                   </Row>
                   <Row className="mb-4 align-items-center">
-                    <Col sm={4}>
+                    <Col xs={5} sm={4}>
                       <FaEnvelope style={{ marginRight: 8 }} />
                       <strong>Email:</strong>
                     </Col>
-                    <Col sm={8} style={{ fontSize: 18 }}>
+                    <Col xs={7} sm={8} style={{ fontSize: 18 }}>
                       {user.email}
                     </Col>
                   </Row>
                   <Row className="mb-4 align-items-center">
-                    <Col sm={4}>
+                    <Col xs={5} sm={4}>
                       <FaCalendarAlt style={{ marginRight: 8 }} />
                       <strong>Member Since:</strong>
                     </Col>
-                    <Col sm={8} style={{ fontSize: 18 }}>
+                    <Col xs={7} sm={8} style={{ fontSize: 18 }}>
                       {user.created_at
                         ? new Date(user.created_at).toLocaleDateString()
                         : ""}
                     </Col>
                   </Row>
                 </Col>
-                {/* Kettlebell image inside card */}
+                {/* Kettlebell image inside card, responsive */}
                 <Col
+                  xs={12}
                   md={4}
                   className="d-flex align-items-center justify-content-center mb-3 mb-md-0"
-                  style={{ minWidth: 200, position: "relative" }}
+                  style={{ minWidth: 120, position: "relative" }}
                 >
                   <img
                     src={kettleballImg}
                     alt="Kettlebell Workouts"
                     style={{
                       width: "100%",
-                      maxWidth: 260,
-                      minWidth: 180,
-                      height: 320,
+                      maxWidth: 200,
+                      minWidth: 100,
+                      height: "auto",
                       borderRadius: 28,
                       boxShadow: "0 4px 18px rgba(0,0,0,0.14)",
                       objectFit: "contain",
                       background: "#fff",
                       marginRight: 12,
-                      marginTop: "140px",
+                      marginTop: "7vw",
+                      transition: "margin 0.3s",
                     }}
                   />
-                  {/* Facts image to the right of the card */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      right: "-440px",
-                      top: "-60px",
-                      width: "100%",
-                      maxWidth: 520,
-                      minWidth: 340,
-                      height: 220,
-                    }}
-                  >
-                    <img
-                      src={factsImg}
-                      alt="Facts"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: 38,
-                        boxShadow: "0 4px 18px rgba(0,0,0,0.14)",
-                        objectFit: "cover",
-                        background: "#fff",
-                        border: "4px solid #43cea2",
-                      }}
-                    />
-                  </div>
                 </Col>
               </Row>
             </Card.Body>
           </Card>
+        </Col>
+        {/* Facts image on the right side, responsive */}
+        <Col
+          xs={2}
+          md={2}
+          className="d-none d-sm-flex flex-column align-items-start justify-content-center"
+          style={{ paddingLeft: 0 }}
+        >
+          <img
+            src={factsImg}
+            alt="Facts"
+            style={{
+              width: "100%",
+              maxWidth: 520,
+              minWidth: 200,
+              height: "auto",
+              borderRadius: 60,
+              boxShadow: "0 4px 30px rgba(0,0,0,0.17)",
+              objectFit: "cover",
+              background: "#fff",
+              border: "5px solid #43cea2",
+              marginBottom: 12,
+            }}
+          />
         </Col>
       </Row>
     </Container>
