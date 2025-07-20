@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { useUser } from "./Context/userContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
+import Markdown from "react-markdown";
 
 function ProgressTracking() {
   const [chatHistory, setChatHistory] = useState([]);
@@ -84,7 +85,7 @@ function ProgressTracking() {
   };
 
   const handleLogin = () => {
-     navigate("/login");
+    navigate("/login");
   };
 
   const handleChatRedirect = () => {
@@ -145,7 +146,11 @@ function ProgressTracking() {
                     )}
                   </Button>
                 ) : (
-                  <Button onClick={handleLogin} variant="outline-warning" size="lg">
+                  <Button
+                    onClick={handleLogin}
+                    variant="outline-warning"
+                    size="lg"
+                  >
                     Please log in to view history
                   </Button>
                 )}
@@ -191,7 +196,7 @@ function ProgressTracking() {
                               color: "#2c3e50",
                             }}
                           >
-                            {item.response_text}
+                            <Markdown>{item.response_text}</Markdown>
                           </div>
                         </Card.Body>
                       </Card>
