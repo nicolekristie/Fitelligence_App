@@ -1,4 +1,5 @@
 import React from "react";
+import { flushSync } from "react-dom";
 import coachImage from "../assets/images/coachFace.jpeg";
 import balanceImage from "../assets/images/aiCoach/balance.jpg";
 import focusedImage from "../assets/images/aiCoach/focused.jpg";
@@ -37,16 +38,11 @@ const Chat = ({ userId, goal }) => {
     setisLoading(true);
     inputRef.current.focus();
 
-    // Debug: Log the data being sent
     const requestData = {
       message: userMessage,
       userId: user?.id,
       goal: goal,
     };
-    console.log("🚀 Sending chat request:", requestData);
-    console.log("👤 User object:", user);
-    console.log("🆔 User ID:", user?.id);
-    console.log("🎯 Goal:", goal);
 
     try {
       const response = await fetch("/api/chat", {
@@ -56,13 +52,41 @@ const Chat = ({ userId, goal }) => {
         },
         body: JSON.stringify(requestData),
       });
-      const data = await response.json();
 
-      console.log("📥 Received response:", data);
-
-      // Add the bot's response to messages
-      setMessages((prev) => [...prev, { text: data.response, isUser: false }]); //AI response
-      setisLoading(false);
+      // STREAMING response handling
+      if (response.body) {
+        const reader = response.body
+          .pipeThrough(new TextDecoderStream())
+          .getReader();
+        let fullResponse = "";
+        // Add a placeholder message for streaming
+        setMessages((prev) => [...prev, { text: "", isUser: false }]);
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          fullResponse += value;
+          // Force React to update UI immediately on each chunk
+          flushSync(() => {
+            setMessages((prev) => {
+              const updated = [...prev];
+              updated[updated.length - 1] = {
+                text: fullResponse,
+                isUser: false,
+              };
+              return updated;
+            });
+          });
+        }
+        setisLoading(false);
+      } else {
+        // Fallback for non-streaming response
+        const data = await response.json();
+        setMessages((prev) => [
+          ...prev,
+          { text: data.response, isUser: false },
+        ]);
+        setisLoading(false);
+      }
     } catch (error) {
       console.error("Error fetching bot response:", error);
       setMessages((prev) => [
@@ -196,7 +220,10 @@ const Chat = ({ userId, goal }) => {
                             message={msg}
                             isUser={msg.isUser}
                             isTyping={
-                              isLoading && index === messages.length - 1
+                              // Show 'Thinking' only if last AI message is empty
+                              index === messages.length - 1 &&
+                              !msg.isUser &&
+                              msg.text === ""
                             }
                           />
                         ))}
@@ -282,7 +309,6 @@ const Chat = ({ userId, goal }) => {
                     </div>
                   </motion.div>
                 </div>
-
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                   <motion.div
                     className="card h-100 shadow-sm"
@@ -306,7 +332,6 @@ const Chat = ({ userId, goal }) => {
                     </div>
                   </motion.div>
                 </div>
-
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                   <motion.div
                     className="card h-100 shadow-sm"
@@ -330,7 +355,6 @@ const Chat = ({ userId, goal }) => {
                     </div>
                   </motion.div>
                 </div>
-
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                   <motion.div
                     className="card h-100 shadow-sm"
@@ -354,7 +378,6 @@ const Chat = ({ userId, goal }) => {
                     </div>
                   </motion.div>
                 </div>
-
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                   <motion.div
                     className="card h-100 shadow-sm"
@@ -378,7 +401,6 @@ const Chat = ({ userId, goal }) => {
                     </div>
                   </motion.div>
                 </div>
-
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                   <motion.div
                     className="card h-100 shadow-sm"

@@ -13,13 +13,61 @@ import useChatBot from "../hooks/useChatBot";
 function ChatRecipe() {
   const { user } = useChatBot(); // Try to get user context if available
   const [input, setInput] = React.useState("");
-  const { messages, sendMessage, loading } = useChatBot();
+  const [messages, setMessages] = React.useState([]);
+  const [loading, setLoading] = React.useState(false);
+
+  // Streaming sendMessage for chat-recipe
+  const sendMessage = async (userMessage) => {
+    setMessages((prev) => [...prev, { text: userMessage, sender: "user" }]);
+    setLoading(true);
+    try {
+      const response = await fetch("/api/chat-recipe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage, userId: user?.id }),
+      });
+      if (response.body) {
+        const reader = response.body
+          .pipeThrough(new TextDecoderStream())
+          .getReader();
+        let fullResponse = "";
+        setMessages((prev) => [...prev, { text: "", sender: "bot" }]);
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          fullResponse += value;
+          setMessages((prev) => {
+            const updated = [...prev];
+            updated[updated.length - 1] = { text: fullResponse, sender: "bot" };
+            return updated;
+          });
+        }
+        setLoading(false);
+      } else {
+        // Fallback for non-streaming
+        const data = await response.json();
+        setMessages((prev) => [
+          ...prev,
+          { text: data.response, sender: "bot" },
+        ]);
+        setLoading(false);
+      }
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          text: "Sorry, I'm having trouble responding right now. Please try again.",
+          sender: "bot",
+        },
+      ]);
+      setLoading(false);
+    }
+  };
 
   const handleSend = () => {
-    if (input.trim() === "") return; // Prevent sending empty messages
-    console.log("Message sent:", input);
-    sendMessage(input); // Send message to chat bot
-    setInput(""); // Clear input after sending
+    if (input.trim() === "") return;
+    sendMessage(input);
+    setInput("");
   };
 
   return (

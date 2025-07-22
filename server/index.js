@@ -113,63 +113,45 @@ When creating workout plans, ONLY suggest exercises using their available equipm
       }
     }
 
-    // Create completion with personalized system context
-    const completion = await openai.chat.completions.create({
-      model: "gpt-4",
-      messages: [
-        {
-          role: "system",
-          content: systemPrompt,
-        },
-        {
-          role: "user",
-          content: message.trim(),
-        },
-      ],
-      temperature: 0.7,
-      max_tokens: 500,
-    });
-
-    // Format and validate AI response
-    const aiResponse = completion.choices[0].message.content;
-
-    if (!aiResponse) {
-      throw new Error("No response from AI");
+    // --- Begin STREAMING OpenAI response ---
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    let fullResponse = "";
+    try {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-4",
+        stream: true,
+        messages: [
+          { role: "system", content: systemPrompt },
+          { role: "user", content: message.trim() },
+        ],
+        temperature: 0.7,
+        max_tokens: 500,
+      });
+      for await (const chunk of completion) {
+        const content = chunk.choices?.[0]?.delta?.content;
+        if (content) {
+          res.write(content);
+          fullResponse += content;
+        }
+      }
+      res.end();
+    } catch (streamError) {
+      console.error("Streaming error:", streamError);
+      res.end();
     }
-
     // Save AI response to database if user is logged in
-    if (userId) {
+    if (userId && fullResponse.trim().length > 0) {
       try {
-        console.log(`Attempting to save AI response for user ${userId}`);
-        console.log(`Response text: ${aiResponse.trim().substring(0, 100)}...`);
-
-        const result = await pool.query(
+        await pool.query(
           `INSERT INTO ai_chat_responses (user_id, response_text) 
            VALUES ($1, $2) RETURNING id`,
-          [userId, aiResponse.trim()]
-        );
-
-        console.log(
-          `✅ Successfully saved AI response with ID: ${result.rows[0].id}`
+          [userId, fullResponse.trim()]
         );
       } catch (dbError) {
-        console.error(
-          "❌ Error saving AI response to database:",
-          dbError.message
-        );
-        console.error("Full error:", dbError);
-        // Continue without failing the request
+        console.error("Error saving AI response to database:", dbError.message);
       }
-    } else {
-      console.log("⚠️ No userId provided, skipping database save");
     }
-
-    // Send formatted response
-    res.json({
-      response: aiResponse.trim(),
-      success: true,
-      timestamp: new Date().toISOString(),
-    });
+    // --- End STREAMING OpenAI response ---
   } catch (error) {
     console.error("Error in chat endpoint:", error.message);
 
@@ -276,7 +258,6 @@ When providing recipe recommendations, use this format for each day and recipe:
 2. Mash the avocado with lemon and salt.
 3. Spread on toast and enjoy!
 
-
 ---
 
 
@@ -302,11 +283,13 @@ When providing recipe recommendations, use this format for each day and recipe:
 2. Chop vegetables and mix with quinoa.
 3. Add feta and olive oil, toss to combine.
 
-
 ---
 
 
 Keep responses concise, friendly, and easy to read. Use emojis and formatting to make each recipe stand out. Do NOT merge sections onto the same line. Do NOT use inline formatting for multiple sections.`;
+
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    res.setHeader("Transfer-Encoding", "chunked");
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4",
@@ -314,26 +297,32 @@ Keep responses concise, friendly, and easy to read. Use emojis and formatting to
         { role: "system", content: systemPrompt },
         { role: "user", content: message },
       ],
+      stream: true,
       temperature: 0.7,
       max_tokens: 500,
     });
 
-    const aiResponse = completion.choices[0].message.content;
-    if (!aiResponse) throw new Error("No response from AI");
-
-    res.json({
-      response: aiResponse.trim(),
-      success: true,
-      timestamp: new Date().toISOString(),
-    });
+    let fullResponse = "";
+    for await (const chunk of completion) {
+      const content = chunk.choices?.[0]?.delta?.content || "";
+      if (content) {
+        fullResponse += content;
+        res.write(content);
+      }
+    }
+    res.end();
   } catch (error) {
     console.error("Error in chat-recipe endpoint:", error.message);
-    res.status(500).json({
-      error:
-        "I'm having trouble responding right now. Please try again in a moment.",
-      success: false,
-      timestamp: new Date().toISOString(),
-    });
+    if (!res.headersSent) {
+      res.status(500).json({
+        error:
+          "I'm having trouble responding right now. Please try again in a moment.",
+        success: false,
+        timestamp: new Date().toISOString(),
+      });
+    } else {
+      res.end();
+    }
   }
 });
 

@@ -2,7 +2,6 @@ import React from "react";
 import { UserIcon, ComputerDesktopIcon } from "@heroicons/react/24/outline";
 import Markdown from "react-markdown";
 
-
 const ChatMessage = ({ message, isUser, isTyping = false }) => {
   return (
     <div
