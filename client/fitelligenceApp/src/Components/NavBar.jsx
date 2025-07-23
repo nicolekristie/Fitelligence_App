@@ -96,6 +96,13 @@ function NavBar() {
                   <Nav.Link as={Link} to="/chat" onClick={handleNavClick}>
                     AI Coach
                   </Nav.Link>
+                  <Nav.Link
+                    as={Link}
+                    to="/recipe-history"
+                    onClick={handleNavClick}
+                  >
+                    Recipe History
+                  </Nav.Link>
                   <Navbar.Text className="me-3 text-light">
                     Welcome, {user.firstname}! 👋
                   </Navbar.Text>

@@ -17,6 +17,8 @@ app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 app.use(cors());
 app.use(express.json());
+// app.use("/api/fitness-survey", fitnessSurveyRoute);
+// app.use("/api/test", fitnessSurveyRoute);
 app.use("/api/fitness-survey", fitnessSurveyRoute);
 
 // Initialize with API key from environment variables
@@ -115,6 +117,7 @@ When creating workout plans, ONLY suggest exercises using their available equipm
 
     // --- Begin STREAMING OpenAI response ---
     res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    res.setHeader("Transfer-Encoding", "chunked");
     let fullResponse = "";
     try {
       const completion = await openai.chat.completions.create({
@@ -166,9 +169,9 @@ When creating workout plans, ONLY suggest exercises using their available equipm
 });
 
 // Get chat history for a user
-app.get("/api/test", (req, res) => {
-  res.json({ success: true, message: "Test route works!" });
-});
+// app.get("/api/test", (req, res) => {
+//   res.json({ success: true, message: "Test route works!" });
+// });
 
 app.get("/api/chat/history/:userId", async (req, res) => {
   try {
@@ -229,6 +232,7 @@ app.get("/api/chat/history/:userId", async (req, res) => {
 });
 
 app.post("/api/chat-recipe", async (req, res) => {
+  console.log("chat-recipe request body:", req.body);
   try {
     const { message } = req.body;
     const systemPrompt = `You are a knowledgeable nutrition assistant. Recommend healthy, balanced recipes based on user preferences. Always suggest nutritious ingredients, clear instructions, and offer tips for dietary needs (e.g., vegetarian, gluten-free, low-carb). Be encouraging, concise, and focus on promoting overall wellness.
@@ -311,6 +315,24 @@ Keep responses concise, friendly, and easy to read. Use emojis and formatting to
       }
     }
     res.end();
+    // Save AI recipe response to database if user is logged in
+    const userId = req.body.userId;
+    console.log(
+      "Saving recipe for userId:",
+      userId,
+      "Response length:",
+      fullResponse.trim().length
+    );
+    if (userId && fullResponse.trim().length > 0) {
+      try {
+        await pool.query(
+          `INSERT INTO ai_recipe_responses (user_id, response_text) VALUES ($1, $2) RETURNING id`,
+          [userId, fullResponse.trim()]
+        );
+      } catch (dbError) {
+        console.error("Error saving AI recipe to database:", dbError.message);
+      }
+    }
   } catch (error) {
     console.error("Error in chat-recipe endpoint:", error.message);
     if (!res.headersSent) {
@@ -323,6 +345,65 @@ Keep responses concise, friendly, and easy to read. Use emojis and formatting to
     } else {
       res.end();
     }
+  }
+});
+
+// Get recipe history for a user
+app.get("/api/recipe/history/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { limit = 50, offset = 0 } = req.query;
+
+    // Validate userId
+    if (!userId || isNaN(parseInt(userId))) {
+      return res.status(400).json({
+        error: "Valid user ID is required",
+        success: false,
+      });
+    }
+
+    // Get recipe history
+    const query = `
+      SELECT 
+        id,
+        response_text,
+        timestamp,
+        created_at
+      FROM ai_recipe_responses 
+      WHERE user_id = $1
+      ORDER BY timestamp DESC 
+      LIMIT $2 OFFSET $3
+    `;
+
+    const result = await pool.query(query, [
+      parseInt(userId),
+      parseInt(limit),
+      parseInt(offset),
+    ]);
+
+    // Get total count for pagination
+    const countResult = await pool.query(
+      `SELECT COUNT(*) FROM ai_recipe_responses WHERE user_id = $1`,
+      [parseInt(userId)]
+    );
+    const totalCount = parseInt(countResult.rows[0].count);
+
+    res.json({
+      success: true,
+      data: result.rows,
+      pagination: {
+        total: totalCount,
+        limit: parseInt(limit),
+        offset: parseInt(offset),
+        hasMore: parseInt(offset) + parseInt(limit) < totalCount,
+      },
+    });
+  } catch (error) {
+    console.error("Error fetching recipe history:", error.message);
+    res.status(500).json({
+      error: "Unable to fetch recipe history",
+      success: false,
+    });
   }
 });
 

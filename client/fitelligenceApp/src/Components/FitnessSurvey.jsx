@@ -57,16 +57,32 @@ export default function FitnessSurvey() {
     }
 
     //Send fitness survey data to backend
-    const res = await fetch("/api/fitness-survey", {
-      method: "POST",
+    // Try PUT first, fallback to POST if no survey exists
+    let res = await fetch("/api/fitness-survey", {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...form, user_id: user.id }),
     });
 
-    const data = await res.json();
+    let data = await res.json();
     if (res.ok) {
-      navigate("/welcome"); // Redirect to the welcome page after successful submission
-      // setShowChat(true); // ✅ Show the Chat component
+      setMessage("Survey updated successfully.");
+      // Optionally redirect or show confirmation
+      // navigate("/welcome");
+    } else if (res.status === 404) {
+      // No survey exists, create new
+      res = await fetch("/api/fitness-survey", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, user_id: user.id }),
+      });
+      data = await res.json();
+      if (res.ok) {
+        setMessage("Survey created successfully.");
+        // navigate("/welcome");
+      } else {
+        setMessage(data.error || "Something went wrong");
+      }
     } else {
       setMessage(data.error || "Something went wrong");
     }

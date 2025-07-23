@@ -15,12 +15,13 @@ const useChatBot = () => {
     setMessages((prevMessages) => [...prevMessages, newMessage]);
     setLoading(true);
     try {
+      console.log("Sending recipe request for userId:", user && user.id);
       const response = await fetch("/api/chat-recipe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({ message: text, userId: user && user.id }),
       });
       const data = await response.json();
       if (data && data.response) {

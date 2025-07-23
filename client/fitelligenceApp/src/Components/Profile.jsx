@@ -1,16 +1,56 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col, Card, Tabs, Tab } from "react-bootstrap";
 import { FaUser, FaEnvelope, FaUserTag, FaCalendarAlt } from "react-icons/fa";
 import { useUser } from "./Context/userContext.jsx";
 import ProfileAvatar from "./ProfileAvatar.jsx";
-import workoutsImg from "../assets/images/profile/workouts.jpeg";
-import kettleballImg from "../assets/images/profile/kettleballworkouts.jpg";
-import stretchesImg from "../assets/images/profile/stretches.jpeg";
-import moreworkoutsImg from "../assets/images/profile/moreworkouts.jpg";
-import factsImg from "../assets/images/profile/facts.png";
+import FitnessSurvey from "./FitnessSurvey.jsx";
 
 function Profile() {
   const { user, isLoading, validateCurrentToken } = useUser();
+  const [editing, setEditing] = useState(false);
+  const [editFields, setEditFields] = useState({
+    firstname: "",
+    lastname: "",
+    username: "",
+  });
+  const [editError, setEditError] = useState("");
+  const [activeTab, setActiveTab] = useState("about");
+
+  React.useEffect(() => {
+    if (editing && user) {
+      setEditFields({
+        firstname: user.firstname || "",
+        lastname: user.lastname || "",
+        username: user.username || "",
+      });
+    }
+  }, [editing, user]);
+
+  // Submit handler for edit form
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    setEditError("");
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch("/api/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(editFields),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        setEditing(false);
+        await validateCurrentToken(); // Refresh user context
+      } else {
+        setEditError(data.error || "Failed to update profile.");
+      }
+    } catch (err) {
+      setEditError("Failed to update profile.");
+    }
+  };
 
   if (isLoading) {
     return (
@@ -62,32 +102,6 @@ function Profile() {
         className="justify-content-center align-items-center"
         style={{ minHeight: "unset", marginTop: 0, position: "relative" }}
       >
-        {/* Stretches image on the left side, responsive */}
-        <Col
-          xs={2}
-          md={2}
-          className="d-none d-sm-flex flex-column align-items-end justify-content-center"
-          style={{ paddingRight: 0 }}
-        >
-          <img
-            src={stretchesImg}
-            alt="Stretches"
-            style={{
-              width: "100%",
-              maxWidth: 320,
-              minWidth: 120,
-              height: "auto",
-              borderRadius: 32,
-              boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
-              objectFit: "contain",
-              background: "#fff",
-              border: "2.5px solid #43cea2",
-              filter: "brightness(0.8) contrast(1.15)",
-              marginBottom: 12,
-            }}
-          />
-        </Col>
-        {/* Profile card centered and responsive */}
         <Col
           xs={12}
           md={8}
@@ -133,137 +147,214 @@ function Profile() {
                 paddingRight: 24,
               }}
             >
-              <Row>
-                {/* Profile fields */}
-                <Col xs={12} md={8} style={{ minWidth: 180 }}>
-                  <div
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      marginBottom: 24,
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        marginLeft: "12vw",
-                        transition: "margin 0.3s",
-                      }}
-                    >
-                      <ProfileAvatar
-                        avatarUrl={avatarUrl}
-                        token={token}
-                        onUpload={handleAvatarUpload}
-                      />
-                    </div>
-                  </div>
-                  <Row className="mb-4 align-items-center">
-                    <Col xs={5} sm={4}>
-                      <FaUser style={{ marginRight: 8 }} />
-                      <strong>First Name:</strong>
-                    </Col>
-                    <Col xs={7} sm={8} style={{ fontSize: 18 }}>
-                      {user.firstname}
+              <Tabs
+                activeKey={activeTab}
+                onSelect={setActiveTab}
+                className="mb-4"
+                fill
+              >
+                <Tab eventKey="about" title="About">
+                  <Row>
+                    <Col xs={12} md={8} style={{ minWidth: 180 }}>
+                      <div
+                        style={{
+                          width: "100%",
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          marginBottom: 24,
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: "100%",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginLeft: "12vw",
+                            transition: "margin 0.3s",
+                          }}
+                        >
+                          <ProfileAvatar
+                            avatarUrl={avatarUrl}
+                            token={token}
+                            onUpload={handleAvatarUpload}
+                          />
+                        </div>
+                      </div>
+                      <Row className="mb-4 align-items-center">
+                        <Col xs={5} sm={4}>
+                          <FaUser style={{ marginRight: 8 }} />
+                          <strong>First Name:</strong>
+                        </Col>
+                        <Col xs={7} sm={8} style={{ fontSize: 18 }}>
+                          {user.firstname}
+                        </Col>
+                      </Row>
+                      <Row className="mb-4 align-items-center">
+                        <Col xs={5} sm={4}>
+                          <FaUser style={{ marginRight: 8 }} />
+                          <strong>Last Name:</strong>
+                        </Col>
+                        <Col xs={7} sm={8} style={{ fontSize: 18 }}>
+                          {user.lastname}
+                        </Col>
+                      </Row>
+                      <Row className="mb-4 align-items-center">
+                        <Col xs={5} sm={4}>
+                          <FaUserTag style={{ marginRight: 8 }} />
+                          <strong>Username:</strong>
+                        </Col>
+                        <Col xs={7} sm={8} style={{ fontSize: 18 }}>
+                          {user.username}
+                        </Col>
+                      </Row>
+                      <Row className="mb-4 align-items-center">
+                        <Col xs={5} sm={4}>
+                          <FaEnvelope style={{ marginRight: 8 }} />
+                          <strong>Email:</strong>
+                        </Col>
+                        <Col xs={7} sm={8} style={{ fontSize: 18 }}>
+                          {user.email}
+                        </Col>
+                      </Row>
+                      <Row className="mb-4 align-items-center">
+                        <Col xs={5} sm={4}>
+                          <FaCalendarAlt style={{ marginRight: 8 }} />
+                          <strong>Member Since:</strong>
+                        </Col>
+                        <Col xs={7} sm={8} style={{ fontSize: 18 }}>
+                          {user.created_at
+                            ? new Date(user.created_at).toLocaleDateString()
+                            : ""}
+                        </Col>
+                      </Row>
+                      <Row className="mb-4 align-items-center">
+                        <Col xs={5} sm={4}>
+                          <button
+                            className="btn btn-outline-primary"
+                            onClick={() => setEditing(true)}
+                          >
+                            Edit
+                          </button>
+                        </Col>
+                      </Row>
+                      {/* Edit Profile Form */}
+                      {editing && (
+                        <Row className="mb-4">
+                          <Col xs={12}>
+                            <form
+                              onSubmit={handleEditSubmit}
+                              style={{
+                                background: "#f8f9fa",
+                                padding: 20,
+                                borderRadius: 8,
+                                boxShadow: "0 2px 8px rgba(24,90,157,0.10)",
+                              }}
+                            >
+                              <h5 style={{ marginBottom: 16 }}>Edit Profile</h5>
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="firstname"
+                                  className="form-label"
+                                >
+                                  First Name
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="firstname"
+                                  value={editFields.firstname}
+                                  onChange={(e) =>
+                                    setEditFields({
+                                      ...editFields,
+                                      firstname: e.target.value,
+                                    })
+                                  }
+                                  required
+                                />
+                              </div>
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="lastname"
+                                  className="form-label"
+                                >
+                                  Last Name
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="lastname"
+                                  value={editFields.lastname}
+                                  onChange={(e) =>
+                                    setEditFields({
+                                      ...editFields,
+                                      lastname: e.target.value,
+                                    })
+                                  }
+                                  required
+                                />
+                              </div>
+                              <div className="mb-3">
+                                <label
+                                  htmlFor="username"
+                                  className="form-label"
+                                >
+                                  Username
+                                </label>
+                                <input
+                                  type="text"
+                                  className="form-control"
+                                  id="username"
+                                  value={editFields.username}
+                                  onChange={(e) =>
+                                    setEditFields({
+                                      ...editFields,
+                                      username: e.target.value,
+                                    })
+                                  }
+                                  required
+                                />
+                              </div>
+                              <div style={{ display: "flex", gap: 12 }}>
+                                <button
+                                  type="submit"
+                                  className="btn btn-success"
+                                >
+                                  Save
+                                </button>
+                                <button
+                                  type="button"
+                                  className="btn btn-secondary"
+                                  onClick={() => setEditing(false)}
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                              {editError && (
+                                <div className="mt-3 text-danger">
+                                  {editError}
+                                </div>
+                              )}
+                            </form>
+                          </Col>
+                        </Row>
+                      )}
                     </Col>
                   </Row>
-                  <Row className="mb-4 align-items-center">
-                    <Col xs={5} sm={4}>
-                      <FaUser style={{ marginRight: 8 }} />
-                      <strong>Last Name:</strong>
-                    </Col>
-                    <Col xs={7} sm={8} style={{ fontSize: 18 }}>
-                      {user.lastname}
+                </Tab>
+                <Tab eventKey="survey" title="Fitness Survey">
+                  <Row>
+                    <Col xs={12} md={8} style={{ minWidth: 180 }}>
+                      <FitnessSurvey />
                     </Col>
                   </Row>
-                  <Row className="mb-4 align-items-center">
-                    <Col xs={5} sm={4}>
-                      <FaUserTag style={{ marginRight: 8 }} />
-                      <strong>Username:</strong>
-                    </Col>
-                    <Col xs={7} sm={8} style={{ fontSize: 18 }}>
-                      {user.username}
-                    </Col>
-                  </Row>
-                  <Row className="mb-4 align-items-center">
-                    <Col xs={5} sm={4}>
-                      <FaEnvelope style={{ marginRight: 8 }} />
-                      <strong>Email:</strong>
-                    </Col>
-                    <Col xs={7} sm={8} style={{ fontSize: 18 }}>
-                      {user.email}
-                    </Col>
-                  </Row>
-                  <Row className="mb-4 align-items-center">
-                    <Col xs={5} sm={4}>
-                      <FaCalendarAlt style={{ marginRight: 8 }} />
-                      <strong>Member Since:</strong>
-                    </Col>
-                    <Col xs={7} sm={8} style={{ fontSize: 18 }}>
-                      {user.created_at
-                        ? new Date(user.created_at).toLocaleDateString()
-                        : ""}
-                    </Col>
-                  </Row>
-                </Col>
-                {/* Kettlebell image inside card, responsive */}
-                <Col
-                  xs={12}
-                  md={4}
-                  className="d-flex align-items-center justify-content-center mb-3 mb-md-0"
-                  style={{ minWidth: 120, position: "relative" }}
-                >
-                  <img
-                    src={kettleballImg}
-                    alt="Kettlebell Workouts"
-                    style={{
-                      width: "100%",
-                      maxWidth: 200,
-                      minWidth: 100,
-                      height: "auto",
-                      borderRadius: 28,
-                      boxShadow: "0 4px 18px rgba(0,0,0,0.14)",
-                      objectFit: "contain",
-                      background: "#fff",
-                      marginRight: 12,
-                      marginTop: "7vw",
-                      transition: "margin 0.3s",
-                    }}
-                  />
-                </Col>
-              </Row>
+                </Tab>
+              </Tabs>
             </Card.Body>
           </Card>
-        </Col>
-        {/* Facts image on the right side, responsive */}
-        <Col
-          xs={2}
-          md={2}
-          className="d-none d-sm-flex flex-column align-items-start justify-content-center"
-          style={{ paddingLeft: 0 }}
-        >
-          <img
-            src={factsImg}
-            alt="Facts"
-            style={{
-              width: "100%",
-              maxWidth: 520,
-              minWidth: 200,
-              height: "auto",
-              borderRadius: 60,
-              boxShadow: "0 4px 30px rgba(0,0,0,0.17)",
-              objectFit: "cover",
-              background: "#fff",
-              border: "5px solid #43cea2",
-              marginBottom: 12,
-            }}
-          />
         </Col>
       </Row>
     </Container>

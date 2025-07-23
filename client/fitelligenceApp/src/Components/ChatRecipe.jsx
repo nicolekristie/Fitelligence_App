@@ -8,10 +8,10 @@ import wine from "../assets/images/recipes/wine.jpg";
 import roastedChicken from "../assets/images/recipes/roastedChicken.jpg";
 import Markdown from "react-markdown";
 import { LuBot, LuSendHorizontal } from "react-icons/lu";
-import useChatBot from "../hooks/useChatBot";
+import { useUser } from "./Context/userContext.jsx";
 
 function ChatRecipe() {
-  const { user } = useChatBot(); // Try to get user context if available
+  const { user } = useUser(); // Use user context directly
   const [input, setInput] = React.useState("");
   const [messages, setMessages] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -21,10 +21,11 @@ function ChatRecipe() {
     setMessages((prev) => [...prev, { text: userMessage, sender: "user" }]);
     setLoading(true);
     try {
+      console.log("Sending recipe request for userId:", user && user.id);
       const response = await fetch("/api/chat-recipe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage, userId: user?.id }),
+        body: JSON.stringify({ message: userMessage, userId: user && user.id }),
       });
       if (response.body) {
         const reader = response.body

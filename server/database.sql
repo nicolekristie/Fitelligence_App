@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS ai_chat_responses;
 DROP TABLE IF EXISTS fitness_survey;
 DROP TABLE IF EXISTS profiles;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS ai_recipe_responses;
 
 -- USERS table
 CREATE TABLE users (
@@ -45,6 +46,15 @@ CREATE TABLE fitness_survey (
 CREATE TABLE ai_chat_responses (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    response_text TEXT NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Add table for storing AI recipe responses
+CREATE TABLE IF NOT EXISTS ai_recipe_responses (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
     response_text TEXT NOT NULL,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
