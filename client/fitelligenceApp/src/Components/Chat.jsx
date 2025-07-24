@@ -292,12 +292,18 @@ const Chat = ({ userId, goal }) => {
                       transformOrigin: "center left",
                     }}
                   >
-                    <motion.img
-                      src={balanceImage}
-                      alt="Balance Training"
-                      className="card-img-top"
-                      style={{ height: "150px", objectFit: "cover" }}
-                    />
+                    <a href="/sample-workouts">
+                      <motion.img
+                        src={balanceImage}
+                        alt="Balance Training"
+                        className="card-img-top"
+                        style={{
+                          height: "150px",
+                          objectFit: "cover",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </a>
                     <div className="card-body p-2">
                       <h6 className="card-title small mb-1">⚖️ Balance</h6>
                       <p
@@ -315,12 +321,18 @@ const Chat = ({ userId, goal }) => {
                     whileHover={{ scale: 2, zIndex: 10 }}
                     style={{ position: "relative" }}
                   >
-                    <img
-                      src={focusedImage}
-                      alt="Focused Training"
-                      className="card-img-top"
-                      style={{ height: "150px", objectFit: "cover" }}
-                    />
+                    <a href="/sample-workouts">
+                      <img
+                        src={focusedImage}
+                        alt="Focused Training"
+                        className="card-img-top"
+                        style={{
+                          height: "150px",
+                          objectFit: "cover",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </a>
                     <div className="card-body p-2">
                       <h6 className="card-title small mb-1">🎯 Focus</h6>
                       <p
@@ -338,12 +350,18 @@ const Chat = ({ userId, goal }) => {
                     whileHover={{ scale: 2, zIndex: 10 }}
                     style={{ position: "relative" }}
                   >
-                    <img
-                      src={intenseImage}
-                      alt="Intense Workout"
-                      className="card-img-top"
-                      style={{ height: "150px", objectFit: "cover" }}
-                    />
+                    <a href="/sample-workouts">
+                      <img
+                        src={intenseImage}
+                        alt="Intense Workout"
+                        className="card-img-top"
+                        style={{
+                          height: "150px",
+                          objectFit: "cover",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </a>
                     <div className="card-body p-2">
                       <h6 className="card-title small mb-1">🔥 Intensity</h6>
                       <p
@@ -361,12 +379,18 @@ const Chat = ({ userId, goal }) => {
                     whileHover={{ scale: 2, zIndex: 10 }}
                     style={{ position: "relative" }}
                   >
-                    <img
-                      src={kettlebellImage}
-                      alt="Kettlebell Training"
-                      className="card-img-top"
-                      style={{ height: "150px", objectFit: "cover" }}
-                    />
+                    <a href="/sample-workouts">
+                      <img
+                        src={kettlebellImage}
+                        alt="Kettlebell Training"
+                        className="card-img-top"
+                        style={{
+                          height: "150px",
+                          objectFit: "cover",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </a>
                     <div className="card-body p-2">
                       <h6 className="card-title small mb-1">🏋️ Kettlebell</h6>
                       <p
@@ -384,12 +408,18 @@ const Chat = ({ userId, goal }) => {
                     whileHover={{ scale: 2, zIndex: 10 }}
                     style={{ position: "relative" }}
                   >
-                    <img
-                      src={powerImage}
-                      alt="Power Training"
-                      className="card-img-top"
-                      style={{ height: "150px", objectFit: "cover" }}
-                    />
+                    <a href="/sample-workouts">
+                      <img
+                        src={powerImage}
+                        alt="Power Training"
+                        className="card-img-top"
+                        style={{
+                          height: "150px",
+                          objectFit: "cover",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </a>
                     <div className="card-body p-2">
                       <h6 className="card-title small mb-1">⚡ Power</h6>
                       <p
@@ -410,12 +440,18 @@ const Chat = ({ userId, goal }) => {
                       transformOrigin: "center right",
                     }}
                   >
-                    <img
-                      src={fitnessPartner}
-                      alt="Male Fitness"
-                      className="card-img-top"
-                      style={{ height: "150px", objectFit: "cover" }}
-                    />
+                    <a href="/sample-workouts">
+                      <img
+                        src={fitnessPartner}
+                        alt="Male Fitness"
+                        className="card-img-top"
+                        style={{
+                          height: "150px",
+                          objectFit: "cover",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </a>
                     <div className="card-body p-2">
                       <h6 className="card-title small mb-1">
                         💪 Fitness Partners

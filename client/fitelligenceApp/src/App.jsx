@@ -18,6 +18,7 @@ import Welcome from "./Components/Welcome.jsx";
 import ChatRecipe from "./Components/ChatRecipe.jsx";
 import RecipeHistory from "./Components/RecipeHistory.jsx";
 import { UserProvider } from "./Components/Context/userContext.jsx";
+import SampleWorkouts from "./Components/SampleWorkouts.jsx";
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/sample-workouts" element={<SampleWorkouts />} />
             <Route
               path="/chat-recipe"
               element={

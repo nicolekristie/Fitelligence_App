@@ -68,7 +68,7 @@ export default function FitnessSurvey() {
     if (res.ok) {
       setMessage("Survey updated successfully.");
       // Optionally redirect or show confirmation
-      // navigate("/welcome");
+      navigate("/welcome");
     } else if (res.status === 404) {
       // No survey exists, create new
       res = await fetch("/api/fitness-survey", {
@@ -109,7 +109,7 @@ export default function FitnessSurvey() {
                 <option value="">Select a goal</option>
                 <option value="muscle gain">Muscle Gain</option>
                 <option value="weight loss">Weight Loss</option>
-                <option value="endurance">Endurance</option>
+                <option value="endurance">Endurance</option>er Workout Manager API
                 <option value="overall health">Overall Health</option>
                 <option value="stress reduction">Stress Reduction</option>
                 <option value="toning">Endurance</option>
