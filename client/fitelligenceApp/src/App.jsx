@@ -6,7 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import NavBar from "./Components/NavBar.jsx";
-import Home from "./Components/Home.jsx";
+import HomeSample from "./Components/HomeSample.jsx";
 import LoginForm from "./Components/LoginForm.jsx";
 import RegistrationForm from "./Components/RegistrationForm.jsx";
 import FitnessSurvey from "./Components/FitnessSurvey";
@@ -27,7 +27,8 @@ function App() {
         <div className="App">
           <NavBar />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<HomeSample />} />
+            <Route path="/home-sample" element={<HomeSample />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegistrationForm />} />
             <Route

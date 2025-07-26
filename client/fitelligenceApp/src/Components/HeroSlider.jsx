@@ -17,362 +17,279 @@ import fitnesswomen from "../assets/images/carousel/fitnesswomen.jpg";
 function HeroSlider() {
   const { user } = useUser();
 
+  // Responsive height: 50vw (max 400px, min 220px)
+  const carouselHeight = "min(max(50vw, 220px), 400px)";
   return (
     <div className="container-fluid p-0">
       <Carousel
         interval={3000}
         controls={true}
         indicators={false}
-        style={{
-          width: "100%",
-          height: "400px",
-          margin: "0",
-        }}
+        style={{ width: "100%", height: "auto", margin: "0" }}
       >
-        <Carousel.Item
-          style={{
-            height: "400px",
-            backgroundImage: `url(${fitnessrope})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-          }}
-        >
-          <div
+        {/* Fitness Journey */}
+        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
+          <img
+            src={fitnessrope}
+            alt="Fitness Journey"
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
               width: "100%",
-              height: "100%",
-              background: "rgba(0,0,0,0.3)",
-              zIndex: 1,
+              height: carouselHeight,
+              objectFit: "contain",
+              objectPosition: "center",
+              display: "block",
+              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
             }}
           />
-          <Carousel.Caption
-            className="d-none d-md-block"
-            style={{
-              zIndex: 2,
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              background: "rgba(0,0,0,0.25)",
-              padding: "32px 0 28px 0",
-            }}
-          >
-            <h5>Fitness Journey</h5>
-            <p>Start your transformation today.</p>
+          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
+            <h5
+              style={{
+                color: "#fff",
+                textShadow: "0 2px 8px #14696a",
+                fontWeight: 700,
+              }}
+            >
+              Fitness Journey
+            </h5>
+            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+              Start your transformation today.
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
-
-        <Carousel.Item
-          style={{
-            height: "400px",
-            backgroundImage: `url(${weights})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-          }}
-        >
-          <div
+        {/* Strength Training */}
+        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
+          <img
+            src={weights}
+            alt="Strength Training"
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
               width: "100%",
-              height: "100%",
-              background: "rgba(0,0,0,0.3)",
-              zIndex: 1,
+              height: carouselHeight,
+              objectFit: "contain",
+              objectPosition: "center",
+              display: "block",
+              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
             }}
           />
-          <Carousel.Caption
-            className="d-none d-md-block"
-            style={{
-              zIndex: 2,
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              background: "rgba(0,0,0,0.3)",
-              padding: "20px 0",
-            }}
-          >
-            <h5>Strength Training</h5>
-            <p>Build your power, one rep at a time.</p>
+          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
+            <h5
+              style={{
+                color: "#fff",
+                textShadow: "0 2px 8px #14696a",
+                fontWeight: 700,
+              }}
+            >
+              Strength Training
+            </h5>
+            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+              Build your power, one rep at a time.
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
-
-        <Carousel.Item
-          style={{
-            height: "400px",
-            backgroundImage: `url(${beStronger})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-          }}
-        >
-          <div
+        {/* Be Stronger */}
+        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
+          <img
+            src={beStronger}
+            alt="Be Stronger"
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
               width: "100%",
-              height: "100%",
-              background: "rgba(0,0,0,0.5)",
-              zIndex: 1,
+              height: carouselHeight,
+              objectFit: "contain",
+              objectPosition: "center",
+              display: "block",
+              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
             }}
           />
-          <Carousel.Caption
-            className="d-none d-md-block"
-            style={{
-              zIndex: 2,
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              background: "rgba(0,0,0,0.3)",
-              padding: "20px 0",
-            }}
-          >
-            <h5>Be Stronger</h5>
-            <p>Than your excuses.</p>
+          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
+            <h5
+              style={{
+                color: "#fff",
+                textShadow: "0 2px 8px #14696a",
+                fontWeight: 700,
+              }}
+            >
+              Be Stronger
+            </h5>
+            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+              Than your excuses.
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
-
-        <Carousel.Item
-          style={{
-            height: "400px",
-            backgroundImage: `url(${neverGiveUp})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-          }}
-        >
-          <div
+        {/* Never Give Up */}
+        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
+          <img
+            src={neverGiveUp}
+            alt="Never Give Up"
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
               width: "100%",
-              height: "100%",
-              background: "rgba(0,0,0,0.5)",
-              zIndex: 1,
+              height: carouselHeight,
+              objectFit: "contain",
+              objectPosition: "center",
+              display: "block",
+              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
             }}
           />
-          <Carousel.Caption
-            className="d-none d-md-block"
-            style={{
-              zIndex: 2,
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              background: "rgba(0,0,0,0.3)",
-              padding: "20px 0",
-            }}
-          >
-            <h5>Never Give Up</h5>
-            <p>Keep pushing forward.</p>
+          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
+            <h5
+              style={{
+                color: "#fff",
+                textShadow: "0 2px 8px #14696a",
+                fontWeight: 700,
+              }}
+            >
+              Never Give Up
+            </h5>
+            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+              Keep pushing forward.
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
-
-        <Carousel.Item
-          style={{
-            height: "400px",
-            backgroundImage: `url(${stayStrong})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-          }}
-        >
-          <div
+        {/* Stay Strong */}
+        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
+          <img
+            src={stayStrong}
+            alt="Stay Strong"
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
               width: "100%",
-              height: "100%",
-              background: "rgba(0,0,0,0.5)",
-              zIndex: 1,
+              height: carouselHeight,
+              objectFit: "contain",
+              objectPosition: "center",
+              display: "block",
+              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
             }}
           />
-          <Carousel.Caption
-            className="d-none d-md-block"
-            style={{
-              zIndex: 2,
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              background: "rgba(0,0,0,0.3)",
-              padding: "20px 0",
-            }}
-          >
-            <h5>Stay Strong</h5>
-            <p>Build your inner strength.</p>
+          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
+            <h5
+              style={{
+                color: "#fff",
+                textShadow: "0 2px 8px #14696a",
+                fontWeight: 700,
+              }}
+            >
+              Stay Strong
+            </h5>
+            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+              Build your inner strength.
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
-
-        <Carousel.Item
-          style={{
-            height: "400px",
-            backgroundImage: `url(${fitnesswomen})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center 30%", // Move image even further down to show top of head
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-          }}
-        >
-          <div
+        {/* Fear No Limits */}
+        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
+          <img
+            src={fitnesswomen}
+            alt="Fear No Limits"
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
               width: "100%",
-              height: "100%",
-              background: "rgba(0,0,0,0.5)",
-              zIndex: 1,
+              height: carouselHeight,
+              objectFit: "contain",
+              objectPosition: "center",
+              display: "block",
+              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
             }}
           />
-          <Carousel.Caption
-            className="d-none d-md-block"
-            style={{
-              zIndex: 2,
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              background: "rgba(0,0,0,0.3)",
-              padding: "20px 0",
-            }}
-          >
-            <h5>Fear No Limits</h5>
-            <p>Push beyond boundaries.</p>
+          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
+            <h5
+              style={{
+                color: "#fff",
+                textShadow: "0 2px 8px #14696a",
+                fontWeight: 700,
+              }}
+            >
+              Fear No Limits
+            </h5>
+            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+              Push beyond boundaries.
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
-
-        <Carousel.Item
-          style={{
-            height: "400px",
-            backgroundImage: `url(${workForIt})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-          }}
-        >
-          <div
+        {/* Work For It */}
+        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
+          <img
+            src={workForIt}
+            alt="Work For It"
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
               width: "100%",
-              height: "100%",
-              background: "rgba(0,0,0,0.5)",
-              zIndex: 1,
+              height: carouselHeight,
+              objectFit: "contain",
+              objectPosition: "center",
+              display: "block",
+              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
             }}
           />
-          <Carousel.Caption
-            className="d-none d-md-block"
-            style={{
-              zIndex: 2,
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              background: "rgba(0,0,0,0.3)",
-              padding: "20px 0",
-            }}
-          >
-            <h5>Work For It</h5>
-            <p>Success requires effort.</p>
+          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
+            <h5
+              style={{
+                color: "#fff",
+                textShadow: "0 2px 8px #14696a",
+                fontWeight: 700,
+              }}
+            >
+              Work For It
+            </h5>
+            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+              Success requires effort.
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
-
-        <Carousel.Item
-          style={{
-            height: "400px",
-            backgroundImage: `url(${goodDay})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-          }}
-        >
-          <div
+        {/* Good Day */}
+        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
+          <img
+            src={goodDay}
+            alt="Good Day"
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
               width: "100%",
-              height: "100%",
-              background: "rgba(0,0,0,0.5)",
-              zIndex: 1,
+              height: carouselHeight,
+              objectFit: "contain",
+              objectPosition: "center",
+              display: "block",
+              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
             }}
           />
-          <Carousel.Caption
-            className="d-none d-md-block"
-            style={{
-              zIndex: 2,
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              background: "rgba(0,0,0,0.3)",
-              padding: "20px 0",
-            }}
-          >
-            <h5>Good Day</h5>
-            <p>Today is your day to shine.</p>
+          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
+            <h5
+              style={{
+                color: "#fff",
+                textShadow: "0 2px 8px #14696a",
+                fontWeight: 700,
+              }}
+            >
+              Good Day
+            </h5>
+            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+              Today is your day to shine.
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
-
-        <Carousel.Item
-          style={{
-            height: "400px",
-            backgroundImage: `url(${together})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            position: "relative",
-          }}
-        >
-          <div
+        {/* Together */}
+        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
+          <img
+            src={together}
+            alt="You can do it!"
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
               width: "100%",
-              height: "100%",
-              background: "rgba(0,0,0,0.5)",
-              zIndex: 1,
+              height: carouselHeight,
+              objectFit: "contain",
+              objectPosition: "center",
+              display: "block",
+              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
             }}
           />
-          <Carousel.Caption
-            className="d-none d-md-block"
-            style={{
-              zIndex: 2,
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              background: "rgba(0,0,0,0.3)",
-              padding: "20px 0",
-            }}
-          >
-            <h5>You can do it!</h5>
-            <p>Believe in yourself and all that you are.</p>
+          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
+            <h5
+              style={{
+                color: "#fff",
+                textShadow: "0 2px 8px #14696a",
+                fontWeight: 700,
+              }}
+            >
+              You can do it!
+            </h5>
+            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+              Believe in yourself and all that you are.
+            </p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
     </div>
   );
 }
-
 export default HeroSlider;

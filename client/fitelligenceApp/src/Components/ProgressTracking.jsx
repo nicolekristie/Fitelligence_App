@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import workoutVideo from "../assets/videos/mixkit-fitness-man-doing-some-workout-601-hd-ready.mp4";
 import {
   Container,
   Row,
@@ -241,6 +242,15 @@ function ProgressTracking() {
                 )}
             </Card.Body>
           </Card>
+        </Col>
+      </Row>
+      <Row className="mt-5 mb-4">
+        <Col className="text-center">
+          <h5 className="mb-3">Keep Going! Every Step Counts 💪</h5>
+          <video width="100%" style={{ maxWidth: 600 }} controls autoPlay muted>
+            <source src={workoutVideo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </Col>
       </Row>
     </Container>

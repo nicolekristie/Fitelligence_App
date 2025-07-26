@@ -67,6 +67,8 @@ export default function FitnessSurvey() {
     let data = await res.json();
     if (res.ok) {
       setMessage("Survey updated successfully.");
+      // Scroll to end of page
+      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
       // Optionally redirect or show confirmation
       navigate("/welcome");
     } else if (res.status === 404) {
@@ -79,6 +81,11 @@ export default function FitnessSurvey() {
       data = await res.json();
       if (res.ok) {
         setMessage("Survey created successfully.");
+        // Scroll to end of page
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: "smooth",
+        });
         // navigate("/welcome");
       } else {
         setMessage(data.error || "Something went wrong");
@@ -109,7 +116,8 @@ export default function FitnessSurvey() {
                 <option value="">Select a goal</option>
                 <option value="muscle gain">Muscle Gain</option>
                 <option value="weight loss">Weight Loss</option>
-                <option value="endurance">Endurance</option>er Workout Manager API
+                <option value="endurance">Endurance</option>er Workout Manager
+                API
                 <option value="overall health">Overall Health</option>
                 <option value="stress reduction">Stress Reduction</option>
                 <option value="toning">Endurance</option>

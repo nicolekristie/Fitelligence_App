@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useUser } from "./Context/userContext.jsx";
 
-function Home() {
+function HomeSample() {
   const { user, isLoading } = useUser();
   return (
     <div style={{ position: "relative", minHeight: "100vh" }}>
@@ -33,12 +33,10 @@ function Home() {
               className="display-4 fw-bold gradient-heading"
               style={{
                 background:
-                  "linear-gradient(90deg, #1b6b6b 0%, #17c3b2 40%, #00e6ff 100%)",
+                  "linear-gradient(90deg, #1b6b6b 0%, #00e6ff 60%, #0072ff 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 display: "inline-block",
-                textShadow:
-                  "0 4px 16px rgba(23,195,178,0.18), 0 2px 8px #14696a",
               }}
             >
               Welcome to Fitelligence
@@ -165,8 +163,7 @@ function Home() {
                   variant="success"
                   as={Link}
                   to="/progress"
-                  // Removed glow-btn for no glow effect
-                  className=""
+                  className="glow-btn"
                   style={{ fontWeight: 600, fontSize: 15, padding: "6px 18px" }}
                 >
                   <FontAwesomeIcon icon={faChartLine} className="me-2" />
@@ -206,8 +203,7 @@ function Home() {
                     as={Link}
                     to="/chat"
                     variant="info"
-                    // Removed glow-btn for no glow effect
-                    className=""
+                    className="glow-btn"
                     style={{
                       fontWeight: 600,
                       fontSize: 15,
@@ -446,8 +442,7 @@ function Home() {
                         to="/progress"
                         variant="primary"
                         size="sm"
-                        className="px-2"
-                        style={{ boxShadow: "none" }}
+                        className="px-2 glow-btn"
                       >
                         View Progress
                       </Button>
@@ -456,8 +451,7 @@ function Home() {
                         to="/profile"
                         variant="outline-primary"
                         size="sm"
-                        className="px-2"
-                        style={{ boxShadow: "none" }}
+                        className="px-2 glow-btn"
                       >
                         My Profile
                       </Button>
@@ -537,4 +531,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomeSample;
