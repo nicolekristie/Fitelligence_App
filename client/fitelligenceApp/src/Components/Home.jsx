@@ -413,6 +413,22 @@ function Home() {
           opacity: 1;
           transform: translateY(0) scale(1);
         }
+      /* Mobile styles for larger, square images */
+      @media (max-width: 600px) {
+        .home-image-row {
+          gap: 16px;
+        }
+        .home-img-container {
+          width: 90vw;
+          height: 90vw;
+          max-width: 340px;
+          max-height: 340px;
+          border-radius: 18px;
+        }
+        .home-img-hover {
+          border-radius: 18px;
+        }
+      }
       `}</style>
         {/* ...rest of Home content (features, CTA) remains unchanged... */}
         {/* Call to Action - restored, compact but more prominent */}
