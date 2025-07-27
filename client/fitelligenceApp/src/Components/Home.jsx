@@ -6,7 +6,7 @@ import {
   faChartLine,
   faBrain,
 } from "@fortawesome/free-solid-svg-icons";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,13 +14,57 @@ import { useUser } from "./Context/userContext.jsx";
 
 function Home() {
   const { user, isLoading } = useUser();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 600);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div
+        style={{
+          minHeight: "60vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={{ position: "relative", minHeight: "100vh" }}>
+      {/* Darkened logo background overlay */}
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.38)), url(${require("../assets/images/logo.png")})`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center center",
+          backgroundSize: "cover",
+          backgroundAttachment: "fixed",
+          opacity: 0.28,
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      />
       {/* Hero Section at the top */}
       <Container className="pt-5 pb-2 text-center">
         {user ? (
           <>
-            <h1 className="display-4 fw-bold text-primary">
+            <h1 className="display-4 fw-bold" style={{ color: "#1db954" }}>
               Welcome back, {user.firstname}! 💪
             </h1>
             <p className="lead text-muted">
@@ -65,12 +109,14 @@ function Home() {
             <span className="img-quote">"Every Day is Progress"</span>
           </div>
         </div>
-        <div className="home-img-container">
-          <img src={couple6} alt="Couple 6" className="home-img-hover" />
-          <div className="img-overlay">
-            <span className="img-quote">"You Got This!"</span>
+        {!isMobile && (
+          <div className="home-img-container">
+            <img src={couple6} alt="Couple 6" className="home-img-hover" />
+            <div className="img-overlay">
+              <span className="img-quote">"You Got This!"</span>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       {/* Smaller three-column feature cards under images */}
       <Container className="mb-3" style={{ maxWidth: 1100 }}>
@@ -416,17 +462,19 @@ function Home() {
       /* Mobile styles for larger, square images */
       @media (max-width: 600px) {
         .home-image-row {
-          gap: 16px;
+          gap: 8px !important;
         }
         .home-img-container {
-          width: 90vw;
-          height: 90vw;
-          max-width: 340px;
-          max-height: 340px;
-          border-radius: 18px;
+          width: 92vw !important;
+          height: 92vw !important;
+          border-radius: 4px !important;
+          max-width: none !important;
+          max-height: none !important;
         }
-        .home-img-hover {
-          border-radius: 18px;
+        .home-img-container .home-img-hover {
+          border-radius: 4px !important;
+          width: 100% !important;
+          height: 100% !important;
         }
       }
       `}</style>

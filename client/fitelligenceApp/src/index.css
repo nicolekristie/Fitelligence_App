@@ -1,3 +1,33 @@
+/* Hide the third home image on mobile for better layout */
+@media (max-width: 600px) {
+  .home-image-row > .home-img-container.mobile-hide {
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+  }
+}
+/* Mobile: Make home page images large, square, and with minimal border-radius */
+@media (max-width: 600px) {
+  .home-image-row {
+    gap: 8px !important;
+  }
+  .home-img-container {
+    width: 92vw !important;
+    height: 92vw !important;
+    border-radius: 4px !important;
+    max-width: none !important;
+    max-height: none !important;
+  }
+  .home-img-container .home-img-hover {
+    border-radius: 4px !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
 /* Stacked/overlapping cards effect for plans */
 .stacked-cards {
   position: relative;

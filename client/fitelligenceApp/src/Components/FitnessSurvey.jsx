@@ -86,7 +86,7 @@ export default function FitnessSurvey() {
           top: document.body.scrollHeight,
           behavior: "smooth",
         });
-        // navigate("/welcome");
+        navigate("/welcome");
       } else {
         setMessage(data.error || "Something went wrong");
       }

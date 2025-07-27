@@ -51,7 +51,13 @@ function HeroSlider() {
             >
               Fitness Journey
             </h5>
-            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+            <p
+              style={{
+                color: "#fff",
+                textShadow: "0 2px 8px #14696a",
+                fontWeight: 700,
+              }}
+            >
               Start your transformation today.
             </p>
           </Carousel.Caption>

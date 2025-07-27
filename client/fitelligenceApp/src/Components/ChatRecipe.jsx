@@ -304,12 +304,12 @@ function ChatRecipe() {
             left: 0,
             width: "100vw",
             height: "100vh",
-            backgroundImage: `url(${logo})`,
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.38)), url(${logo})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center center",
             backgroundSize: "cover",
             backgroundAttachment: "fixed",
-            opacity: 0.08,
+            opacity: 0.28, // even darker
             pointerEvents: "none",
             zIndex: 0,
           }}
@@ -323,17 +323,17 @@ function ChatRecipe() {
           style={{
             position: "fixed",
             left: 32,
-            top: "50%",
-            transform: "translateY(-50%)",
-            width: 200,
+            top: "60%", // moved down from 50% to 60%
+            transform: "translateY(-40%)", // adjust for new top
+            width: 300, // even wider
             height: 340,
             objectFit: "cover",
             borderRadius: 32,
             filter: "brightness(0.92) saturate(1.05)",
             boxShadow: "none",
             zIndex: 2,
-            maxWidth: "34vw",
-            maxHeight: "48vh",
+            maxWidth: "48vw", // allow even wider
+            maxHeight: "52vh",
           }}
         />
         <img
@@ -343,17 +343,17 @@ function ChatRecipe() {
           style={{
             position: "fixed",
             right: 32,
-            top: "50%",
-            transform: "translateY(-50%)",
-            width: 200,
+            top: "60%", // moved down from 50% to 60%
+            transform: "translateY(-40%)", // adjust for new top
+            width: 300, // even wider
             height: 340,
             objectFit: "cover",
             borderRadius: 32,
             filter: "brightness(0.92) saturate(1.05)",
             boxShadow: "none",
             zIndex: 2,
-            maxWidth: "34vw",
-            maxHeight: "48vh",
+            maxWidth: "48vw", // allow even wider
+            maxHeight: "52vh",
           }}
         />
         <style>{`
@@ -432,14 +432,22 @@ function ChatRecipe() {
         </div>
         <h2
           className="text-center bg-white rounded shadow-sm py-4 px-5 mb-4 w-100 chat-main"
-          style={{ maxWidth: 700, fontSize: "2.2rem" }}
+          style={{
+            maxWidth: 700,
+            fontSize: "2.2rem",
+            borderRadius: 18,
+            zIndex: 100,
+            position: "relative",
+            boxShadow: "0 4px 24px 2px rgba(0,0,0,0.18)",
+            borderTop: "5px solid #1b6b6b",
+          }}
         >
           Chat with AI Coach
           <LuBot size={24} className="ms-2 align-middle" />
         </h2>
         <div
           className="w-100 d-flex flex-column align-items-center chat-main"
-          style={{ maxWidth: 700 }}
+          style={{ maxWidth: 700, zIndex: 50, position: "relative" }}
         >
           {messages.map((msg, index) => (
             <div
@@ -447,6 +455,18 @@ function ChatRecipe() {
               className={`p-3 rounded max-w-xs ${
                 msg.sender === "user" ? "bg-primary text-white" : "bg-light"
               }`}
+              style={{
+                border:
+                  msg.sender === "user"
+                    ? "3px solid #111 !important"
+                    : "3px solid #1fa71f !important",
+                boxShadow: "0 4px 24px 2px rgba(0,0,0,0.18)",
+                marginBottom: 16,
+                background: msg.sender === "bot" ? "#fff" : undefined,
+                borderRadius: 18,
+                zIndex: 100,
+                position: "relative",
+              }}
             >
               <Markdown>{msg.text}</Markdown>
             </div>
