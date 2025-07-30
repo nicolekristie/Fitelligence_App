@@ -126,12 +126,12 @@ function Profile() {
               as="h3"
               className="text-center"
               style={{
-                background: "linear-gradient(90deg, #43cea2, #185a9d)",
+                background: "linear-gradient(90deg, #b31217 0%, #000 100%)",
                 color: "#fff",
                 borderRadius: "12px",
                 fontWeight: 700,
                 letterSpacing: 1,
-                boxShadow: "0 2px 8px rgba(24,90,157,0.10)",
+                boxShadow: "0 2px 8px rgba(179,18,23,0.10)",
                 padding: "14px 0 10px 0",
                 marginBottom: 10,
                 fontSize: 30,

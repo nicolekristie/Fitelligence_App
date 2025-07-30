@@ -48,12 +48,63 @@ const QuoteGenerator = () => {
 
   return (
     <div style={{ textAlign: "center", padding: "20px" }}>
-      <h3>Motivational Fitness Quote</h3>
+      <h3
+        style={{
+          color: "#fff",
+          textShadow: "0 2px 8px #b31217, 0 4px 24px #000",
+        }}
+      >
+        Motivational Fitness Quote
+      </h3>
       <blockquote>
-        <p style={{ fontStyle: "italic" }}>"{currentQuote.text}"</p>
-        <footer>- {currentQuote.author}</footer>
+        <p
+          style={{
+            fontStyle: "italic",
+            color: "#fff",
+            fontSize: "1.25rem",
+            textShadow: "0 2px 8px #b31217, 0 4px 24px #000",
+            marginBottom: 8,
+          }}
+        >
+          "{currentQuote.text}"
+        </p>
+        <footer
+          style={{
+            color: "#fff",
+            opacity: 0.85,
+            fontSize: "1rem",
+            textShadow: "0 2px 8px #000",
+          }}
+        >
+          - {currentQuote.author}
+        </footer>
       </blockquote>
-      <button onClick={generateRandomQuote}>New Quote</button>
+      <button
+        onClick={generateRandomQuote}
+        style={{
+          background: "linear-gradient(90deg, #b31217 0%, #000 100%)",
+          color: "#fff",
+          border: "none",
+          borderRadius: 24,
+          padding: "10px 28px",
+          fontWeight: 600,
+          fontSize: "1.1rem",
+          boxShadow: "0 2px 12px rgba(0,0,0,0.18)",
+          cursor: "pointer",
+          marginTop: 12,
+          transition: "background 0.2s",
+        }}
+        onMouseOver={(e) =>
+          (e.currentTarget.style.background =
+            "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)")
+        }
+        onMouseOut={(e) =>
+          (e.currentTarget.style.background =
+            "linear-gradient(90deg, #b31217 0%, #000 100%)")
+        }
+      >
+        New Quote
+      </button>
     </div>
   );
 };

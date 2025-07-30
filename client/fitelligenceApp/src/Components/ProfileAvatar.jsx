@@ -81,15 +81,15 @@ function ProfileAvatar({ avatarUrl, token, onUpload }) {
       >
         <label
           htmlFor="avatar-upload"
+          className="btn btn-outline-secondary btn-sm"
           style={{
-            background: "linear-gradient(90deg, #ff8a00, #e52e71)",
-            color: "#fff",
-            padding: "8px 18px",
-            borderRadius: "20px",
-            cursor: "pointer",
             fontWeight: 600,
-            marginRight: 12,
-            boxShadow: "0 2px 8px rgba(229,46,113,0.15)",
+            background: "linear-gradient(90deg, #b31217 0%, #000 100%)",
+            color: "#fff",
+            border: "none",
+            boxShadow: "0 2px 8px rgba(179,18,23,0.10)",
+            borderRadius: "20px",
+            padding: "8px 18px",
           }}
         >
           Choose File
@@ -97,8 +97,8 @@ function ProfileAvatar({ avatarUrl, token, onUpload }) {
             id="avatar-upload"
             type="file"
             accept="image/*"
-            onChange={handleFileChange}
             style={{ display: "none" }}
+            onChange={handleFileChange}
           />
         </label>
         <button

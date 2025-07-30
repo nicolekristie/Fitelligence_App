@@ -86,159 +86,189 @@ function RecipeHistory() {
   };
 
   return (
-    <Container className="mt-5">
-      <Row>
-        <Col>
-          <Card>
-            <Card.Header as="h3" className="text-center">
-              Recipe History
-            </Card.Header>
-            <Card.Body>
-              <div className="text-center mb-4">
-                <h5>
-                  Your AI Recipe Responses
-                  {recipes.length > 0 && (
-                    <Badge bg="success" className="ms-2">
-                      {recipes.length}
-                    </Badge>
-                  )}
-                </h5>
-                <p className="text-muted">
-                  Review your previous AI-generated recipes. This page displays
-                  your recipe history so you can revisit healthy meal ideas and
-                  nutrition tips.
-                </p>
-                {user?.id ? (
-                  <Button
-                    variant={showHistory ? "outline-secondary" : "success"}
-                    onClick={toggleHistory}
-                    disabled={loading}
-                    size="lg"
-                  >
-                    {loading ? (
-                      <>
-                        <Spinner
-                          as="span"
-                          animation="border"
-                          size="sm"
-                          role="status"
-                          aria-hidden="true"
-                          className="me-2"
-                        />
-                        Loading...
-                      </>
-                    ) : showHistory ? (
-                      "Hide Recipe History"
-                    ) : (
-                      "View Recipe History"
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, #000 0%, #b31217 100%)",
+        backgroundAttachment: "fixed",
+        backgroundImage: "none",
+      }}
+    >
+      <Container className="mt-5">
+        <Row>
+          <Col>
+            <Card>
+              <Card.Header as="h3" className="text-center">
+                Recipe History
+              </Card.Header>
+              <Card.Body>
+                <div className="text-center mb-4">
+                  <h5>
+                    Your AI Recipe Responses
+                    {recipes.length > 0 && (
+                      <Badge bg="success" className="ms-2">
+                        {recipes.length}
+                      </Badge>
                     )}
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleLogin}
-                    variant="outline-warning"
-                    size="lg"
-                  >
-                    Please log in to view history
-                  </Button>
+                  </h5>
+                  <p className="text-muted">
+                    Review your previous AI-generated recipes. This page
+                    displays your recipe history so you can revisit healthy meal
+                    ideas and nutrition tips.
+                  </p>
+                  {user?.id ? (
+                    <Button
+                      variant={showHistory ? "outline-secondary" : "success"}
+                      onClick={toggleHistory}
+                      disabled={loading}
+                      size="lg"
+                    >
+                      {loading ? (
+                        <>
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                            className="me-2"
+                          />
+                          Loading...
+                        </>
+                      ) : showHistory ? (
+                        "Hide Recipe History"
+                      ) : (
+                        "View Recipe History"
+                      )}
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleLogin}
+                      variant="outline-warning"
+                      size="lg"
+                    >
+                      Please log in to view history
+                    </Button>
+                  )}
+                </div>
+
+                {error && (
+                  <Alert variant="danger" className="mt-3">
+                    {error}
+                  </Alert>
                 )}
-              </div>
 
-              {error && (
-                <Alert variant="danger" className="mt-3">
-                  {error}
-                </Alert>
-              )}
-
-              {showHistory && recipes.length > 0 && (
-                <div className="mt-4">
-                  <h6 className="mb-4 text-center">
-                    <i className="fas fa-utensils me-2"></i>
-                    Recent AI Recipe Responses
-                  </h6>
-                  <div style={{ maxHeight: "600px", overflowY: "auto" }}>
-                    {recipes.map((item, index) => (
-                      <Card key={item.id} className="mb-4 shadow-sm border-0">
-                        <Card.Header className="bg-light border-0">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <div className="d-flex align-items-center">
-                              <Badge bg="success" pill className="me-2">
-                                #{recipes.length - index}
-                              </Badge>
-                              <small className="text-muted fw-bold">
-                                AI Recipe Response
+                {showHistory && recipes.length > 0 && (
+                  <div className="mt-4">
+                    <h6 className="mb-4 text-center">
+                      <i className="fas fa-utensils me-2"></i>
+                      Recent AI Recipe Responses
+                    </h6>
+                    <div style={{ maxHeight: "600px", overflowY: "auto" }}>
+                      {recipes.map((item, index) => (
+                        <Card key={item.id} className="mb-4 shadow-sm border-0">
+                          <Card.Header
+                            style={{
+                              background: "rgba(0,0,0,0.92)",
+                              color: "#eafcff",
+                            }}
+                            className="border-0"
+                          >
+                            <div className="d-flex justify-content-between align-items-center">
+                              <div className="d-flex align-items-center">
+                                <Badge bg="success" pill className="me-2">
+                                  #{recipes.length - index}
+                                </Badge>
+                                <small className="text-muted fw-bold">
+                                  AI Recipe Response
+                                </small>
+                              </div>
+                              <small className="text-muted">
+                                <i className="fas fa-clock me-1"></i>
+                                {formatDate(item.timestamp || item.created_at)}
                               </small>
                             </div>
-                            <small className="text-muted">
-                              <i className="fas fa-clock me-1"></i>
-                              {formatDate(item.timestamp || item.created_at)}
-                            </small>
-                          </div>
-                        </Card.Header>
-                        <Card.Body className="py-4">
-                          <div
-                            className="ai-response-text"
+                          </Card.Header>
+                          <Card.Body
                             style={{
-                              fontSize: "1rem",
-                              lineHeight: "1.6",
-                              color: "#2c3e50",
+                              minHeight: 0,
+                              background:
+                                "linear-gradient(135deg, #000 0%, #b31217 100%)",
+                              backgroundAttachment: "fixed",
+                              backgroundImage: "none",
+                              padding: "18px 0 8px 0",
+                              marginBottom: 4,
                             }}
                           >
-                            <ReactMarkdown>{item.response_text}</ReactMarkdown>
-                          </div>
-                        </Card.Body>
-                      </Card>
-                    ))}
+                            <div
+                              className="ai-response-text"
+                              style={{
+                                fontSize: "1rem",
+                                lineHeight: "1.6",
+                                color: "#2c3e50",
+                              }}
+                            >
+                              <ReactMarkdown>
+                                {item.response_text}
+                              </ReactMarkdown>
+                            </div>
+                          </Card.Body>
+                        </Card>
+                      ))}
+                    </div>
+                    <div className="text-center mt-4">
+                      <Button
+                        variant="outline-success"
+                        onClick={() => {
+                          setLoading(true);
+                          axios
+                            .get(`/api/recipe/history/${user.id}`)
+                            .then((res) => {
+                              if (res.data.success) {
+                                setRecipes(res.data.data);
+                              }
+                              setLoading(false);
+                            })
+                            .catch(() => setLoading(false));
+                        }}
+                        disabled={loading}
+                        className="me-2"
+                      >
+                        <i className="fas fa-sync-alt me-2"></i>
+                        Refresh History
+                      </Button>
+                      <Button
+                        variant="outline-secondary"
+                        onClick={toggleHistory}
+                      >
+                        <i className="fas fa-eye-slash me-2"></i>
+                        Hide History
+                      </Button>
+                    </div>
                   </div>
-                  <div className="text-center mt-4">
-                    <Button
-                      variant="outline-success"
-                      onClick={() => {
-                        setLoading(true);
-                        axios
-                          .get(`/api/recipe/history/${user.id}`)
-                          .then((res) => {
-                            if (res.data.success) {
-                              setRecipes(res.data.data);
-                            }
-                            setLoading(false);
-                          })
-                          .catch(() => setLoading(false));
-                      }}
-                      disabled={loading}
-                      className="me-2"
-                    >
-                      <i className="fas fa-sync-alt me-2"></i>
-                      Refresh History
-                    </Button>
-                    <Button variant="outline-secondary" onClick={toggleHistory}>
-                      <i className="fas fa-eye-slash me-2"></i>
-                      Hide History
-                    </Button>
-                  </div>
-                </div>
-              )}
+                )}
 
-              {showHistory && recipes.length === 0 && !loading && !error && (
-                <div className="mt-4">
-                  <Alert variant="info" className="text-center py-4">
-                    <i className="fas fa-utensils fa-2x mb-3 text-success"></i>
-                    <h5>No recipe history found</h5>
-                    <p className="mb-3">
-                      Start asking for recipes to see them appear here!
-                    </p>
-                    <Button onClick={handleChatRedirect} variant="success">
-                      <i className="fas fa-utensils me-2"></i>
-                      Go to Recipe Chat
-                    </Button>
-                  </Alert>
-                </div>
-              )}
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+                {showHistory && recipes.length === 0 && !loading && !error && (
+                  <div className="mt-4">
+                    <Alert variant="info" className="text-center py-4">
+                      <i className="fas fa-utensils fa-2x mb-3 text-success"></i>
+                      <h5>No recipe history found</h5>
+                      <p className="mb-3">
+                        Start asking for recipes to see them appear here!
+                      </p>
+                      <Button onClick={handleChatRedirect} variant="success">
+                        <i className="fas fa-utensils me-2"></i>
+                        Go to Recipe Chat
+                      </Button>
+                    </Alert>
+                  </div>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 
   return (

@@ -20,26 +20,44 @@ function NavBar() {
   return (
     <>
       <style>{`
-        .navbar-custom {
-          background: linear-gradient(135deg, #14696a 0%, #2274a5 100%) !important;
-          box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        .navbar-custom,
+        .navbar,
+        .navbar.bg-body-tertiary,
+        .navbar.bg-light,
+        .navbar.bg-white {
+          background: linear-gradient(135deg, #000 0%, #b31217 100%) !important;
+          background-color: #18181b !important;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.22);
         }
         .navbar-brand {
           font-weight: 700;
           letter-spacing: 1px;
-          color: #00e6ff !important;
-        }
-        .navbar-logo {
-          /* No drop-shadow for a flat look */
+          color: #ff2a2a !important;
         }
         .navbar-nav .nav-link {
-          color: #eafcff !important;
-          font-weight: 500;
+          color: #fff !important;
+          font-weight: 600;
           letter-spacing: 0.5px;
-          transition: color 0.2s;
+          transition: color 0.2s, background 0.2s, box-shadow 0.2s;
+          border-radius: 8px;
+          padding: 6px 18px;
+          margin: 0 2px;
+          background: linear-gradient(135deg, #a02020 0%, #222 100%) !important;
+          border: 1.5px solid #b31217 !important;
+          box-shadow: 0 6px 24px 0 rgba(0,0,0,0.22);
+          opacity: 0.96;
         }
         .navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
-          color: #00e6ff !important;
+          color: #fff !important;
+          background: linear-gradient(135deg, #ff2a2a 0%, #b31217 100%) !important;
+          border: 2px solid #ff2a2a !important;
+          box-shadow: 0 0 16px 2px #ff2a2a99, 0 2px 8px #b31217;
+          opacity: 1;
+          transform: scale(1.07);
+        }
+        }
+        .navbar .text-muted, .navbar .text-secondary, .navbar .navbar-text {
+          color: #ccc !important;
         }
         .navbar-avatar {
           width: 32px;
@@ -50,28 +68,37 @@ function NavBar() {
           border: 2px solid #fff;
         }
         .offcanvas {
-          background: linear-gradient(135deg, #14696a 0%, #2274a5 100%) !important;
+          background: linear-gradient(135deg, #000 0%, #b31217 100%) !important;
         }
         .offcanvas .nav-link {
-          color: #eafcff !important;
+          color: #f3f3f3 !important;
         }
         .offcanvas .nav-link:hover, .offcanvas .nav-link.active {
-          color: #00e6ff !important;
+          color: #ff2a2a !important;
+          background: linear-gradient(135deg, #ff2a2a 0%, #b31217 100%) !important;
+          border: 2px solid #ff2a2a !important;
+          box-shadow: 0 0 16px 2px #ff2a2a99, 0 2px 8px #b31217;
+          transform: scale(1.07);
+        }
+        .offcanvas .text-muted, .offcanvas .text-secondary, .offcanvas .navbar-text {
+          color: #ccc !important;
+        }
+        .glassy-effect {
+          background: rgba(0,0,0,0.82) !important;
+          backdrop-filter: blur(6px);
+          border: 2px solid #b31217;
+          box-shadow: 0 4px 24px rgba(179,18,23,0.18);
+          z-index: 300;
         }
       `}</style>
-      <Navbar
-        bg=""
-        variant="dark"
-        expand="lg"
-        sticky="top"
-        className="navbar-custom"
-      >
+      <Navbar bg="" variant="dark" expand="lg" className="glassy-effect">
         <Container fluid>
           <Navbar.Brand as={Link} to="/">
             <img
               src={logo}
               className="navbar-logo d-inline-block align-top"
               alt="Fitelligence Logo"
+              style={{ height: 36, marginRight: 8 }}
             />
             <strong>Fitelligence</strong>
           </Navbar.Brand>

@@ -8,13 +8,20 @@ function Welcome() {
   const { user } = useUser();
 
   return (
-    <>
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, #000 0%, #b31217 100%)",
+        backgroundAttachment: "fixed",
+        backgroundImage: "none",
+      }}
+    >
       <Container className="text-center mb-4 mt-4">
         <h1
           className="display-4 fw-bold"
           style={{
-            color: "#14696a",
-            textShadow: "0 2px 8px #14696a",
+            color: "#fff",
+            textShadow: "0 2px 8px #b31217, 0 4px 24px #000",
             fontWeight: 700,
           }}
         >
@@ -26,8 +33,12 @@ function Welcome() {
           </span>
         </h1>
         <p className="lead text-secondary">
-          We're glad to have you here. Let's get started on your fitness
-          journey!
+          <p
+            className="lead"
+            style={{ color: "#fff", textShadow: "0 2px 8px #000" }}
+          >
+            Ready to continue your fitness journey?
+          </p>
         </p>
       </Container>
 
@@ -37,7 +48,7 @@ function Welcome() {
         <Features />
       </div>
       <div style={{ height: "48px" }} />
-    </>
+    </div>
   );
 }
 

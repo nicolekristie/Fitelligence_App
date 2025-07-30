@@ -1,0 +1,11 @@
+<svg width="320" height="80" viewBox="0 0 320 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fitelligence-gradient" x1="0" y1="0" x2="320" y2="80" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#b31217"/>
+      <stop offset="1" stop-color="#000"/>
+    </linearGradient>
+  </defs>
+  <text x="16" y="56" font-family="'Montserrat', 'Arial Black', Arial, sans-serif" font-size="48" font-weight="bold" fill="url(#fitelligence-gradient)" letter-spacing="2">
+    Fitelligence
+  </text>
+</svg>

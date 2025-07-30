@@ -51,13 +51,13 @@ function ProgressTracking() {
     if (showHistory && user?.id) {
       fetchChatHistory();
     }
-  }, [showHistory, user?.id]);
+  }, [showHistory, user]);
 
-  const formatDate = (timestamp) => {
+  // Date formatting helper
+  function formatDate(timestamp) {
     const date = new Date(timestamp);
     const now = new Date();
     const diffInDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
-
     if (diffInDays === 0) {
       return `Today, ${date.toLocaleString("en-US", {
         hour: "2-digit",
@@ -83,7 +83,7 @@ function ProgressTracking() {
         minute: "2-digit",
       });
     }
-  };
+  }
 
   const handleLogin = () => {
     navigate("/login");
@@ -98,162 +98,188 @@ function ProgressTracking() {
   };
 
   return (
-    <Container className="mt-5">
-      <Row>
-        <Col>
-          <Card>
-            <Card.Header as="h3" className="text-center">
-              Progress Tracking
-            </Card.Header>
-            <Card.Body>
-              <div className="text-center mb-4">
-                <h5>
-                  Your AI Fitness Coach Conversations
-                  {chatHistory.length > 0 && (
-                    <Badge bg="primary" className="ms-2">
-                      {chatHistory.length}
-                    </Badge>
-                  )}
-                </h5>
-                <p className="text-muted">
-                  Review your previous conversations with your AI fitness coach.
-                  This page displays your chat history so you can revisit your
-                  coach's advice, feedback, and motivation as you progress on
-                  your fitness journey.
-                </p>
-                {user?.id ? (
-                  <Button
-                    variant={showHistory ? "outline-secondary" : "primary"}
-                    onClick={toggleHistory}
-                    disabled={isLoading}
-                    size="lg"
-                  >
-                    {isLoading ? (
-                      <>
-                        <Spinner
-                          as="span"
-                          animation="border"
-                          size="sm"
-                          role="status"
-                          aria-hidden="true"
-                          className="me-2"
-                        />
-                        Loading...
-                      </>
-                    ) : showHistory ? (
-                      "Hide Chat History"
-                    ) : (
-                      "View Chat History"
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, #000 0%, #b31217 100%)",
+        backgroundAttachment: "fixed",
+        backgroundImage: "none",
+      }}
+    >
+      <Container className="mt-5">
+        <Row>
+          <Col>
+            <Card>
+              <Card.Header as="h3" className="text-center">
+                Progress Tracking
+              </Card.Header>
+              <Card.Body>
+                <div className="text-center mb-4">
+                  <h5>
+                    Your AI Fitness Coach Conversations
+                    {chatHistory.length > 0 && (
+                      <Badge bg="primary" className="ms-2">
+                        {chatHistory.length}
+                      </Badge>
                     )}
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleLogin}
-                    variant="outline-warning"
-                    size="lg"
-                  >
-                    Please log in to view history
-                  </Button>
+                  </h5>
+                  <p className="text-muted">
+                    Review your previous conversations with your AI fitness
+                    coach. This page displays your chat history so you can
+                    revisit your coach's advice, feedback, and motivation as you
+                    progress on your fitness journey.
+                  </p>
+                  {user?.id ? (
+                    <Button
+                      variant={showHistory ? "outline-secondary" : "primary"}
+                      onClick={toggleHistory}
+                      disabled={isLoading}
+                      size="lg"
+                    >
+                      {isLoading ? (
+                        <>
+                          <Spinner
+                            as="span"
+                            animation="border"
+                            size="sm"
+                            role="status"
+                            aria-hidden="true"
+                            className="me-2"
+                          />
+                          Loading...
+                        </>
+                      ) : showHistory ? (
+                        "Hide Chat History"
+                      ) : (
+                        "View Chat History"
+                      )}
+                    </Button>
+                  ) : (
+                    <Button
+                      onClick={handleLogin}
+                      variant="outline-warning"
+                      size="lg"
+                    >
+                      Please log in to view history
+                    </Button>
+                  )}
+                </div>
+
+                {error && (
+                  <Alert variant="danger" className="mt-3">
+                    {error}
+                  </Alert>
                 )}
-              </div>
 
-              {error && (
-                <Alert variant="danger" className="mt-3">
-                  {error}
-                </Alert>
-              )}
-
-              {showHistory && chatHistory.length > 0 && (
-                <div className="mt-4">
-                  <h6 className="mb-4 text-center">
-                    <i className="fas fa-comments me-2"></i>
-                    Recent AI Coach Responses
-                  </h6>
-                  <div style={{ maxHeight: "600px", overflowY: "auto" }}>
-                    {chatHistory.map((item, index) => (
-                      <Card key={item.id} className="mb-4 shadow-sm border-0">
-                        <Card.Header className="bg-light border-0">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <div className="d-flex align-items-center">
-                              <Badge bg="primary" pill className="me-2">
-                                #{chatHistory.length - index}
-                              </Badge>
-                              <small className="text-muted fw-bold">
-                                AI Coach Response
+                {showHistory && chatHistory.length > 0 && (
+                  <div className="mt-4">
+                    <h6 className="mb-4 text-center">
+                      <i className="fas fa-comments me-2"></i>
+                      Recent AI Coach Responses
+                    </h6>
+                    <div style={{ maxHeight: "600px", overflowY: "auto" }}>
+                      {chatHistory.map((item, index) => (
+                        <Card key={item.id} className="mb-4 shadow-sm border-0">
+                          <Card.Header
+                            style={{
+                              background: "rgba(0,0,0,0.92)",
+                              color: "#eafcff",
+                            }}
+                            className="border-0"
+                          >
+                            <div className="d-flex justify-content-between align-items-center">
+                              <div className="d-flex align-items-center">
+                                <Badge bg="primary" pill className="me-2">
+                                  #{chatHistory.length - index}
+                                </Badge>
+                                <small className="text-muted fw-bold">
+                                  AI Coach Response
+                                </small>
+                              </div>
+                              <small className="text-muted">
+                                <i className="fas fa-clock me-1"></i>
+                                {formatDate(item.timestamp)}
                               </small>
                             </div>
-                            <small className="text-muted">
-                              <i className="fas fa-clock me-1"></i>
-                              {formatDate(item.timestamp)}
-                            </small>
-                          </div>
-                        </Card.Header>
-                        <Card.Body className="py-4">
-                          <div
-                            className="ai-response-text"
-                            style={{
-                              fontSize: "1rem",
-                              lineHeight: "1.6",
-                              color: "#2c3e50",
-                            }}
-                          >
-                            <Markdown>{item.response_text}</Markdown>
-                          </div>
-                        </Card.Body>
-                      </Card>
-                    ))}
-                  </div>
-                  <div className="text-center mt-4">
-                    <Button
-                      variant="outline-primary"
-                      onClick={fetchChatHistory}
-                      disabled={isLoading}
-                      className="me-2"
-                    >
-                      <i className="fas fa-sync-alt me-2"></i>
-                      Refresh History
-                    </Button>
-                    <Button variant="outline-secondary" onClick={toggleHistory}>
-                      <i className="fas fa-eye-slash me-2"></i>
-                      Hide History
-                    </Button>
-                  </div>
-                </div>
-              )}
-
-              {showHistory &&
-                chatHistory.length === 0 &&
-                !isLoading &&
-                !error && (
-                  <div className="mt-4">
-                    <Alert variant="info" className="text-center py-4">
-                      <i className="fas fa-comment-dots fa-2x mb-3 text-info"></i>
-                      <h5>No chat history found</h5>
-                      <p className="mb-3">
-                        Start chatting with your AI fitness coach to see
-                        responses here!
-                      </p>
-                      <Button onClick={handleChatRedirect} variant="primary">
-                        <i className="fas fa-comments me-2"></i>
-                        Go to Chat
+                          </Card.Header>
+                          <Card.Body className="py-4">
+                            <div
+                              className="ai-response-text"
+                              style={{
+                                fontSize: "1rem",
+                                lineHeight: "1.6",
+                                color: "#2c3e50",
+                              }}
+                            >
+                              <Markdown>{item.response_text}</Markdown>
+                            </div>
+                          </Card.Body>
+                        </Card>
+                      ))}
+                    </div>
+                    <div className="text-center mt-4">
+                      <Button
+                        variant="outline-primary"
+                        onClick={fetchChatHistory}
+                        disabled={isLoading}
+                        className="me-2"
+                      >
+                        <i className="fas fa-sync-alt me-2"></i>
+                        Refresh History
                       </Button>
-                    </Alert>
+                      <Button
+                        variant="outline-secondary"
+                        onClick={toggleHistory}
+                      >
+                        <i className="fas fa-eye-slash me-2"></i>
+                        Hide History
+                      </Button>
+                    </div>
                   </div>
                 )}
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-      <Row className="mt-5 mb-4">
-        <Col className="text-center">
-          <h5 className="mb-3">Keep Going! Every Step Counts 💪</h5>
-          <video width="100%" style={{ maxWidth: 600 }} controls autoPlay muted>
-            <source src={workoutVideo} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-        </Col>
-      </Row>
-    </Container>
+
+                {showHistory &&
+                  chatHistory.length === 0 &&
+                  !isLoading &&
+                  !error && (
+                    <div className="mt-4">
+                      <Alert variant="info" className="text-center py-4">
+                        <i className="fas fa-comment-dots fa-2x mb-3 text-info"></i>
+                        <h5>No chat history found</h5>
+                        <p className="mb-3">
+                          Start chatting with your AI fitness coach to see
+                          responses here!
+                        </p>
+                        <Button onClick={handleChatRedirect} variant="primary">
+                          <i className="fas fa-comments me-2"></i>
+                          Go to Chat
+                        </Button>
+                      </Alert>
+                    </div>
+                  )}
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+        <Row className="mt-5 mb-4">
+          <Col className="text-center">
+            <h5 className="mb-3" style={{ color: "#f3f6fa" }}>
+              Keep Going! Every Step Counts 💪
+            </h5>
+            <video
+              width="100%"
+              style={{ maxWidth: 600 }}
+              controls
+              autoPlay
+              muted
+            >
+              <source src={workoutVideo} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 }
 

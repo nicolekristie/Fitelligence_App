@@ -1,3 +1,11 @@
+/* Force Home page background to override global body background */
+body .home-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #000 0%, #b31217 100%) !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
 /* Hide the third home image on mobile for better layout */
 @media (max-width: 600px) {
   .home-image-row > .home-img-container.mobile-hide {
@@ -113,12 +121,7 @@
   margin: 0 auto;
   padding: 0.5rem 0.5rem;
   display: flex;
-  flex-direction: column;
-  justify-content: stretch;
-}
-.feature-card-body {
-  padding: 0.7rem 1.1rem;
-  min-height: 120px;
+  background: none !important;
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
@@ -156,13 +159,10 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f8f9fa;
-  position: relative;
-  background-image: linear-gradient(rgba(248, 249, 250, 0.8), rgba(248, 249, 250, 0.8)), url('/logo.png');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  background-attachment: fixed;
+  background: linear-gradient(135deg, #000 0%, #b31217 100%) !important;
+  background-attachment: fixed !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
 }
 
 h1 {

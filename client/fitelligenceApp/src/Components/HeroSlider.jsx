@@ -19,282 +19,360 @@ function HeroSlider() {
 
   // Responsive height: 50vw (max 400px, min 220px)
   const carouselHeight = "min(max(50vw, 220px), 400px)";
+  const gradientBg = "linear-gradient(135deg, #000 0%, #b31217 100%)";
   return (
     <div className="container-fluid p-0">
-      <Carousel
-        interval={3000}
-        controls={true}
-        indicators={false}
-        style={{ width: "100%", height: "auto", margin: "0" }}
+      {/* Add a border and shadow to the carousel container for visual separation */}
+      <div
+        className="hero-slider-carousel"
+        style={{
+          border: "3px solid #b31217",
+          borderRadius: "28px",
+          boxShadow: "0 8px 32px 0 rgba(0,0,0,0.38)",
+          background: "rgba(0,0,0,0.18)",
+          padding: "18px 0",
+          margin: "0 auto 32px auto",
+          maxWidth: "900px",
+          position: "relative",
+          zIndex: 100,
+        }}
       >
-        {/* Fitness Journey */}
-        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
-          <img
-            src={fitnessrope}
-            alt="Fitness Journey"
+        <Carousel
+          interval={3000}
+          controls={true}
+          indicators={false}
+          style={{ width: "100%", height: "auto", margin: "0" }}
+        >
+          {/* Fitness Journey */}
+          <Carousel.Item
             style={{
-              width: "100%",
               height: carouselHeight,
-              objectFit: "contain",
-              objectPosition: "center",
-              display: "block",
-              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
+              position: "relative",
+              background: gradientBg,
             }}
-          />
-          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
-            <h5
+          >
+            <img
+              src={fitnessrope}
+              alt="Fitness Journey"
               style={{
-                color: "#fff",
-                textShadow: "0 2px 8px #14696a",
-                fontWeight: 700,
+                width: "100%",
+                height: carouselHeight,
+                objectFit: "contain",
+                objectPosition: "center",
+                display: "block",
+                background: "transparent",
               }}
+            />
+            <Carousel.Caption
+              className="d-none d-md-block"
+              style={{ zIndex: 2 }}
             >
-              Fitness Journey
-            </h5>
-            <p
-              style={{
-                color: "#fff",
-                textShadow: "0 2px 8px #14696a",
-                fontWeight: 700,
-              }}
-            >
-              Start your transformation today.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        {/* Strength Training */}
-        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
-          <img
-            src={weights}
-            alt="Strength Training"
+              <h5
+                style={{
+                  color: "#fff",
+                  textShadow: "0 2px 8px #14696a",
+                  fontWeight: 700,
+                }}
+              >
+                Fitness Journey
+              </h5>
+              <p
+                style={{
+                  color: "#fff",
+                  textShadow: "0 2px 8px #14696a",
+                  fontWeight: 700,
+                }}
+              >
+                Start your transformation today.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          {/* Strength Training */}
+          <Carousel.Item
             style={{
-              width: "100%",
               height: carouselHeight,
-              objectFit: "contain",
-              objectPosition: "center",
-              display: "block",
-              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
+              position: "relative",
+              background: gradientBg,
             }}
-          />
-          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
-            <h5
+          >
+            <img
+              src={weights}
+              alt="Strength Training"
               style={{
-                color: "#fff",
-                textShadow: "0 2px 8px #14696a",
-                fontWeight: 700,
+                width: "100%",
+                height: carouselHeight,
+                objectFit: "contain",
+                objectPosition: "center",
+                display: "block",
+                background: "transparent",
               }}
+            />
+            <Carousel.Caption
+              className="d-none d-md-block"
+              style={{ zIndex: 2 }}
             >
-              Strength Training
-            </h5>
-            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
-              Build your power, one rep at a time.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        {/* Be Stronger */}
-        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
-          <img
-            src={beStronger}
-            alt="Be Stronger"
+              <h5
+                style={{
+                  color: "#fff",
+                  textShadow: "0 2px 8px #14696a",
+                  fontWeight: 700,
+                }}
+              >
+                Strength Training
+              </h5>
+              <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+                Build your power, one rep at a time.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          {/* Be Stronger */}
+          <Carousel.Item
             style={{
-              width: "100%",
               height: carouselHeight,
-              objectFit: "contain",
-              objectPosition: "center",
-              display: "block",
-              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
+              position: "relative",
+              background: gradientBg,
             }}
-          />
-          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
-            <h5
+          >
+            <img
+              src={beStronger}
+              alt="Be Stronger"
               style={{
-                color: "#fff",
-                textShadow: "0 2px 8px #14696a",
-                fontWeight: 700,
+                width: "100%",
+                height: carouselHeight,
+                objectFit: "contain",
+                objectPosition: "center",
+                display: "block",
+                background: "transparent",
               }}
+            />
+            <Carousel.Caption
+              className="d-none d-md-block"
+              style={{ zIndex: 2 }}
             >
-              Be Stronger
-            </h5>
-            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
-              Than your excuses.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        {/* Never Give Up */}
-        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
-          <img
-            src={neverGiveUp}
-            alt="Never Give Up"
+              <h5
+                style={{
+                  color: "#fff",
+                  textShadow: "0 2px 8px #14696a",
+                  fontWeight: 700,
+                }}
+              >
+                Be Stronger
+              </h5>
+              <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+                Than your excuses.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          {/* Never Give Up */}
+          <Carousel.Item
             style={{
-              width: "100%",
               height: carouselHeight,
-              objectFit: "contain",
-              objectPosition: "center",
-              display: "block",
-              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
+              position: "relative",
+              background: gradientBg,
             }}
-          />
-          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
-            <h5
+          >
+            <img
+              src={neverGiveUp}
+              alt="Never Give Up"
               style={{
-                color: "#fff",
-                textShadow: "0 2px 8px #14696a",
-                fontWeight: 700,
+                width: "100%",
+                height: carouselHeight,
+                objectFit: "contain",
+                objectPosition: "center",
+                display: "block",
+                background: "transparent",
               }}
+            />
+            <Carousel.Caption
+              className="d-none d-md-block"
+              style={{ zIndex: 2 }}
             >
-              Never Give Up
-            </h5>
-            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
-              Keep pushing forward.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        {/* Stay Strong */}
-        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
-          <img
-            src={stayStrong}
-            alt="Stay Strong"
-            style={{
-              width: "100%",
-              height: carouselHeight,
-              objectFit: "contain",
-              objectPosition: "center",
-              display: "block",
-              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
-            }}
-          />
-          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
-            <h5
+              <h5
+                style={{
+                  color: "#fff",
+                  textShadow: "0 2px 8px #14696a",
+                  fontWeight: 700,
+                }}
+              >
+                Never Give Up
+              </h5>
+              <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+                Keep pushing forward.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          {/* Stay Strong */}
+          <Carousel.Item
+            style={{ height: carouselHeight, position: "relative" }}
+          >
+            <img
+              src={stayStrong}
+              alt="Stay Strong"
               style={{
-                color: "#fff",
-                textShadow: "0 2px 8px #14696a",
-                fontWeight: 700,
+                width: "100%",
+                height: carouselHeight,
+                objectFit: "contain",
+                objectPosition: "center",
+                display: "block",
+                background: gradientBg,
               }}
+            />
+            <Carousel.Caption
+              className="d-none d-md-block"
+              style={{ zIndex: 2 }}
             >
-              Stay Strong
-            </h5>
-            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
-              Build your inner strength.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        {/* Fear No Limits */}
-        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
-          <img
-            src={fitnesswomen}
-            alt="Fear No Limits"
-            style={{
-              width: "100%",
-              height: carouselHeight,
-              objectFit: "contain",
-              objectPosition: "center",
-              display: "block",
-              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
-            }}
-          />
-          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
-            <h5
+              <h5
+                style={{
+                  color: "#fff",
+                  textShadow: "0 2px 8px #14696a",
+                  fontWeight: 700,
+                }}
+              >
+                Stay Strong
+              </h5>
+              <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+                Build your inner strength.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          {/* Fear No Limits */}
+          <Carousel.Item
+            style={{ height: carouselHeight, position: "relative" }}
+          >
+            <img
+              src={fitnesswomen}
+              alt="Fear No Limits"
               style={{
-                color: "#fff",
-                textShadow: "0 2px 8px #14696a",
-                fontWeight: 700,
+                width: "100%",
+                height: carouselHeight,
+                objectFit: "contain",
+                objectPosition: "center",
+                display: "block",
+                background: gradientBg,
               }}
+            />
+            <Carousel.Caption
+              className="d-none d-md-block"
+              style={{ zIndex: 2 }}
             >
-              Fear No Limits
-            </h5>
-            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
-              Push beyond boundaries.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        {/* Work For It */}
-        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
-          <img
-            src={workForIt}
-            alt="Work For It"
-            style={{
-              width: "100%",
-              height: carouselHeight,
-              objectFit: "contain",
-              objectPosition: "center",
-              display: "block",
-              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
-            }}
-          />
-          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
-            <h5
+              <h5
+                style={{
+                  color: "#fff",
+                  textShadow: "0 2px 8px #14696a",
+                  fontWeight: 700,
+                }}
+              >
+                Fear No Limits
+              </h5>
+              <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+                Push beyond boundaries.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          {/* Work For It */}
+          <Carousel.Item
+            style={{ height: carouselHeight, position: "relative" }}
+          >
+            <img
+              src={workForIt}
+              alt="Work For It"
               style={{
-                color: "#fff",
-                textShadow: "0 2px 8px #14696a",
-                fontWeight: 700,
+                width: "100%",
+                height: carouselHeight,
+                objectFit: "contain",
+                objectPosition: "center",
+                display: "block",
+                background: gradientBg,
               }}
+            />
+            <Carousel.Caption
+              className="d-none d-md-block"
+              style={{ zIndex: 2 }}
             >
-              Work For It
-            </h5>
-            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
-              Success requires effort.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        {/* Good Day */}
-        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
-          <img
-            src={goodDay}
-            alt="Good Day"
-            style={{
-              width: "100%",
-              height: carouselHeight,
-              objectFit: "contain",
-              objectPosition: "center",
-              display: "block",
-              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
-            }}
-          />
-          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
-            <h5
+              <h5
+                style={{
+                  color: "#fff",
+                  textShadow: "0 2px 8px #14696a",
+                  fontWeight: 700,
+                }}
+              >
+                Work For It
+              </h5>
+              <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+                Success requires effort.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          {/* Good Day */}
+          <Carousel.Item
+            style={{ height: carouselHeight, position: "relative" }}
+          >
+            <img
+              src={goodDay}
+              alt="Good Day"
               style={{
-                color: "#fff",
-                textShadow: "0 2px 8px #14696a",
-                fontWeight: 700,
+                width: "100%",
+                height: carouselHeight,
+                objectFit: "contain",
+                objectPosition: "center",
+                display: "block",
+                background: gradientBg,
               }}
+            />
+            <Carousel.Caption
+              className="d-none d-md-block"
+              style={{ zIndex: 2 }}
             >
-              Good Day
-            </h5>
-            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
-              Today is your day to shine.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        {/* Together */}
-        <Carousel.Item style={{ height: carouselHeight, position: "relative" }}>
-          <img
-            src={together}
-            alt="You can do it!"
-            style={{
-              width: "100%",
-              height: carouselHeight,
-              objectFit: "contain",
-              objectPosition: "center",
-              display: "block",
-              background: "linear-gradient(135deg, #17c3b2 0%, #2274a5 100%)",
-            }}
-          />
-          <Carousel.Caption className="d-none d-md-block" style={{ zIndex: 2 }}>
-            <h5
+              <h5
+                style={{
+                  color: "#fff",
+                  textShadow: "0 2px 8px #14696a",
+                  fontWeight: 700,
+                }}
+              >
+                Good Day
+              </h5>
+              <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+                Today is your day to shine.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+          {/* Together */}
+          <Carousel.Item
+            style={{ height: carouselHeight, position: "relative" }}
+          >
+            <img
+              src={together}
+              alt="You can do it!"
               style={{
-                color: "#fff",
-                textShadow: "0 2px 8px #14696a",
-                fontWeight: 700,
+                width: "100%",
+                height: carouselHeight,
+                objectFit: "contain",
+                objectPosition: "center",
+                display: "block",
+                background: gradientBg,
               }}
+            />
+            <Carousel.Caption
+              className="d-none d-md-block"
+              style={{ zIndex: 2 }}
             >
-              You can do it!
-            </h5>
-            <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
-              Believe in yourself and all that you are.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
+              <h5
+                style={{
+                  color: "#fff",
+                  textShadow: "0 2px 8px #14696a",
+                  fontWeight: 700,
+                }}
+              >
+                You can do it!
+              </h5>
+              <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+                Believe in yourself and all that you are.
+              </p>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
+      </div>
     </div>
   );
 }

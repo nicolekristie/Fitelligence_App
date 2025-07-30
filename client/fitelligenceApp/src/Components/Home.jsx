@@ -41,53 +41,64 @@ function Home() {
   }
 
   return (
-    <div style={{ position: "relative", minHeight: "100vh" }}>
-      {/* Darkened logo background overlay */}
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "100vh",
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.38), rgba(0,0,0,0.38)), url(${require("../assets/images/logo.png")})`,
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center center",
-          backgroundSize: "cover",
-          backgroundAttachment: "fixed",
-          opacity: 0.28,
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
+    <div
+      className="home-bg"
+      style={{
+        position: "relative",
+        minHeight: "100vh",
+        background: "linear-gradient(135deg, #000 0%, #b31217 100%)",
+        backgroundAttachment: "fixed",
+      }}
+    >
       {/* Hero Section at the top */}
       <Container className="pt-5 pb-2 text-center">
         {user ? (
           <>
-            <h1 className="display-4 fw-bold" style={{ color: "#1db954" }}>
+            <h1
+              className="display-4 fw-bold"
+              style={{ color: "#ff2a2a", textShadow: "0 2px 12px #000" }}
+            >
               Welcome back, {user.firstname}! 💪
             </h1>
             <p className="lead text-muted">
-              Ready to continue your fitness journey?
+              <span
+                style={{
+                  color: "#fff",
+                  textShadow: "0 2px 8px #b31217, 0 4px 24px #000",
+                }}
+              >
+                Ready to continue your fitness journey?
+              </span>
             </p>
           </>
         ) : (
           <>
             <h1
-              className="display-4 fw-bold gradient-heading"
+              className="display-4 fw-bold gradient-welcome-text"
               style={{
-                background:
-                  "linear-gradient(90deg, #1b6b6b 0%, #17c3b2 40%, #00e6ff 100%)",
+                background: "linear-gradient(90deg, #ff2a2a 0%, #b31217 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                display: "inline-block",
+                backgroundClip: "text",
+                color: "#ff2a2a",
                 textShadow:
-                  "0 4px 16px rgba(23,195,178,0.18), 0 2px 8px #14696a",
+                  "0 4px 24px #000, 0 2px 8px #b3121788, 0 1px 0 #fff2",
+                letterSpacing: 1.5,
+                marginBottom: 12,
+                display: "inline-block",
               }}
             >
               Welcome to Fitelligence
             </h1>
-            <p className="lead text-muted">
+            <p
+              style={{
+                color: "#f3f3f3",
+                fontSize: "1.25rem",
+                fontWeight: 400,
+                textShadow: "0 2px 12px #000, 0 1px 0 #fff2",
+                marginBottom: 32,
+              }}
+            >
               Your intelligent fitness companion for smarter workouts and better
               results
             </p>
@@ -129,6 +140,10 @@ function Home() {
                 margin: "0 auto",
                 borderRadius: 22,
                 padding: 0,
+                background: "rgba(0,0,0,0.92)",
+                boxShadow: "0 4px 24px 0 #b3121744",
+                color: "#ff2a2a",
+                border: "2px solid #b31217",
               }}
             >
               <Card.Body style={{ padding: 32 }}>
@@ -139,11 +154,18 @@ function Home() {
                   <FontAwesomeIcon icon={faDumbbell} />
                 </span>
                 <Card.Title
-                  style={{ fontWeight: 700, fontSize: 18, marginBottom: 6 }}
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 18,
+                    marginBottom: 6,
+                    color: "#fff",
+                  }}
                 >
                   AI Personalized Recipes
                 </Card.Title>
-                <Card.Text style={{ fontSize: 15, marginBottom: 12 }}>
+                <Card.Text
+                  style={{ fontSize: 15, marginBottom: 12, color: "#fff" }}
+                >
                   Personalized meal plans and recipes tailored to your fitness
                   goals and dietary preferences.
                 </Card.Text>
@@ -151,26 +173,31 @@ function Home() {
                   <Button
                     as={Link}
                     to="/chat-recipe"
-                    variant="primary"
+                    variant="danger"
                     className="glow-btn"
                     style={{
                       fontWeight: 600,
                       fontSize: 15,
                       padding: "6px 18px",
+                      background:
+                        "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
+                      border: "none",
                     }}
                   >
-                    View Recipes
+                    Explore Recipes
                   </Button>
                 ) : (
                   <Button
                     as={Link}
                     to="/login"
-                    variant="outline-primary"
+                    variant="outline-danger"
                     className="glow-btn"
                     style={{
                       fontWeight: 600,
                       fontSize: 15,
                       padding: "6px 18px",
+                      color: "#ff2a2a",
+                      border: "2px solid #b31217",
                     }}
                   >
                     Login to View Recipes
@@ -187,6 +214,10 @@ function Home() {
                 margin: "0 auto",
                 borderRadius: 22,
                 padding: 0,
+                background: "rgba(0,0,0,0.92)",
+                boxShadow: "0 4px 24px 0 #b3121744",
+                color: "#ff2a2a",
+                border: "2px solid #b31217",
               }}
             >
               <Card.Body style={{ padding: 32 }}>
@@ -197,23 +228,36 @@ function Home() {
                   <FontAwesomeIcon icon={faChartLine} />
                 </span>
                 <Card.Title
-                  style={{ fontWeight: 700, fontSize: 18, marginBottom: 6 }}
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 18,
+                    marginBottom: 6,
+                    color: "#fff",
+                  }}
                 >
                   Progress Tracking
                 </Card.Title>
-                <Card.Text style={{ fontSize: 15, marginBottom: 12 }}>
+                <Card.Text
+                  style={{ fontSize: 15, marginBottom: 12, color: "#fff" }}
+                >
                   Review your previous conversations with your AI fitness coach.
                   This page displays your chat history so you can revisit your
                   coach's advice, feedback, and motivation as you progress on
                   your fitness journey.
                 </Card.Text>
                 <Button
-                  variant="success"
+                  variant="danger"
                   as={Link}
                   to="/progress"
-                  // Removed glow-btn for no glow effect
-                  className=""
-                  style={{ fontWeight: 600, fontSize: 15, padding: "6px 18px" }}
+                  className="glow-btn"
+                  style={{
+                    fontWeight: 600,
+                    fontSize: 15,
+                    padding: "6px 18px",
+                    background:
+                      "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
+                    border: "none",
+                  }}
                 >
                   <FontAwesomeIcon icon={faChartLine} className="me-2" />
                   View Progress
@@ -229,6 +273,10 @@ function Home() {
                 margin: "0 auto",
                 borderRadius: 22,
                 padding: 0,
+                background: "rgba(0,0,0,0.92)",
+                boxShadow: "0 4px 24px 0 #b3121744",
+                color: "#ff2a2a",
+                border: "2px solid #b31217",
               }}
             >
               <Card.Body style={{ padding: 32 }}>
@@ -239,11 +287,18 @@ function Home() {
                   <FontAwesomeIcon icon={faBrain} />
                 </span>
                 <Card.Title
-                  style={{ fontWeight: 700, fontSize: 18, marginBottom: 6 }}
+                  style={{
+                    fontWeight: 700,
+                    fontSize: 18,
+                    marginBottom: 6,
+                    color: "#fff",
+                  }}
                 >
                   AI Intelligence
                 </Card.Title>
-                <Card.Text style={{ fontSize: 15, marginBottom: 12 }}>
+                <Card.Text
+                  style={{ fontSize: 15, marginBottom: 12, color: "#fff" }}
+                >
                   Get personalized workout suggestions powered by artificial
                   intelligence.
                 </Card.Text>
@@ -251,13 +306,15 @@ function Home() {
                   <Button
                     as={Link}
                     to="/chat"
-                    variant="info"
-                    // Removed glow-btn for no glow effect
-                    className=""
+                    variant="danger"
+                    className="glow-btn"
                     style={{
                       fontWeight: 600,
                       fontSize: 15,
                       padding: "6px 18px",
+                      background:
+                        "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
+                      border: "none",
                     }}
                   >
                     Chat with AI Coach
@@ -266,12 +323,14 @@ function Home() {
                   <Button
                     as={Link}
                     to="/login"
-                    variant="outline-info"
+                    variant="outline-danger"
                     className="glow-btn"
                     style={{
                       fontWeight: 600,
                       fontSize: 15,
                       padding: "6px 18px",
+                      color: "#ff2a2a",
+                      border: "2px solid #b31217",
                     }}
                   >
                     Login to Access AI Coach
@@ -386,9 +445,9 @@ function Home() {
           height: min(32vw, 340px);
           border-radius: 32px;
           overflow: hidden;
-          background: #eafcff;
+          background: linear-gradient(135deg, #14696a 0%, #2274a5 100%);
           box-shadow: 0 10px 40px 0 rgba(0,0,0,0.22);
-          border: 4px solid #fff;
+          border: 4px solid #eafcff;
           transition: box-shadow 0.3s, border-color 0.3s;
         }
         .home-img-hover {
@@ -483,13 +542,15 @@ function Home() {
         <Row className="text-center mb-4">
           <Col>
             <Card
-              className="bg-light"
               style={{
                 minHeight: 0,
                 maxWidth: 1100,
                 width: "100%",
                 margin: "0 auto",
                 borderRadius: 18,
+                background: "linear-gradient(90deg, #18181b 0%, #b31217 100%)",
+                color: "#eafcff",
+                boxShadow: "0 4px 24px 0 #b3121744",
               }}
             >
               <Card.Body
@@ -518,7 +579,7 @@ function Home() {
                       <Button
                         as={Link}
                         to="/profile"
-                        variant="outline-primary"
+                        variant="primary"
                         size="sm"
                         className="px-2"
                         style={{ boxShadow: "none" }}
@@ -527,46 +588,109 @@ function Home() {
                       </Button>
                     </div>
                     <p
-                      className="text-muted mt-1 mb-0"
-                      style={{ fontSize: 13 }}
+                      className="mt-1 mb-0"
+                      style={{
+                        fontSize: 20,
+                        color: "#b31217",
+                        fontWeight: 700,
+                        background: "rgba(255,255,255,0.92)",
+                        borderRadius: 12,
+                        padding: "8px 16px",
+                        display: "inline-block",
+                        boxShadow: "0 2px 8px rgba(179,18,23,0.08)",
+                        marginTop: 8,
+                      }}
                     >
                       Welcome back! Let's achieve your fitness goals together.
                     </p>
                   </>
                 ) : (
                   <>
-                    <h5
-                      className="mb-1"
-                      style={{ fontSize: 18, marginBottom: 4 }}
+                    <Container
+                      className="d-flex justify-content-center align-items-center"
+                      style={{ minHeight: 180 }}
                     >
-                      Ready to Start?
-                    </h5>
-                    <div className="d-flex justify-content-center gap-2 mb-1">
-                      <Button
-                        as={Link}
-                        to="/register"
-                        variant="primary"
-                        size="sm"
-                        className="px-2"
+                      <div
+                        style={{
+                          background:
+                            "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
+                          borderRadius: 20,
+                          padding: "32px 18px 24px 18px",
+                          margin: "0 auto 8px auto",
+                          maxWidth: 440,
+                          width: "100%",
+                          boxShadow: "0 4px 32px 0 #b3121744",
+                        }}
                       >
-                        Get Started
-                      </Button>
-                      <Button
-                        as={Link}
-                        to="/login"
-                        variant="outline-primary"
-                        size="sm"
-                        className="px-2"
-                      >
-                        Login
-                      </Button>
-                    </div>
-                    <p
-                      className="text-muted mt-1 mb-0"
-                      style={{ fontSize: 13 }}
-                    >
-                      Join thousands of users already using Fitelligence
-                    </p>
+                        <h5
+                          className="mb-3"
+                          style={{
+                            fontSize: 22,
+                            color: "#fff",
+                            fontWeight: 800,
+                            letterSpacing: 1,
+                            textAlign: "center",
+                          }}
+                        >
+                          Ready to Start?
+                        </h5>
+                        <div className="d-flex justify-content-center gap-3 mb-3 flex-wrap">
+                          <Button
+                            as={Link}
+                            to="/register"
+                            size="lg"
+                            className="cta-btn px-4 py-2"
+                            style={{
+                              background:
+                                "linear-gradient(90deg, #111 0%, #333 100%)",
+                              border: "none",
+                              fontWeight: 700,
+                              color: "#fff",
+                              borderRadius: 12,
+                              boxShadow:
+                                "0 2px 16px 0 #0007, 0 0 0 2px #fff2 inset",
+                              fontSize: 18,
+                              letterSpacing: 0.5,
+                              transition: "background 0.2s, box-shadow 0.2s",
+                            }}
+                          >
+                            Get Started
+                          </Button>
+                          <Button
+                            as={Link}
+                            to="/login"
+                            size="lg"
+                            className="cta-btn px-4 py-2"
+                            style={{
+                              background:
+                                "linear-gradient(90deg, #111 0%, #333 100%)",
+                              border: "none",
+                              fontWeight: 700,
+                              color: "#fff",
+                              borderRadius: 12,
+                              boxShadow:
+                                "0 2px 16px 0 #0007, 0 0 0 2px #fff2 inset",
+                              fontSize: 18,
+                              letterSpacing: 0.5,
+                              transition: "background 0.2s, box-shadow 0.2s",
+                            }}
+                          >
+                            Login
+                          </Button>
+                        </div>
+                        <p
+                          className="mt-1 mb-0"
+                          style={{
+                            fontSize: 15,
+                            color: "#fff",
+                            opacity: 0.95,
+                            textAlign: "center",
+                          }}
+                        >
+                          Join thousands of users already using Fitelligence
+                        </p>
+                      </div>
+                    </Container>
                   </>
                 )}
               </Card.Body>

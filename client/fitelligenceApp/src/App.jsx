@@ -6,7 +6,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import NavBar from "./Components/NavBar.jsx";
-import HomeSample from "./Components/HomeSample.jsx";
+import Home from "./Components/Home.jsx";
 import LoginForm from "./Components/LoginForm.jsx";
 import RegistrationForm from "./Components/RegistrationForm.jsx";
 import FitnessSurvey from "./Components/FitnessSurvey";
@@ -18,7 +18,6 @@ import Welcome from "./Components/Welcome.jsx";
 import ChatRecipe from "./Components/ChatRecipe.jsx";
 import RecipeHistory from "./Components/RecipeHistory.jsx";
 import { UserProvider } from "./Components/Context/userContext.jsx";
-import SampleWorkouts from "./Components/SampleWorkouts.jsx";
 
 function App() {
   return (
@@ -27,8 +26,7 @@ function App() {
         <div className="App">
           <NavBar />
           <Routes>
-            <Route path="/" element={<HomeSample />} />
-            <Route path="/home-sample" element={<HomeSample />} />
+            <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="/register" element={<RegistrationForm />} />
             <Route
@@ -41,10 +39,7 @@ function App() {
             />
             <Route path="/progress" element={<ProgressTracking />} />
             {/* Redirect old workouts route to new progress route */}
-            <Route
-              path="/workouts"
-              element={<Navigate to="/progress" replace />}
-            />
+            {/* Removed navigation to /sample-workouts and /workouts since SampleWorkouts page is deleted */}
             <Route
               path="/chat"
               element={
@@ -69,13 +64,26 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/sample-workouts" element={<SampleWorkouts />} />
             <Route
               path="/chat-recipe"
               element={
                 <ProtectedRoute>
                   <ChatRecipe />
                 </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/ai-intelligence"
+              element={
+                <div
+                  style={{
+                    color: "#fff",
+                    padding: "2rem",
+                    textAlign: "center",
+                  }}
+                >
+                  AI Intelligence page placeholder
+                </div>
               }
             />
             <Route

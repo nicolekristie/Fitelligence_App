@@ -92,10 +92,24 @@ function Workouts() {
         <Col>
           <Card>
             <Card.Header as="h3" className="text-center">
-              Progress Tracking
+              AI Coach Fitness Gallery
             </Card.Header>
             <Card.Body>
               <div className="text-center mb-4">
+                <div
+                  style={{
+                    color: "#b31217",
+                    fontSize: "2.2rem",
+                    fontWeight: 700,
+                    marginBottom: "24px",
+                    textShadow: "0 2px 8px #000",
+                  }}
+                >
+                  Keep Going! Every Step Counts
+                  <span role="img" aria-label="muscle">
+                    💪
+                  </span>
+                </div>
                 <h5>
                   Your AI Fitness Coach Conversations
                   {chatHistory.length > 0 && (
@@ -156,7 +170,13 @@ function Workouts() {
                   <div style={{ maxHeight: "600px", overflowY: "auto" }}>
                     {chatHistory.map((item, index) => (
                       <Card key={item.id} className="mb-4 shadow-sm border-0">
-                        <Card.Header className="bg-light border-0">
+                        <Card.Header
+                          style={{
+                            background: "rgba(0,0,0,0.92)",
+                            color: "#eafcff",
+                          }}
+                          className="border-0"
+                        >
                           <div className="d-flex justify-content-between align-items-center">
                             <div className="d-flex align-items-center">
                               <Badge bg="primary" pill className="me-2">

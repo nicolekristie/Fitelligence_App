@@ -128,7 +128,7 @@ When creating workout plans, ONLY suggest exercises using their available equipm
           { role: "user", content: message.trim() },
         ],
         temperature: 0.7,
-        max_tokens: 500,
+        max_tokens: 1200,
       });
       for await (const chunk of completion) {
         const content = chunk.choices?.[0]?.delta?.content;
@@ -239,6 +239,8 @@ app.post("/api/chat-recipe", async (req, res) => {
 
 IMPORTANT: Never repeat the same recipe twice in a row. Always generate new, creative, and different recipes for each request, even if the user message is similar. Add variety and surprise to your suggestions.
 
+IMPORTANT: When the user asks for recipes for "1 week" or "a week", ALWAYS generate 7 days of recipes (not 5). A week means 7 days. Do not generate only 5 days. If the user asks for a week, provide 7 days of recipes.
+
 For each recipe, put every section on its own line. Add TWO blank lines between each section. Never put more than one section on the same line. Never use inline formatting for multiple sections. If you do not follow this format, your response will not be accepted.
 
 When providing recipe recommendations, use this format for each day and recipe:
@@ -305,7 +307,7 @@ Keep responses concise, friendly, and easy to read. Use emojis and formatting to
       ],
       stream: true,
       temperature: 0.7,
-      max_tokens: 500,
+      max_tokens: 1200,
     });
 
     let fullResponse = "";
