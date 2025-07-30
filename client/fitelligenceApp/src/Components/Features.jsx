@@ -213,7 +213,7 @@ function Features() {
               </Card.Text>
               <Button
                 as={Link}
-                to="/ai-intelligence"
+                to="/chat"
                 // className="btn btn-info w-100 mt-2"
                 className="glow-btn"
                 style={{
