@@ -109,8 +109,24 @@ function ProgressTracking() {
       <Container className="mt-5">
         <Row>
           <Col>
-            <Card>
-              <Card.Header as="h3" className="text-center">
+            <Card
+              style={{
+                background: "linear-gradient(135deg, #232323 0%, #b31217 100%)", // palette background
+                color: "#fff",
+                borderRadius: 18,
+                boxShadow: "0 2px 18px rgba(179,18,23,0.18)",
+                border: "2px solid #b31217",
+              }}
+            >
+              <Card.Header
+                as="h3"
+                className="text-center"
+                style={{
+                  background: "transparent",
+                  color: "#fff",
+                  border: "none",
+                }}
+              >
                 Progress Tracking
               </Card.Header>
               <Card.Body>
@@ -123,7 +139,14 @@ function ProgressTracking() {
                       </Badge>
                     )}
                   </h5>
-                  <p className="text-muted">
+                  <p
+                    style={{
+                      color: "#eafcff", // light color for visibility on dark background
+                      opacity: 0.85,
+                      fontWeight: 500,
+                      letterSpacing: "0.2px",
+                    }}
+                  >
                     Review your previous conversations with your AI fitness
                     coach. This page displays your chat history so you can
                     revisit your coach's advice, feedback, and motivation as you
@@ -135,6 +158,16 @@ function ProgressTracking() {
                       onClick={toggleHistory}
                       disabled={isLoading}
                       size="lg"
+                      style={{
+                        background: showHistory
+                          ? "linear-gradient(90deg, #232323 0%, #b31217 100%)"
+                          : "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
+                        color: "#fff",
+                        border: "none",
+                        fontWeight: 700,
+                        borderRadius: 10,
+                        boxShadow: "0 0 12px #b31217",
+                      }}
                     >
                       {isLoading ? (
                         <>
@@ -179,7 +212,18 @@ function ProgressTracking() {
                     </h6>
                     <div style={{ maxHeight: "600px", overflowY: "auto" }}>
                       {chatHistory.map((item, index) => (
-                        <Card key={item.id} className="mb-4 shadow-sm border-0">
+                        <Card
+                          key={item.id}
+                          className="mb-4 shadow-sm border-0"
+                          style={{
+                            background:
+                              "linear-gradient(135deg, #232323 0%, #b31217 100%)", // palette background
+                            color: "#fff",
+                            borderRadius: 14,
+                            boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
+                            border: "2px solid #b31217",
+                          }}
+                        >
                           <Card.Header
                             style={{
                               background: "rgba(0,0,0,0.92)",
@@ -192,7 +236,14 @@ function ProgressTracking() {
                                 <Badge bg="primary" pill className="me-2">
                                   #{chatHistory.length - index}
                                 </Badge>
-                                <small className="text-muted fw-bold">
+                                <small
+                                  className="fw-bold"
+                                  style={{
+                                    color: "#fff", // pure white for maximum contrast
+                                    opacity: 0.95,
+                                    letterSpacing: "0.2px",
+                                  }}
+                                >
                                   AI Coach Response
                                 </small>
                               </div>
@@ -207,8 +258,7 @@ function ProgressTracking() {
                               className="ai-response-text"
                               style={{
                                 fontSize: "1rem",
-                                lineHeight: "1.6",
-                                color: "#2c3e50",
+                                color: "#eafcff", // light text for visibility
                               }}
                             >
                               <Markdown>{item.response_text}</Markdown>

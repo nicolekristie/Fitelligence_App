@@ -11,13 +11,11 @@ import { LuBot, LuSendHorizontal } from "react-icons/lu";
 import { useUser } from "./Context/userContext.jsx";
 
 function ChatRecipe() {
-  // Add missing handleSend function
   const handleSend = () => {
     if (input.trim() === "") return;
     sendMessage(input);
     setInput("");
   };
-  // ...existing code...
   const { user } = useUser(); // Use user context directly
   const [input, setInput] = React.useState("");
   const [messages, setMessages] = React.useState([]);
@@ -81,7 +79,6 @@ function ChatRecipe() {
     }
   }, [messages]);
 
-  // Restore original visual layout with images and heading
   return (
     <>
       {/* Side images (fixed) */}
@@ -154,16 +151,16 @@ function ChatRecipe() {
           <div
             style={{
               fontFamily: "'Pacifico', 'Brush Script MT', cursive, sans-serif",
-              color: "#232323",
+              color: "#fff",
               fontSize: 28,
               fontWeight: 900,
               textShadow: "0 2px 8px #fff",
               letterSpacing: 1,
-              background: "rgba(255,255,255,0.92)",
+              background: "linear-gradient(90deg, #b31217 0%, #232323 100%)", // updated to match palette
               borderRadius: 18,
               padding: "18px 12px 18px 12px",
-              border: "1.5px solid #e3f6f5",
-              boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
+              border: "2px solid #b31217",
+              boxShadow: "0 2px 18px rgba(179,18,23,0.18)",
               textAlign: "left",
               minWidth: 340,
               alignSelf: "flex-start",
@@ -175,10 +172,11 @@ function ChatRecipe() {
             Healthy eating isn't a diet, it's a lifestyle.
             <br />
             <span
-              style={{
-                color: "#232323",
+                style={{
+                color: "#fff",
                 fontWeight: 700,
                 fontFamily: "inherit",
+                textShadow: "0 1px 4px #b31217, 0 2px 8px #000",
               }}
             >
               Nourish your body, fuel your life.
@@ -186,18 +184,19 @@ function ChatRecipe() {
           </div>
           {/* Emoji sequence in rounded box - stays top right */}
           <div
-            style={{
-              background: "rgba(255,255,255,0.92)",
+              style={{
+              background: "linear-gradient(90deg, #b31217 0%, #232323 100%)", // updated to match palette
               borderRadius: 22,
               padding: "10px 32px",
               display: "flex",
               alignItems: "center",
               fontSize: 38,
-              boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
-              border: "1.5px solid #e3f6f5",
+              boxShadow: "0 2px 18px rgba(179,18,23,0.18)",
+              border: "2px solid #b31217",
               zIndex: 101,
               marginRight: "32px",
               marginTop: "12px",
+              color: "#fff", // ensure emoji and text are white
             }}
           >
             <span role="img" aria-label="muscle">
@@ -213,7 +212,6 @@ function ChatRecipe() {
             </span>
           </div>
         </div>
-        {/* ...existing code... */}
         {/* Food images row */}
         <div
           className="d-flex justify-content-center align-items-center gap-4 mb-4 flex-wrap"
@@ -293,15 +291,15 @@ function ChatRecipe() {
             style={{
               textAlign: "center",
               margin: "0 0 12px 0",
-              color: "#232323",
+               color: "#fff",
               fontWeight: 900,
               fontSize: "1.6rem",
-              background: "#fff",
+              background: "linear-gradient(90deg, #b31217 0%, #000 100%)", // unified palette
               borderRadius: 16,
-              boxShadow: "0 2px 12px rgba(0,0,0,0.10)",
+              boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
               padding: "10px 0 4px 0",
               width: "100%",
-              border: "2px solid #e3f6f5",
+              border: "2px solid #b2f7ef",
               letterSpacing: 1,
               position: "relative",
             }}
@@ -325,19 +323,20 @@ function ChatRecipe() {
               scrollbarColor: "#888 #d3d3d3",
               scrollbarWidth: "thin",
               borderRadius: 14, // Match dialog corners
-              background: "#fff",
+              background: "linear-gradient(135deg, #232323 0%, #b31217 100%)",
             }}
             id="chat-messages-scroll"
           >
-            <style>{`
+            <style>{` 
             .chat-recipe-messages > div::-webkit-scrollbar {
-              width: 8px;
-              background: #d3d3d3; /* light grey track */
-            }
-            .chat-recipe-messages > div::-webkit-scrollbar-thumb {
-              background: #888; /* medium grey thumb */
-              border-radius: 8px;
-            }
+            width: 8px;
+            background: #000; // black track
+          }
+          .chat-recipe-messages > div::-webkit-scrollbar-thumb {
+            background: #b31217; // deep red thumb
+            border-radius: 8px;
+          } 
+     
           `}</style>
             {messages.length === 0 ? (
               <div
@@ -348,6 +347,7 @@ function ChatRecipe() {
                   fontWeight: 500,
                   padding: "48px 0",
                   opacity: 0.8,
+                  background: "transparent",
                 }}
               >
                 No messages yet
@@ -358,10 +358,13 @@ function ChatRecipe() {
                   <div
                     key={index}
                     style={{
-                      background: msg.sender === "user" ? "#e3f6f5" : "#fff",
-                      color: msg.sender === "user" ? "#1b6b6b" : "#232323",
+                      background:
+                        msg.sender === "user"
+                            ? "linear-gradient(90deg, #232323 0%, #000 100%)" // dark gray to black
+                            : "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
+                        color: "#fff",      
                       borderRadius: 14,
-                      boxShadow: "0 2px 12px rgba(0,0,0,0.10)",
+                      boxShadow: "0 4px 18px rgba(179,18,23,0.18)",
                       padding: "16px 18px",
                       marginBottom: 4,
                       width: "100%",
@@ -373,7 +376,11 @@ function ChatRecipe() {
                       border:
                         msg.sender === "user"
                           ? "2px solid #b2f7ef"
-                          : "2px solid #e3f6f5",
+                          : "2.5px solid #fff",
+                      textShadow: msg.sender === "user"
+                        ? "none"
+                        : "0 2px 8px #b31217, 0 4px 24px #000", // subtle glow for bot
+                      letterSpacing: "0.5px",
                     }}
                   >
                     <Markdown>{msg.text}</Markdown>
@@ -387,11 +394,11 @@ function ChatRecipe() {
           <div
             style={{
               width: "100%",
-              background: "#fff",
+              background: "linear-gradient(90deg, #b31217 0%, #000 100%)", 
               borderRadius: 14,
-              boxShadow: "0 2px 12px rgba(0,0,0,0.10)",
+              boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
               padding: "12px 0 8px 0",
-              border: "2px solid #e3f6f5",
+              border: "2px solid #b2f7ef",
               marginTop: 18, // Add space above input section
               marginBottom: 12,
               zIndex: 150,
@@ -403,13 +410,31 @@ function ChatRecipe() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               rows={4}
-              style={{ resize: "none", minHeight: 60, maxHeight: 120 }}
+              style={{
+                resize: "none",
+                minHeight: 60,
+                maxHeight: 120,
+                background: "#232323",
+                color: "#fff",
+                border: "2px solid #b31217",
+                borderRadius: 10,
+              }}
             />
             <button
               onClick={handleSend}
               className="btn btn-primary w-100 chat-recipe-send-btn"
               disabled={loading}
-              style={{ marginTop: 4 }}
+               style={{
+                marginTop: 4,
+                background: "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
+                border: "none",
+                fontWeight: 700,
+                fontSize: "1.1rem",
+                color: "#fff",
+                boxShadow: "0 0 12px #b31217",
+                borderRadius: 10,
+                padding: "0.7rem 2.2rem",
+              }}
             >
               <LuSendHorizontal size={20} className="me-2" />
               Send

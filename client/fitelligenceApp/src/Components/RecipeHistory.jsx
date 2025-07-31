@@ -97,7 +97,15 @@ function RecipeHistory() {
       <Container className="mt-5">
         <Row>
           <Col>
-            <Card>
+            <Card
+              style={{
+                background: "linear-gradient(135deg, #232323 0%, #b31217 100%)", // palette background
+                color: "#fff",
+                borderRadius: 18,
+                boxShadow: "0 2px 18px rgba(179,18,23,0.18)",
+                border: "2px solid #b31217",
+              }}
+            >
               <Card.Header as="h3" className="text-center">
                 Recipe History
               </Card.Header>
@@ -111,7 +119,14 @@ function RecipeHistory() {
                       </Badge>
                     )}
                   </h5>
-                  <p className="text-muted">
+                  <p
+                    style={{
+                      color: "#fff", // pure white for maximum contrast
+                      opacity: 0.92,
+                      fontWeight: 500,
+                      letterSpacing: "0.2px",
+                    }}
+                  >
                     Review your previous AI-generated recipes. This page
                     displays your recipe history so you can revisit healthy meal
                     ideas and nutrition tips.
@@ -166,7 +181,18 @@ function RecipeHistory() {
                     </h6>
                     <div style={{ maxHeight: "600px", overflowY: "auto" }}>
                       {recipes.map((item, index) => (
-                        <Card key={item.id} className="mb-4 shadow-sm border-0">
+                        <Card
+                          key={item.id}
+                          className="mb-4 shadow-sm border-0"
+                          style={{
+                            background:
+                              "linear-gradient(135deg, #232323 0%, #b31217 100%)", // palette background
+                            color: "#fff",
+                            borderRadius: 14,
+                            boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
+                            border: "2px solid #b31217",
+                          }}
+                        >
                           <Card.Header
                             style={{
                               background: "rgba(0,0,0,0.92)",
@@ -179,11 +205,25 @@ function RecipeHistory() {
                                 <Badge bg="success" pill className="me-2">
                                   #{recipes.length - index}
                                 </Badge>
-                                <small className="text-muted fw-bold">
+                                <small
+                                  className="fw-bold"
+                                  style={{
+                                    color: "#fff", // pure white for maximum contrast
+                                    opacity: 0.95,
+                                    letterSpacing: "0.2px",
+                                  }}
+                                >
                                   AI Recipe Response
                                 </small>
                               </div>
-                              <small className="text-muted">
+                              <small
+                                style={{
+                                  color: "#fff", // pure white for maximum contrast
+                                  opacity: 0.85,
+                                  fontWeight: 500,
+                                  letterSpacing: "0.2px",
+                                }}
+                              >
                                 <i className="fas fa-clock me-1"></i>
                                 {formatDate(item.timestamp || item.created_at)}
                               </small>
@@ -193,7 +233,7 @@ function RecipeHistory() {
                             style={{
                               minHeight: 0,
                               background:
-                                "linear-gradient(135deg, #000 0%, #b31217 100%)",
+                                "linear-gradient(135deg, #232323 0%, #b31217 100%)", // updated to palette
                               backgroundAttachment: "fixed",
                               backgroundImage: "none",
                               padding: "18px 0 8px 0",
@@ -205,7 +245,7 @@ function RecipeHistory() {
                               style={{
                                 fontSize: "1rem",
                                 lineHeight: "1.6",
-                                color: "#2c3e50",
+                                color: "#eafcff", // light text for visibility
                               }}
                             >
                               <ReactMarkdown>
@@ -238,8 +278,18 @@ function RecipeHistory() {
                         Refresh History
                       </Button>
                       <Button
-                        variant="outline-secondary"
+                        // variant="outline-secondary"
                         onClick={toggleHistory}
+                        style={{
+                          background:
+                            "linear-gradient(90deg, #232323 0%, #b31217 100%)", // palette background
+                          background: "linear-gradient(90deg, #232323 0%, #b31217 100%) !important", // palette background
+                          color: "#fff !important", // white text for visibility
+                          fontWeight: 700,
+                          borderRadius: 10,
+                          border: "none",
+                          boxShadow: "0 0 12px #b31217",
+                        }}
                       >
                         <i className="fas fa-eye-slash me-2"></i>
                         Hide History

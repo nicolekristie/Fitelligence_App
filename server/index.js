@@ -306,7 +306,7 @@ Keep responses concise, friendly, and easy to read. Use emojis and formatting to
         { role: "user", content: message },
       ],
       stream: true,
-      temperature: 0.7,
+      temperature: 0.8,
       max_tokens: 1200,
     });
 

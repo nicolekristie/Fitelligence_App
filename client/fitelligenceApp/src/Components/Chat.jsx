@@ -1,6 +1,6 @@
 import React from "react";
 import { flushSync } from "react-dom";
-import coachImage from "../assets/images/coachFace.jpeg";
+import coachImage from "../assets/images/coachFace.png";
 import balanceImage from "../assets/images/aiCoach/balance.jpg";
 import focusedImage from "../assets/images/aiCoach/focused.jpg";
 import intenseImage from "../assets/images/aiCoach/intense.jpg";
@@ -112,16 +112,31 @@ const Chat = ({ userId, goal }) => {
             <div className="col-lg-3 col-md-4 mb-4">
               <div className="row g-3">
                 <div className="col-12">
-                  <img
-                    src={coachImage}
-                    alt="Fitness Coach"
-                    className="img-fluid rounded shadow-sm"
+                  <div
+                    className="rounded shadow-sm d-flex align-items-center justify-content-center"
                     style={{
                       width: "80%",
                       height: "180px",
-                      objectFit: "cover",
+                      background:
+                        "linear-gradient(135deg, #232323 0%, #b31217 100%)", // palette background
+                      borderRadius: 18,
+                      boxShadow: "0 2px 18px rgba(179,18,23,0.18)",
+                      padding: "8px",
                     }}
-                  />
+                  >
+                    <img
+                      src={coachImage}
+                      alt="Fitness Coach"
+                      className="img-fluid rounded shadow-sm"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        borderRadius: 14,
+                        boxShadow: "none",
+                      }}
+                    />
+                  </div>
                 </div>
                 <div className="col-6">
                   <div
@@ -175,8 +190,27 @@ const Chat = ({ userId, goal }) => {
 
             {/* Right Column - Expanded Chat */}
             <div className="col-lg-9 col-md-8">
-              <div className="card chat h-100">
-                <div className="card-header py-2">
+              <div
+                className="card chat h-100"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #232323 0%, #b31217 100%)", // Fitelligence palette
+                  border: "2px solid #b31217",
+                  borderRadius: 18,
+                  boxShadow: "0 2px 18px rgba(179,18,23,0.18)",
+                  color: "#fff",
+                }}
+              >
+                <div
+                  className="card-header py-2"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #b31217 0%, #232323 100%)",
+                    color: "#fff",
+                    borderRadius: "16px 16px 0 0",
+                    borderBottom: "2px solid #b31217",
+                  }}
+                >
                   <div className="d-flex align-items-center">
                     <img
                       src={coachImage}
@@ -194,6 +228,7 @@ const Chat = ({ userId, goal }) => {
                     height: "450px",
                     display: "flex",
                     flexDirection: "column",
+                    background: "transparent",
                   }}
                 >
                   <p className="card-text mb-2 small text-muted">
@@ -206,10 +241,12 @@ const Chat = ({ userId, goal }) => {
                     style={{
                       overflowY: "auto",
                       padding: "8px",
-                      border: "1px solid #dee2e6",
-                      borderRadius: "6px",
-                      backgroundColor: "#f8f9fa",
+                      border: "2px solid #b31217",
+                      borderRadius: "12px",
+                      background:
+                        "linear-gradient(135deg, #232323 0%, #b31217 100%)",
                       minHeight: "250px",
+                      color: "#fff",
                     }}
                   >
                     {messages.length > 0 ? (
@@ -230,7 +267,10 @@ const Chat = ({ userId, goal }) => {
                         <div ref={messagesEndRef} />
                       </>
                     ) : (
-                      <div className="text-muted text-center py-2 small">
+                      <div
+                        className="text-muted text-center py-2 small"
+                        style={{ color: "#fff", opacity: 0.6 }}
+                      >
                         No messages yet
                       </div>
                     )}
@@ -249,13 +289,29 @@ const Chat = ({ userId, goal }) => {
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         disabled={isLoading}
+                        style={{
+                          background: "#232323",
+                          color: "#fff",
+                          border: "2px solid #b31217",
+                          borderRadius: 10,
+                        }}
                       />
                     </div>
                     <button
                       type="submit"
                       className="btn btn-primary btn-sm d-flex align-items-center justify-content-center"
                       disabled={isLoading || !input.trim()}
-                      style={{ minWidth: "45px", height: "32px" }}
+                      style={{
+                        minWidth: "45px",
+                        height: "32px",
+                        background:
+                          "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
+                        border: "none",
+                        color: "#fff",
+                        fontWeight: 700,
+                        borderRadius: 10,
+                        boxShadow: "0 0 12px #b31217",
+                      }}
                     >
                       {isLoading ? (
                         <div
@@ -279,7 +335,7 @@ const Chat = ({ userId, goal }) => {
           {/* Image Gallery Section Below Chat */}
           <div className="row mt-4 mb-5">
             <div className="col-12">
-              <h5 className="text-center mb-4 text-primary">
+              <h5 className="text-center mb-4 text-white">
                 AI Coach Fitness Gallery
               </h5>
               <div className="row g-3">
@@ -287,9 +343,18 @@ const Chat = ({ userId, goal }) => {
                   <motion.div
                     className="card h-100 shadow-sm"
                     whileHover={{ scale: 2, zIndex: 10 }}
+                    // style={{
+                    //   position: "relative",
+                    //   transformOrigin: "center left",
+                    // }}
                     style={{
                       position: "relative",
-                      transformOrigin: "center left",
+                      background:
+                        "linear-gradient(135deg, #b31217 0%, #232323 100%)", // updated palette
+                      borderRadius: 16,
+                      boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
+                      border: "2px solid #b31217",
+                      color: "#fff",
                     }}
                   >
                     <a href="/sample-workouts">
@@ -319,7 +384,15 @@ const Chat = ({ userId, goal }) => {
                   <motion.div
                     className="card h-100 shadow-sm"
                     whileHover={{ scale: 2, zIndex: 10 }}
-                    style={{ position: "relative" }}
+                    style={{
+                      position: "relative",
+                      background:
+                        "linear-gradient(135deg, #b31217 0%, #232323 100%)", // updated palette
+                      borderRadius: 16,
+                      boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
+                      border: "2px solid #b31217",
+                      color: "#fff",
+                    }}
                   >
                     <a href="/sample-workouts">
                       <img
@@ -348,7 +421,15 @@ const Chat = ({ userId, goal }) => {
                   <motion.div
                     className="card h-100 shadow-sm"
                     whileHover={{ scale: 2, zIndex: 10 }}
-                    style={{ position: "relative" }}
+                    style={{
+                      position: "relative",
+                      background:
+                        "linear-gradient(135deg, #b31217 0%, #232323 100%)", // updated palette
+                      borderRadius: 16,
+                      boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
+                      border: "2px solid #b31217",
+                      color: "#fff",
+                    }}
                   >
                     <a href="/sample-workouts">
                       <img
@@ -377,7 +458,15 @@ const Chat = ({ userId, goal }) => {
                   <motion.div
                     className="card h-100 shadow-sm"
                     whileHover={{ scale: 2, zIndex: 10 }}
-                    style={{ position: "relative" }}
+                    style={{
+                      position: "relative",
+                      background:
+                        "linear-gradient(135deg, #b31217 0%, #232323 100%)", // updated palette
+                      borderRadius: 16,
+                      boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
+                      border: "2px solid #b31217",
+                      color: "#fff",
+                    }}
                   >
                     <a href="/sample-workouts">
                       <img
@@ -406,7 +495,15 @@ const Chat = ({ userId, goal }) => {
                   <motion.div
                     className="card h-100 shadow-sm"
                     whileHover={{ scale: 2, zIndex: 10 }}
-                    style={{ position: "relative" }}
+                    style={{
+                      position: "relative",
+                      background:
+                        "linear-gradient(135deg, #b31217 0%, #232323 100%)", // updated palette
+                      borderRadius: 16,
+                      boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
+                      border: "2px solid #b31217",
+                      color: "#fff",
+                    }}
                   >
                     <a href="/sample-workouts">
                       <img
@@ -437,7 +534,12 @@ const Chat = ({ userId, goal }) => {
                     whileHover={{ scale: 2, zIndex: 10 }}
                     style={{
                       position: "relative",
-                      transformOrigin: "center right",
+                      background:
+                        "linear-gradient(135deg, #b31217 0%, #232323 100%)", // updated palette
+                      borderRadius: 16,
+                      boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
+                      border: "2px solid #b31217",
+                      color: "#fff",
                     }}
                   >
                     <a href="/sample-workouts">

@@ -198,11 +198,10 @@ export default function FitnessSurvey() {
                 <option value="">Select a goal</option>
                 <option value="muscle gain">Muscle Gain</option>
                 <option value="weight loss">Weight Loss</option>
-                <option value="endurance">Endurance</option>er Workout Manager
-                API
+                <option value="endurance">Endurance</option>
                 <option value="overall health">Overall Health</option>
                 <option value="stress reduction">Stress Reduction</option>
-                <option value="toning">Endurance</option>
+                <option value="toning">Improved Sleep</option>
               </select>
             </div>
 

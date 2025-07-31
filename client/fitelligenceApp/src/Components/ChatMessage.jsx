@@ -19,10 +19,28 @@ const ChatMessage = ({ message, isUser, isTyping = false }) => {
       )}
 
       <div
-        className={`p-3 rounded ${
-          isUser ? "bg-primary text-white" : "bg-light"
-        }`}
-        style={{ maxWidth: "70%" }}
+       style={{
+          background: isUser
+            ? "linear-gradient(90deg, #232323 0%, #000 100%)"
+            : "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
+          color: "#fff",
+          borderRadius: 14,
+          boxShadow: "0 4px 18px rgba(179,18,23,0.18)",
+          padding: "14px 16px",
+          marginBottom: 6,
+          maxWidth: "70%",
+          alignSelf: isUser ? "flex-end" : "flex-start",
+          fontSize: "1.08rem",
+          fontWeight: 500,
+          wordBreak: "break-word",
+          border: isUser
+            ? "2px solid #b31217"
+            : "2.5px solid #fff",
+          textShadow: isUser
+            ? "none"
+            : "0 2px 8px #b31217, 0 4px 24px #000",
+          letterSpacing: "0.5px",
+        }}
       >
         {isTyping ? (
           <div className="d-flex align-items-center">
