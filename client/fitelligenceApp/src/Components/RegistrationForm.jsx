@@ -112,8 +112,28 @@ function RegistrationForm() {
     <Container className="mt-5">
       <Row className="justify-content-md-center">
         <Col md={6}>
-          <Card>
-            <Card.Header as="h3" className="text-center">
+          <Card
+            style={{
+              background: "linear-gradient(135deg, #232323 0%, #b31217 100%)",
+              color: "#fff",
+              borderRadius: 18,
+              boxShadow: "0 2px 18px rgba(179,18,23,0.18)",
+              border: "2px solid #b31217",
+              backdropFilter: "blur(2px)", // optional for frosted effect
+            }}
+          >
+            <Card.Header
+              as="h3"
+              className="text-center"
+              style={{
+                background: "transparent",
+                color: "#fff",
+                border: "none",
+                textShadow: "0 1px 6px #b31217",
+                letterSpacing: "0.5px",
+                fontWeight: 800,
+              }}
+            >
               Register
             </Card.Header>
             <Card.Body className="text-start">
@@ -196,9 +216,19 @@ function RegistrationForm() {
                 </Form.Group>
 
                 <Button
-                  variant="primary"
+                  // variant="primary"
                   type="submit"
                   className="w-100"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #232323 0%, #b31217 100%)",
+                    color: "#fff",
+                    fontWeight: 700,
+                    borderRadius: 10,
+                    border: "2px solid #eafcff",
+                    boxShadow: "0 4px 24px #000", // strong black shadow for visibility
+                    letterSpacing: "0.2px",
+                  }}
                   disabled={isLoading}
                 >
                   {isLoading ? "Creating Account..." : "Register"}

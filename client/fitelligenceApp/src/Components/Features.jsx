@@ -74,16 +74,7 @@ function Features() {
               >
                 AI Personalized Recipes
               </Card.Title>
-              {/* <img
-                src={recipeIcon}
-                alt="AI Recipes"
-                style={{
-                  width: 38,
-                  height: 38,
-                  marginBottom: 12,
-                  borderRadius: 12,
-                }} */}
-              {/* /> */}
+    
               <Card.Text
                 style={{
                   fontSize: "1rem",
@@ -96,7 +87,6 @@ function Features() {
                 goals and dietary preferences.
               </Card.Text>
               <Button
-                // className="btn btn-primary w-100 mt-2"
                 onClick={onRecipeClick}
                 variant="danger"
                 className="glow-btn"
@@ -157,7 +147,6 @@ function Features() {
               <Button
                 as={Link}
                 to="/progress"
-                // className="btn btn-success w-100 mt-2"
                 className="glow-btn"
                 style={{
                   fontWeight: 600,
@@ -214,7 +203,6 @@ function Features() {
               <Button
                 as={Link}
                 to="/chat"
-                // className="btn btn-info w-100 mt-2"
                 className="glow-btn"
                 style={{
                   fontWeight: 600,

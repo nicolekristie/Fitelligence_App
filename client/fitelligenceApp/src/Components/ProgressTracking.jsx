@@ -154,20 +154,10 @@ function ProgressTracking() {
                   </p>
                   {user?.id ? (
                     <Button
-                      variant={showHistory ? "outline-secondary" : "primary"}
+                      className="progress-toggle-btn"
                       onClick={toggleHistory}
                       disabled={isLoading}
                       size="lg"
-                      style={{
-                        background: showHistory
-                          ? "linear-gradient(90deg, #232323 0%, #b31217 100%)"
-                          : "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
-                        color: "#fff",
-                        border: "none",
-                        fontWeight: 700,
-                        borderRadius: 10,
-                        boxShadow: "0 0 12px #b31217",
-                      }}
                     >
                       {isLoading ? (
                         <>
@@ -190,8 +180,17 @@ function ProgressTracking() {
                   ) : (
                     <Button
                       onClick={handleLogin}
-                      variant="outline-warning"
                       size="lg"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, #232323 0%, #b31217 100%)",
+                        color: "#fff",
+                        fontWeight: 700,
+                        borderRadius: 10,
+                        border: "none",
+                        boxShadow: "0 0 12px #b31217",
+                        letterSpacing: "0.2px",
+                      }}
                     >
                       Please log in to view history
                     </Button>
@@ -269,16 +268,15 @@ function ProgressTracking() {
                     </div>
                     <div className="text-center mt-4">
                       <Button
-                        variant="outline-primary"
+                        className="progress-refresh-btn me-2"
                         onClick={fetchChatHistory}
                         disabled={isLoading}
-                        className="me-2"
                       >
                         <i className="fas fa-sync-alt me-2"></i>
                         Refresh History
                       </Button>
                       <Button
-                        variant="outline-secondary"
+                        className="progress-hide-btn"
                         onClick={toggleHistory}
                       >
                         <i className="fas fa-eye-slash me-2"></i>
@@ -293,14 +291,25 @@ function ProgressTracking() {
                   !isLoading &&
                   !error && (
                     <div className="mt-4">
-                      <Alert variant="info" className="text-center py-4">
+                      <Alert
+                        variant="info"
+                        className="text-center py-4"
+                        style={{
+                          background:
+                            "linear-gradient(135deg, #232323 0%, #b31217 100%)",
+                          color: "#fff",
+                          border: "2px solid #b31217",
+                          borderRadius: "14px",
+                          boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
+                        }}
+                      >
                         <i className="fas fa-comment-dots fa-2x mb-3 text-info"></i>
                         <h5>No chat history found</h5>
                         <p className="mb-3">
                           Start chatting with your AI fitness coach to see
                           responses here!
                         </p>
-                        <Button onClick={handleChatRedirect} variant="primary">
+                        <Button onClick={handleChatRedirect} className="progress-gotochat-btn">
                           <i className="fas fa-comments me-2"></i>
                           Go to Chat
                         </Button>

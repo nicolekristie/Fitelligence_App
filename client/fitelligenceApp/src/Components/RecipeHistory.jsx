@@ -133,7 +133,15 @@ function RecipeHistory() {
                   </p>
                   {user?.id ? (
                     <Button
-                      variant={showHistory ? "outline-secondary" : "success"}
+                      style={{
+                        background:
+                          "linear-gradient(90deg, #232323 0%, #b31217 100%)",
+                        color: "#fff",
+                        fontWeight: 700,
+                        borderRadius: 10,
+                        border: "none",
+                        boxShadow: "0 0 12px #b31217",
+                      }}
                       onClick={toggleHistory}
                       disabled={loading}
                       size="lg"
@@ -159,8 +167,17 @@ function RecipeHistory() {
                   ) : (
                     <Button
                       onClick={handleLogin}
-                      variant="outline-warning"
                       size="lg"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, #232323 0%, #b31217 100%)",
+                        color: "#fff",
+                        fontWeight: 700,
+                        borderRadius: 10,
+                        border: "none",
+                        boxShadow: "0 0 12px #b31217",
+                        letterSpacing: "0.2px",
+                      }}
                     >
                       Please log in to view history
                     </Button>
@@ -273,17 +290,24 @@ function RecipeHistory() {
                         }}
                         disabled={loading}
                         className="me-2"
+                        style={{
+                          background:
+                            "linear-gradient(90deg, #232323 0%, #b31217 100%)", // solid palette background
+                          color: "#fff",
+                          fontWeight: 700,
+                          borderRadius: 10,
+                          border: "none",
+                          boxShadow: "0 0 12px #b31217",
+                        }}
                       >
                         <i className="fas fa-sync-alt me-2"></i>
                         Refresh History
                       </Button>
                       <Button
-                        // variant="outline-secondary"
                         onClick={toggleHistory}
                         style={{
                           background:
-                            "linear-gradient(90deg, #232323 0%, #b31217 100%)", // palette background
-                          background: "linear-gradient(90deg, #232323 0%, #b31217 100%) !important", // palette background
+                            "linear-gradient(90deg, #232323 0%, #b31217 100%) !important", // palette background
                           color: "#fff !important", // white text for visibility
                           fontWeight: 700,
                           borderRadius: 10,
@@ -321,22 +345,6 @@ function RecipeHistory() {
     </div>
   );
 
-  return (
-    <div className="recipe-history-container">
-      <h2>Your Recipe History</h2>
-      {recipes.map((item) => (
-        <div key={item.id} className="recipe-history-item">
-          <div className="recipe-timestamp">
-            {new Date(item.timestamp || item.created_at).toLocaleString()}
-          </div>
-          <div className="recipe-response">
-            <ReactMarkdown>{item.response_text}</ReactMarkdown>
-          </div>
-          <hr />
-        </div>
-      ))}
-    </div>
-  );
 }
 
 export default RecipeHistory;

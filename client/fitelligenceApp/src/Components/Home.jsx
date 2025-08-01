@@ -1,6 +1,6 @@
-import couple1 from "../assets/images/Home/couple1.webp";
-import couple2 from "../assets/images/Home/couple2.webp";
-import couple6 from "../assets/images/Home/couple6.jpg";
+import couple1 from "../assets/images/Home/fitnesscouple1.png";
+import couple2 from "../assets/images/Home/fitnesscouple2.png";
+import couple3 from "../assets/images/Home/fitnesscouple3.png";
 import {
   faDumbbell,
   faChartLine,
@@ -122,7 +122,7 @@ function Home() {
         </div>
         {!isMobile && (
           <div className="home-img-container">
-            <img src={couple6} alt="Couple 6" className="home-img-hover" />
+            <img src={couple3} alt="Couple 3" className="home-img-hover" />
             <div className="img-overlay">
               <span className="img-quote">"You Got This!"</span>
             </div>

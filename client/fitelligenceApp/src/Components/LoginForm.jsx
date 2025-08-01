@@ -105,11 +105,35 @@ function LoginForm() {
     <Container className="mt-5">
       <Row className="justify-content-md-center">
         <Col md={6}>
-          <Card>
-            <Card.Header as="h3" className="text-center">
+          <Card
+            style={{
+              background: "linear-gradient(135deg, #232323 0%, #b31217 100%)",
+              color: "#fff",
+              borderRadius: 18,
+              boxShadow: "0 2px 18px rgba(179,18,23,0.18)",
+              border: "2px solid #b31217",
+              backdropFilter: "blur(2px)", // optional for a frosted effect
+            }}
+          >
+            <Card.Header
+              as="h3"
+              className="text-center"
+              style={{
+                background: "transparent",
+                color: "#fff",
+                border: "none",
+              }}
+            >
               Login
             </Card.Header>
-            <Card.Body className="text-start">
+            <Card.Body
+              className="text-start"
+              style={{
+                background: "linear-gradient(135deg, #232323 0%, #b31217 100%)",
+                color: "#fff",
+                borderRadius: "0 0 18px 18px",
+              }}
+            >
               {message && (
                 <Alert
                   variant={isError ? "danger" : "success"}
@@ -144,17 +168,55 @@ function LoginForm() {
                 </Form.Group>
 
                 <Button
-                  variant="primary"
+                  // variant="primary"
                   type="submit"
                   className="w-100"
                   disabled={isFormLoading}
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #232323 0%, #b31217 100%)",
+                    color: "#fff",
+                    fontWeight: 700,
+                    borderRadius: 10,
+                    border: "2px solid #eafcff", // lighter border for contrast
+                    boxShadow: "0 0 12px #b31217",
+                    letterSpacing: "0.2px",
+                  }}
                 >
                   {isFormLoading ? "Logging in..." : "Login"}
                 </Button>
 
                 <div className="text-center mt-3">
-                  <span className="text-muted">Don't have an account? </span>
-                  <Link to="/register" className="text-decoration-none">
+                  <span
+                    style={{
+                      color: "#fff",
+                      fontWeight: 600,
+                      fontSize: "1.08rem",
+                      letterSpacing: "0.2px",
+                      textShadow: "0 1px 4px #b31217",
+                    }}
+                  >
+                    Don't have an account?{" "}
+                  </span>
+                  <Link
+                    to="/register"
+                    className="text-decoration-underline"
+                    style={{
+                      color: "#ff2a2a",
+                      fontWeight: 700,
+                      letterSpacing: "0.2px",
+                      fontSize: "1.08rem",
+                      textShadow: `
+                        0 2px 8px #000,
+                        0 1px 6px #b31217,
+                        0 0 2px #000,
+                        0 0 6px #000
+                      `,
+                      transition: "color 0.2s",
+                    }}
+                    onMouseOver={(e) => (e.target.style.color = "#fff")}
+                    onMouseOut={(e) => (e.target.style.color = "#ff2a2a")}
+                  >
                     Register here
                   </Link>
                 </div>

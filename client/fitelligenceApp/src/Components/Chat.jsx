@@ -341,12 +341,8 @@ const Chat = ({ userId, goal }) => {
               <div className="row g-3">
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                   <motion.div
-                    className="card h-100 shadow-sm"
+                    className="card h-100 shadow-sm ai-gallery-card"
                     whileHover={{ scale: 2, zIndex: 10 }}
-                    // style={{
-                    //   position: "relative",
-                    //   transformOrigin: "center left",
-                    // }}
                     style={{
                       position: "relative",
                       background:
@@ -357,8 +353,7 @@ const Chat = ({ userId, goal }) => {
                       color: "#fff",
                     }}
                   >
-                    <a href="/sample-workouts">
-                      <motion.img
+                    <motion.img
                         src={balanceImage}
                         alt="Balance Training"
                         className="card-img-top"
@@ -368,8 +363,7 @@ const Chat = ({ userId, goal }) => {
                           cursor: "pointer",
                         }}
                       />
-                    </a>
-                    <div className="card-body p-2">
+                    <div className="card-body p-2 ">
                       <h6 className="card-title small mb-1">⚖️ Balance</h6>
                       <p
                         className="card-text text-muted"
@@ -382,7 +376,7 @@ const Chat = ({ userId, goal }) => {
                 </div>
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                   <motion.div
-                    className="card h-100 shadow-sm"
+                    className="card h-100 shadow-sm ai-gallery-card"
                     whileHover={{ scale: 2, zIndex: 10 }}
                     style={{
                       position: "relative",
@@ -393,8 +387,7 @@ const Chat = ({ userId, goal }) => {
                       border: "2px solid #b31217",
                       color: "#fff",
                     }}
-                  >
-                    <a href="/sample-workouts">
+                  >     
                       <img
                         src={focusedImage}
                         alt="Focused Training"
@@ -405,7 +398,6 @@ const Chat = ({ userId, goal }) => {
                           cursor: "pointer",
                         }}
                       />
-                    </a>
                     <div className="card-body p-2">
                       <h6 className="card-title small mb-1">🎯 Focus</h6>
                       <p
@@ -419,7 +411,7 @@ const Chat = ({ userId, goal }) => {
                 </div>
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                   <motion.div
-                    className="card h-100 shadow-sm"
+                    className="card h-100 shadow-sm ai-gallery-card"
                     whileHover={{ scale: 2, zIndex: 10 }}
                     style={{
                       position: "relative",
@@ -430,8 +422,7 @@ const Chat = ({ userId, goal }) => {
                       border: "2px solid #b31217",
                       color: "#fff",
                     }}
-                  >
-                    <a href="/sample-workouts">
+                  >    
                       <img
                         src={intenseImage}
                         alt="Intense Workout"
@@ -442,7 +433,6 @@ const Chat = ({ userId, goal }) => {
                           cursor: "pointer",
                         }}
                       />
-                    </a>
                     <div className="card-body p-2">
                       <h6 className="card-title small mb-1">🔥 Intensity</h6>
                       <p
@@ -456,7 +446,7 @@ const Chat = ({ userId, goal }) => {
                 </div>
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                   <motion.div
-                    className="card h-100 shadow-sm"
+                    className="card h-100 shadow-sm ai-gallery-card"
                     whileHover={{ scale: 2, zIndex: 10 }}
                     style={{
                       position: "relative",
@@ -467,9 +457,8 @@ const Chat = ({ userId, goal }) => {
                       border: "2px solid #b31217",
                       color: "#fff",
                     }}
-                  >
-                    <a href="/sample-workouts">
-                      <img
+                  > 
+                     <img
                         src={kettlebellImage}
                         alt="Kettlebell Training"
                         className="card-img-top"
@@ -479,7 +468,6 @@ const Chat = ({ userId, goal }) => {
                           cursor: "pointer",
                         }}
                       />
-                    </a>
                     <div className="card-body p-2">
                       <h6 className="card-title small mb-1">🏋️ Kettlebell</h6>
                       <p
@@ -493,7 +481,7 @@ const Chat = ({ userId, goal }) => {
                 </div>
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                   <motion.div
-                    className="card h-100 shadow-sm"
+                    className="card h-100 shadow-sm ai-gallery-card"
                     whileHover={{ scale: 2, zIndex: 10 }}
                     style={{
                       position: "relative",
@@ -505,7 +493,6 @@ const Chat = ({ userId, goal }) => {
                       color: "#fff",
                     }}
                   >
-                    <a href="/sample-workouts">
                       <img
                         src={powerImage}
                         alt="Power Training"
@@ -516,7 +503,6 @@ const Chat = ({ userId, goal }) => {
                           cursor: "pointer",
                         }}
                       />
-                    </a>
                     <div className="card-body p-2">
                       <h6 className="card-title small mb-1">⚡ Power</h6>
                       <p
@@ -530,7 +516,7 @@ const Chat = ({ userId, goal }) => {
                 </div>
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                   <motion.div
-                    className="card h-100 shadow-sm"
+                    className="card h-100 shadow-sm ai-gallery-card"
                     whileHover={{ scale: 2, zIndex: 10 }}
                     style={{
                       position: "relative",
@@ -542,7 +528,6 @@ const Chat = ({ userId, goal }) => {
                       color: "#fff",
                     }}
                   >
-                    <a href="/sample-workouts">
                       <img
                         src={fitnessPartner}
                         alt="Male Fitness"
@@ -553,7 +538,6 @@ const Chat = ({ userId, goal }) => {
                           cursor: "pointer",
                         }}
                       />
-                    </a>
                     <div className="card-body p-2">
                       <h6 className="card-title small mb-1">
                         💪 Fitness Partners

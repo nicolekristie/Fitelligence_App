@@ -193,9 +193,7 @@ function HeroSlider() {
                   textShadow: "0 2px 8px #14696a",
                   fontWeight: 700,
                 }}
-              >
-                Never Give Up
-              </h5>
+              ></h5>
               <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
                 Keep pushing forward.
               </p>
@@ -332,7 +330,15 @@ function HeroSlider() {
               >
                 Good Day
               </h5>
-              <p style={{ color: "#fff", textShadow: "0 2px 8px #14696a" }}>
+              <p
+                style={{
+                  color: "#fff",
+                  textShadow: "0 2px 8px #14696a",
+                  fontWeight: 900, // Make it extra bold
+                  fontSize: "1.35rem", // Optional: slightly larger
+                  letterSpacing: "0.5px", // Optional: more readable
+                }}
+              >
                 Today is your day to shine.
               </p>
             </Carousel.Caption>

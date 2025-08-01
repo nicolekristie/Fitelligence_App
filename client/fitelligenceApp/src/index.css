@@ -293,3 +293,161 @@ button:focus-visible {
   50% {background-position: 400% 0;}
   100% {background-position: 0 0;}  
 }
+
+/* Custom palette styles for React-Bootstrap tab buttons */
+.nav-tabs .nav-link {
+  background: linear-gradient(90deg, #232323 0%, #b31217 100%);
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 10px 10px 0 0;
+  border: 2px solid #b31217;
+  margin-right: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-tabs .nav-link.active {
+  background: linear-gradient(90deg, #b31217 0%, #232323 100%);
+  color: #eafcff !important;
+  border-bottom: 2px solid #fff;
+}
+
+.profile-edit-btn {
+  background: linear-gradient(90deg, #232323 0%, #b31217 100%);
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 10px;
+  border: 2px solid #b31217;
+  box-shadow: 0 0 12px #b31217;
+  padding: 0.5rem 1.2rem;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.profile-edit-btn:hover,
+.profile-edit-btn:focus {
+  background: linear-gradient(90deg, #b31217 0%, #232323 100%);
+  color: #eafcff !important;
+  box-shadow: 0 0 24px #b31217;
+}
+
+.profile-save-btn {
+  background: linear-gradient(90deg, #232323 0%, #b31217 100%);
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 10px;
+  border: 2px solid #b31217;
+  box-shadow: 0 0 12px #b31217;
+  padding: 0.5rem 1.2rem;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.profile-save-btn:hover,
+.profile-save-btn:focus {
+  background: linear-gradient(90deg, #b31217 0%, #232323 100%);
+  color: #eafcff !important;
+  box-shadow: 0 0 24px #b31217;
+}
+
+.profile-cancel-btn {
+  background: linear-gradient(90deg, #232323 0%, #888 100%);
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 10px;
+  border: 2px solid #888;
+  box-shadow: 0 0 8px #888;
+  padding: 0.5rem 1.2rem;
+  margin-left: 8px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.profile-cancel-btn:hover,
+.profile-cancel-btn:focus {
+  background: linear-gradient(90deg, #888 0%, #232323 100%);
+  color: #fff !important;
+  box-shadow: 0 0 16px #888;
+}
+
+.progress-refresh-btn {
+  background: linear-gradient(90deg, #232323 0%, #b31217 100%);
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 10px;
+  border: 2px solid #b31217;
+  box-shadow: 0 0 12px #b31217;
+  padding: 0.5rem 1.2rem;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.progress-refresh-btn:hover,
+.progress-refresh-btn:focus {
+  background: linear-gradient(90deg, #b31217 0%, #232323 100%);
+  color: #eafcff !important;
+  box-shadow: 0 0 24px #b31217;
+}
+
+.progress-hide-btn {
+  background: linear-gradient(90deg, #232323 0%, #b31217 100%);
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 10px;
+  border: 2px solid #b31217;
+  box-shadow: 0 0 12px #b31217;
+  padding: 0.5rem 1.2rem;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.progress-hide-btn:hover,
+.progress-hide-btn:focus {
+  background: linear-gradient(90deg, #b31217 0%, #232323 100%);
+  color: #eafcff !important;
+  box-shadow: 0 0 24px #b31217;
+}
+
+.progress-toggle-btn {
+  background: linear-gradient(90deg, #232323 0%, #b31217 100%);
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 10px;
+  border: 2px solid #b31217;
+  box-shadow: 0 0 12px #b31217;
+  padding: 0.6rem 1.6rem;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.progress-toggle-btn:hover,
+.progress-toggle-btn:focus {
+  background: linear-gradient(90deg, #b31217 0%, #232323 100%);
+  color: #eafcff !important;
+  box-shadow: 0 0 24px #b31217;
+}
+
+.ai-gallery-card .card-title,
+.ai-gallery-card .card-text {
+  color: #eafcff !important;
+}
+
+.progress-gotochat-btn {
+  background: linear-gradient(90deg, #232323 0%, #b31217 100%);
+  color: #fff !important;
+  font-weight: 700;
+  border-radius: 10px;
+  border: 2px solid #b31217;
+  box-shadow: 0 0 12px #b31217;
+  padding: 0.5rem 1.2rem;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.progress-gotochat-btn:hover,
+.progress-gotochat-btn:focus {
+  background: linear-gradient(90deg, #b31217 0%, #232323 100%);
+  color: #eafcff !important;
+  box-shadow: 0 0 24px #b31217;
+}
+
+/* Make mobile menu text more visible */
+.offcanvas .nav-link,
+.offcanvas .navbar-nav .nav-link {
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-shadow: 0 2px 8px #b31217, 0 1px 0 #000;
+  letter-spacing: 0.5px;
+}
+.offcanvas .nav-link.active,
+.offcanvas .navbar-nav .nav-link.active {
+  color: #ffd700 !important;
+  text-decoration: underline 2.5px #ffd700;
+  text-underline-offset: 6px;
+}

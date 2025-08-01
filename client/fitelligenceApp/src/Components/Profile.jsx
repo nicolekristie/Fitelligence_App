@@ -120,6 +120,11 @@ function Profile() {
               paddingBottom: 0,
               margin: "0 auto",
               position: "relative",
+              background: "linear-gradient(135deg, #232323 0%, #b31217 100%)",
+              color: "#fff",
+              borderRadius: 18,
+              boxShadow: "0 2px 18px rgba(179,18,23,0.18)",
+              border: "2px solid #b31217",
             }}
           >
             <Card.Header
@@ -234,7 +239,7 @@ function Profile() {
                       <Row className="mb-4 align-items-center">
                         <Col xs={5} sm={4}>
                           <button
-                            className="btn btn-outline-primary"
+                            className="profile-edit-btn"
                             onClick={() => setEditing(true)}
                           >
                             Edit
@@ -248,10 +253,12 @@ function Profile() {
                             <form
                               onSubmit={handleEditSubmit}
                               style={{
-                                background: "#f8f9fa",
+                                background:
+                                  "linear-gradient(135deg, #232323 0%, #b31217 100%)", // palette background
+                                color: "#fff",
                                 padding: 20,
                                 borderRadius: 8,
-                                boxShadow: "0 2px 8px rgba(24,90,157,0.10)",
+                                boxShadow: "0 2px 8px rgba(179,18,23,0.10)",
                               }}
                             >
                               <h5 style={{ marginBottom: 16 }}>Edit Profile</h5>
@@ -321,13 +328,13 @@ function Profile() {
                               <div style={{ display: "flex", gap: 12 }}>
                                 <button
                                   type="submit"
-                                  className="btn btn-success"
+                                  className="profile-save-btn"
                                 >
                                   Save
                                 </button>
                                 <button
                                   type="button"
-                                  className="btn btn-secondary"
+                                  className="profile-cancel-btn"
                                   onClick={() => setEditing(false)}
                                 >
                                   Cancel
@@ -358,6 +365,7 @@ function Profile() {
         </Col>
       </Row>
     </Container>
+    // {/* </div> */}
   );
 }
 export default Profile;
