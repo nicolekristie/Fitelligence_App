@@ -466,3 +466,51 @@ button:focus-visible {
   border: 2px solid #ffd700;
   margin-right: 10px;
 }
+
+
+/* Add extra margin to first and last card columns for breathing room */
+.ai-gallery-row > div:first-child,
+.ai-gallery-row > div:last-child {
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+/* Ensure hovered card appears above others and is not clipped */
+.ai-gallery-card {
+  z-index: 1;
+  transition: z-index 0.2s;
+}
+.ai-gallery-card:hover {
+  z-index: 100;
+}
+
+.ai-gallery-row {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  flex-wrap: nowrap !important;
+  display: flex;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 48px;    /* Increased for scaling room */
+  padding-bottom: 48px; /* Increased for scaling room */
+  position: relative;
+}
+
+.ai-gallery-row > div {
+ min-width: 180px;
+ flex: 0 0 auto;
+}
+
+.ai-gallery-row,
+.ai-gallery-row > div,
+.ai-gallery-row > div > .ai-gallery-card {
+  overflow: visible !important;
+}
+
+@media (max-width: 600px) {
+  .ai-gallery-row > div:first-child,
+  .ai-gallery-row > div:last-child {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+}

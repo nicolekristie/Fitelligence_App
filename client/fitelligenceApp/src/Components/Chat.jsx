@@ -338,7 +338,7 @@ const Chat = ({ userId, goal }) => {
               <h5 className="text-center mb-4 text-white">
                 AI Coach Fitness Gallery
               </h5>
-              <div className="row g-3">
+              <div className="row g-3 ai-gallery-row flex-nowrap">
                 <div className="col-xl-2 col-lg-3 col-md-4 col-sm-6">
                   <motion.div
                     className="card h-100 shadow-sm ai-gallery-card"
@@ -555,8 +555,8 @@ const Chat = ({ userId, goal }) => {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div>       
+    </div>    
   );
 };
 
