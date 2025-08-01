@@ -451,3 +451,18 @@ button:focus-visible {
   text-decoration: underline 2.5px #ffd700;
   text-underline-offset: 6px;
 }
+
+.offcanvas-user-info {
+  color: #fff !important;
+  font-weight: 800;
+  font-size: 1.15rem;
+  text-shadow: 0 2px 8px #b31217, 0 1px 0 #000;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+.offcanvas-user-info .navbar-avatar {
+  border: 2px solid #ffd700;
+  margin-right: 10px;
+}

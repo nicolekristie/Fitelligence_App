@@ -158,7 +158,7 @@ function NavBar() {
             className="d-lg-none"
           >
             <Offcanvas.Header closeButton>
-              <Offcanvas.Title id="offcanvasNavbarLabel">
+              <Offcanvas.Title id="offcanvasNavbarLabel" className="offcanvas-user-info ">
                 {user && user.avatar_url ? (
                   <Image
                     src={user.avatar_url}
