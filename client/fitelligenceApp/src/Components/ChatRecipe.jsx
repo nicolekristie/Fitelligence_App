@@ -16,19 +16,17 @@ function ChatRecipe() {
     sendMessage(input);
     setInput("");
   };
-  const { user } = useUser(); // Use user context directly
+  const { user } = useUser();
   const [input, setInput] = React.useState("");
   const [messages, setMessages] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
 
-  // Streaming sendMessage for chat-recipe
   const messagesEndRef = React.useRef(null);
 
   const sendMessage = async (userMessage) => {
     setMessages((prev) => [...prev, { text: userMessage, sender: "user" }]);
     setLoading(true);
     try {
-      console.log("Sending recipe request for userId:", user && user.id);
       const response = await fetch("/api/chat-recipe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -52,7 +50,6 @@ function ChatRecipe() {
         }
         setLoading(false);
       } else {
-        // Fallback for non-streaming
         const data = await response.json();
         setMessages((prev) => [
           ...prev,
@@ -72,12 +69,14 @@ function ChatRecipe() {
     }
   };
 
-  // Auto-scroll to bottom when messages update
   React.useEffect(() => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      messagesEndRef.current.scrollIntoView({
+        behavior: /Mobi|Android/i.test(navigator.userAgent) ? "auto" : "smooth",
+        block: "end",
+      });
     }
-  }, [messages]);
+  }, [messages, loading]);
 
   return (
     <>
@@ -133,9 +132,9 @@ function ChatRecipe() {
           overflowX: "hidden",
         }}
       >
-        {/* Top section: motivational text (left) and emoji sequence (right) - grid for alignment */}
-        {/* Motivational text and emoji sequence in flex row */}
+        {/* Top section: motivational text and emoji sequence */}
         <div
+          className="motivation-row"
           style={{
             display: "flex",
             flexDirection: "row",
@@ -145,10 +144,30 @@ function ChatRecipe() {
             zIndex: 100,
             gap: 24,
             marginTop: 12,
+            flexWrap: "wrap",
           }}
         >
-          {/* Motivational text flush left */}
+          <style>{`
+            @media (max-width: 700px) {
+              .motivation-row {
+                flex-direction: column !important;
+                align-items: stretch !important;
+                gap: 12px !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+              }
+              .motivation-text,
+              .motivation-emoji {
+                min-width: 0 !important;
+                width: 100% !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                margin-top: 8px !important;
+              }
+            }
+          `}</style>
           <div
+            className="motivation-text"
             style={{
               fontFamily: "'Pacifico', 'Brush Script MT', cursive, sans-serif",
               color: "#fff",
@@ -156,7 +175,7 @@ function ChatRecipe() {
               fontWeight: 900,
               textShadow: "0 2px 8px #fff",
               letterSpacing: 1,
-              background: "linear-gradient(90deg, #b31217 0%, #232323 100%)", // updated to match palette
+              background: "linear-gradient(90deg, #b31217 0%, #232323 100%)",
               borderRadius: 18,
               padding: "18px 12px 18px 12px",
               border: "2px solid #b31217",
@@ -172,7 +191,7 @@ function ChatRecipe() {
             Healthy eating isn't a diet, it's a lifestyle.
             <br />
             <span
-                style={{
+              style={{
                 color: "#fff",
                 fontWeight: 700,
                 fontFamily: "inherit",
@@ -182,10 +201,10 @@ function ChatRecipe() {
               Nourish your body, fuel your life.
             </span>
           </div>
-          {/* Emoji sequence in rounded box - stays top right */}
           <div
-              style={{
-              background: "linear-gradient(90deg, #b31217 0%, #232323 100%)", // updated to match palette
+            className="motivation-emoji"
+            style={{
+              background: "linear-gradient(90deg, #b31217 0%, #232323 100%)",
               borderRadius: 22,
               padding: "10px 32px",
               display: "flex",
@@ -196,7 +215,7 @@ function ChatRecipe() {
               zIndex: 101,
               marginRight: "32px",
               marginTop: "12px",
-              color: "#fff", // ensure emoji and text are white
+              color: "#fff",
             }}
           >
             <span role="img" aria-label="muscle">
@@ -218,7 +237,7 @@ function ChatRecipe() {
           style={{
             zIndex: 1,
             position: "relative",
-            marginTop: "-72px", // Move up closer to the top edge
+            marginTop: "-72px",
           }}
         >
           <img
@@ -270,178 +289,192 @@ function ChatRecipe() {
             }}
           />
         </div>
-        {/* Chat dialog with heading above input */}
-        <div
-          className="chat-recipe-messages"
-          style={{
-            maxWidth: 700,
-            margin: "0 auto",
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            zIndex: 50,
-            position: "relative",
-            flex: 1,
-            minHeight: 420,
-          }}
-        >
-          {/* Chat heading above input */}
-          <div
-            style={{
-              textAlign: "center",
-              margin: "0 0 12px 0",
-               color: "#fff",
-              fontWeight: 900,
-              fontSize: "1.6rem",
-              background: "linear-gradient(90deg, #b31217 0%, #000 100%)", // unified palette
-              borderRadius: 16,
-              boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
-              padding: "10px 0 4px 0",
-              width: "100%",
-              border: "2px solid #b2f7ef",
-              letterSpacing: 1,
-              position: "relative",
-            }}
-          >
-            Chat About Recipes <LuBot size={28} className="ms-2 align-middle" />
-          </div>
-          {/* Chat messages area above input section, scrollable with max height and full width */}
-          <div
-            style={{
-              width: "100%",
-              maxHeight: "480px", // Increased height for bigger dialog
-              minHeight: "180px", // Ensure visible area even if empty
-              overflowY: "auto",
-              paddingBottom: 8,
-              paddingRight: 12, // Add space for scrollbar
-              marginBottom: 0,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "stretch",
-              flex: "none",
-              scrollbarColor: "#888 #d3d3d3",
-              scrollbarWidth: "thin",
-              borderRadius: 14, // Match dialog corners
-              background: "linear-gradient(135deg, #232323 0%, #b31217 100%)",
-            }}
-            id="chat-messages-scroll"
-          >
-            <style>{` 
-            .chat-recipe-messages > div::-webkit-scrollbar {
-            width: 8px;
-            background: #000; // black track
-          }
-          .chat-recipe-messages > div::-webkit-scrollbar-thumb {
-            background: #b31217; // deep red thumb
-            border-radius: 8px;
-          } 
-     
-          `}</style>
-            {messages.length === 0 ? (
+        {/* Responsive chat dialog row */}
+        <div className="row justify-content-center w-100 m-0">
+          {/* Right column: Chat dialog, always full width on mobile */}
+          <div className="col-lg-9 col-md-8 col-12">
+            <div
+              className="chat-recipe-messages"
+              style={{
+                maxWidth: "1000px",
+                margin: "0 auto",
+                width: "100%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                zIndex: 50,
+                position: "relative",
+                flex: 1,
+                minHeight: 420,
+              }}
+            >
+              <style>{`
+                @media (max-width: 600px) {
+                  .chat-recipe-messages {
+                    max-width: 100vw !important;
+                    padding-left: 0 !important;
+                    padding-right: 0 !important;
+                  }
+                }
+              `}</style>
+              {/* Chat heading above input */}
               <div
                 style={{
                   textAlign: "center",
-                  color: "#888",
-                  fontSize: "1.2rem",
-                  fontWeight: 500,
-                  padding: "48px 0",
-                  opacity: 0.8,
-                  background: "transparent",
+                  margin: "0 0 12px 0",
+                  color: "#fff",
+                  fontWeight: 900,
+                  fontSize: "1.6rem",
+                  background: "linear-gradient(90deg, #b31217 0%, #000 100%)",
+                  borderRadius: 16,
+                  boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
+                  padding: "10px 0 4px 0",
+                  width: "100%",
+                  border: "2px solid #b2f7ef",
+                  letterSpacing: 1,
+                  position: "relative",
                 }}
               >
-                No messages yet
+                Chat About Recipes <LuBot size={28} className="ms-2 align-middle" />
               </div>
-            ) : (
-              <>
-                {messages.map((msg, index) => (
+              {/* Chat messages area above input section, scrollable with max height and full width */}
+              <div
+                style={{
+                  width: "100%",
+                  maxHeight: "480px",
+                  minHeight: "180px",
+                  overflowY: "auto",
+                  paddingBottom: 8,
+                  paddingRight: 12,
+                  marginBottom: 0,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "stretch",
+                  flex: "none",
+                  scrollbarColor: "#888 #d3d3d3",
+                  scrollbarWidth: "thin",
+                  borderRadius: 14,
+                  background: "linear-gradient(135deg, #232323 0%, #b31217 100%)",
+                }}
+                id="chat-messages-scroll"
+              >
+                <style>{` 
+                  .chat-recipe-messages > div::-webkit-scrollbar {
+                    width: 8px;
+                    background: #000;
+                  }
+                  .chat-recipe-messages > div::-webkit-scrollbar-thumb {
+                    background: #b31217;
+                    border-radius: 8px;
+                  } 
+                `}</style>
+                {messages.length === 0 ? (
                   <div
-                    key={index}
                     style={{
-                      background:
-                        msg.sender === "user"
-                            ? "linear-gradient(90deg, #232323 0%, #000 100%)" // dark gray to black
-                            : "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
-                        color: "#fff",      
-                      borderRadius: 14,
-                      boxShadow: "0 4px 18px rgba(179,18,23,0.18)",
-                      padding: "16px 18px",
-                      marginBottom: 4,
-                      width: "100%",
-                      alignSelf:
-                        msg.sender === "user" ? "flex-end" : "flex-start",
-                      fontSize: "1.08rem",
+                      textAlign: "center",
+                      color: "#888",
+                      fontSize: "1.2rem",
                       fontWeight: 500,
-                      wordBreak: "break-word",
-                      border:
-                        msg.sender === "user"
-                          ? "2px solid #b2f7ef"
-                          : "2.5px solid #fff",
-                      textShadow: msg.sender === "user"
-                        ? "none"
-                        : "0 2px 8px #b31217, 0 4px 24px #000", // subtle glow for bot
-                      letterSpacing: "0.5px",
+                      padding: "48px 0",
+                      opacity: 0.8,
+                      background: "transparent",
                     }}
                   >
-                    <Markdown>{msg.text}</Markdown>
+                    No messages yet
                   </div>
-                ))}
-                <div ref={messagesEndRef} />
-              </>
-            )}
-          </div>
-          {/* Input section at the bottom, same width */}
-          <div
-            style={{
-              width: "100%",
-              background: "linear-gradient(90deg, #b31217 0%, #000 100%)", 
-              borderRadius: 14,
-              boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
-              padding: "12px 0 8px 0",
-              border: "2px solid #b2f7ef",
-              marginTop: 18, // Add space above input section
-              marginBottom: 12,
-              zIndex: 150,
-            }}
-          >
-            <textarea
-              className="form-control mb-2 chat-recipe-textarea"
-              placeholder="Type your message..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              rows={4}
-              style={{
-                resize: "none",
-                minHeight: 60,
-                maxHeight: 120,
-                background: "#232323",
-                color: "#fff",
-                border: "2px solid #b31217",
-                borderRadius: 10,
-              }}
-            />
-            <button
-              onClick={handleSend}
-              className="btn btn-primary w-100 chat-recipe-send-btn"
-              disabled={loading}
-               style={{
-                marginTop: 4,
-                background: "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
-                border: "none",
-                fontWeight: 700,
-                fontSize: "1.1rem",
-                color: "#fff",
-                boxShadow: "0 0 12px #b31217",
-                borderRadius: 10,
-                padding: "0.7rem 2.2rem",
-              }}
-            >
-              <LuSendHorizontal size={20} className="me-2" />
-              Send
-            </button>
+                ) : (
+                  <>
+                    {messages.map((msg, index) => (
+                      <div
+                        key={index}
+                        style={{
+                          background:
+                            msg.sender === "user"
+                              ? "linear-gradient(90deg, #232323 0%, #000 100%)"
+                              : "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
+                          color: "#fff",
+                          borderRadius: 14,
+                          boxShadow: "0 4px 18px rgba(179,18,23,0.18)",
+                          padding: "16px 18px",
+                          marginBottom: 4,
+                          width: "100%",
+                          alignSelf:
+                            msg.sender === "user" ? "flex-end" : "flex-start",
+                          fontSize: "1.08rem",
+                          fontWeight: 500,
+                          wordBreak: "break-word",
+                          border:
+                            msg.sender === "user"
+                              ? "2px solid #b2f7ef"
+                              : "2.5px solid #fff",
+                          textShadow:
+                            msg.sender === "user"
+                              ? "none"
+                              : "0 2px 8px #b31217, 0 4px 24px #000",
+                          letterSpacing: "0.5px",
+                        }}
+                      >
+                        <Markdown>{msg.text}</Markdown>
+                      </div>
+                    ))}
+                    <div ref={messagesEndRef} />
+                  </>
+                )}
+              </div>
+              {/* Input section at the bottom, same width */}
+              <div
+                style={{
+                  width: "100%",
+                  background: "linear-gradient(90deg, #b31217 0%, #000 100%)",
+                  borderRadius: 14,
+                  boxShadow: "0 2px 12px rgba(179,18,23,0.10)",
+                  padding: "12px 0 8px 0",
+                  border: "2px solid #b2f7ef",
+                  marginTop: 18,
+                  marginBottom: 12,
+                  zIndex: 150,
+                }}
+              >
+                <textarea
+                  className="form-control mb-2 chat-recipe-textarea"
+                  placeholder="Type your message..."
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  rows={4}
+                  style={{
+                    resize: "none",
+                    minHeight: 60,
+                    maxHeight: 120,
+                    background: "#232323",
+                    color: "#fff",
+                    border: "2px solid #b31217",
+                    borderRadius: 10,
+                  }}
+                />
+                <button
+                  onClick={handleSend}
+                  className="btn btn-primary w-100 chat-recipe-send-btn"
+                  disabled={loading}
+                  style={{
+                    marginTop: 4,
+                    background: "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
+                    border: "none",
+                    fontWeight: 700,
+                    fontSize: "1.1rem",
+                    color: "#fff",
+                    boxShadow: "0 0 12px #b31217",
+                    borderRadius: 10,
+                    padding: "0.7rem 2.2rem",
+                  }}
+                >
+                  <LuSendHorizontal size={20} className="me-2" />
+                  Send
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        {/* Footer (static, scrolls with page) */}
+        {/* Footer */}
         <footer
           style={{
             width: "100%",

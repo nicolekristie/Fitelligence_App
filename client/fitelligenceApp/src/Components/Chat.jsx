@@ -25,9 +25,15 @@ const Chat = ({ userId, goal }) => {
   const { user } = useUser();
 
   // Auto-scroll to bottom when new messages are added
-  React.useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages, isLoading]);
+ React.useEffect(() => {
+  if (messagesEndRef.current) {
+    messagesEndRef.current.scrollIntoView({
+      behavior: /Mobi|Android/i.test(navigator.userAgent) ? "auto" : "smooth",
+      block: "end",
+    });
+  }
+}, [messages, isLoading]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -109,7 +115,7 @@ const Chat = ({ userId, goal }) => {
         <div className="col-12">
           <div className="row">
             {/* Left Column - Images */}
-            <div className="col-lg-3 col-md-4 mb-4">
+            <div className="col-lg-3 col-md-4 mb-4 d-none d-md-block">
               <div className="row g-3">
                 <div className="col-12">
                   <div
@@ -189,7 +195,7 @@ const Chat = ({ userId, goal }) => {
             </div>
 
             {/* Right Column - Expanded Chat */}
-            <div className="col-lg-9 col-md-8">
+            <div className="col-lg-9 col-md-8 col-12">
               <div
                 className="card chat h-100"
                 style={{
