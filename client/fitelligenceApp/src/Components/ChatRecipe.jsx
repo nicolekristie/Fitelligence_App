@@ -233,13 +233,24 @@ function ChatRecipe() {
         </div>
         {/* Food images row */}
         <div
-          className="d-flex justify-content-center align-items-center gap-4 mb-4 flex-wrap"
+          className="d-flex justify-content-center align-items-center gap-4 mb-4 flex-wrap food-row"
           style={{
             zIndex: 1,
             position: "relative",
             marginTop: "-72px",
           }}
         >
+          <style>{`
+            @media (max-width: 700px) {
+              .food-row {
+                margin-top: 24px !important;
+              }
+              .food-row-img.hide-mobile {
+                display: none !important;
+              }
+            }
+          `}</style>
+
           <img
             src={fish}
             alt="Fish"
@@ -335,7 +346,8 @@ function ChatRecipe() {
                   position: "relative",
                 }}
               >
-                Chat About Recipes <LuBot size={28} className="ms-2 align-middle" />
+                Chat About Recipes{" "}
+                <LuBot size={28} className="ms-2 align-middle" />
               </div>
               {/* Chat messages area above input section, scrollable with max height and full width */}
               <div
@@ -354,7 +366,8 @@ function ChatRecipe() {
                   scrollbarColor: "#888 #d3d3d3",
                   scrollbarWidth: "thin",
                   borderRadius: 14,
-                  background: "linear-gradient(135deg, #232323 0%, #b31217 100%)",
+                  background:
+                    "linear-gradient(135deg, #232323 0%, #b31217 100%)",
                 }}
                 id="chat-messages-scroll"
               >
@@ -457,7 +470,8 @@ function ChatRecipe() {
                   disabled={loading}
                   style={{
                     marginTop: 4,
-                    background: "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
+                    background:
+                      "linear-gradient(90deg, #b31217 0%, #ff2a2a 100%)",
                     border: "none",
                     fontWeight: 700,
                     fontSize: "1.1rem",
