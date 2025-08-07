@@ -489,19 +489,29 @@ button:focus-visible {
   overflow-y: visible !important;
   flex-wrap: nowrap !important;
   display: flex;
-  /* padding-left: 24px;
-  padding-right: 24px; */
-  padding-left: 4px !important;
-  padding-right: 4px !important;
-  padding-top: 48px;    /* Increased for scaling room */
-  padding-bottom: 48px; /* Increased for scaling room */
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  padding-top: 48px;
+  padding-bottom: 48px;
   position: relative;
 }
 
-.ai-gallery-row > div {
- /* min-width: 180px; */
- min-width: 120px !important;
- flex: 0 0 auto;
+/* Mobile override */
+@media (max-width: 600px) {
+  .ai-gallery-row {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+    max-width: 100vw !important;
+    box-sizing: border-box;
+  }
+  .ai-gallery-row > div {
+    min-width: 90vw !important;
+    max-width: 92vw !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 }
 
 .ai-gallery-row,
