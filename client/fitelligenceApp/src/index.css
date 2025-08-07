@@ -489,15 +489,18 @@ button:focus-visible {
   overflow-y: visible !important;
   flex-wrap: nowrap !important;
   display: flex;
-  padding-left: 24px;
-  padding-right: 24px;
+  /* padding-left: 24px;
+  padding-right: 24px; */
+  padding-left: 4px !important;
+  padding-right: 4px !important;
   padding-top: 48px;    /* Increased for scaling room */
   padding-bottom: 48px; /* Increased for scaling room */
   position: relative;
 }
 
 .ai-gallery-row > div {
- min-width: 180px;
+ /* min-width: 180px; */
+ min-width: 120px !important;
  flex: 0 0 auto;
 }
 
@@ -510,7 +513,9 @@ button:focus-visible {
 @media (max-width: 600px) {
   .ai-gallery-row > div:first-child,
   .ai-gallery-row > div:last-child {
-    margin-left: 8px;
-    margin-right: 8px;
+    /* margin-left: 8px;
+    margin-right: 8px; */
+    margin-left: 4px !important;
+    margin-right: 4px !important;
   }
 }
