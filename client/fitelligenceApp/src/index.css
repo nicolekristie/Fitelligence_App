@@ -523,8 +523,6 @@ button:focus-visible {
 @media (max-width: 600px) {
   .ai-gallery-row > div:first-child,
   .ai-gallery-row > div:last-child {
-    /* margin-left: 8px;
-    margin-right: 8px; */
     margin-left: 4px !important;
     margin-right: 4px !important;
   }
@@ -537,5 +535,9 @@ button:focus-visible {
     border-radius: 0 !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
+  }
+  .container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 }
