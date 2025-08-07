@@ -195,7 +195,7 @@ const Chat = ({ userId, goal }) => {
             </div>
 
             {/* Right Column - Expanded Chat */}
-            <div className="col-lg-9 col-md-8 col-12">
+            <div className="col-lg-9 col-md-8 col-12 px-0">
               <div
                 className="card chat h-100"
                 style={{
