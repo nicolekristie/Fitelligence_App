@@ -1,5 +1,7 @@
 # Fitelligence_App
 
+> **Live Demo:** [https://fitelligence.shebuilds.it.com/](https://fitelligence.shebuilds.it.com/) is live!
+
 ## Overview
 
 Fitelligence is a modern, AI-powered fitness and nutrition web application. It provides personalized workout plans, recipe suggestions, progress tracking, and a user-friendly chat interface with an AI coach. The app is built with React, Node.js, Express, and OpenAI GPT-4, and features a visually appealing, responsive design.
